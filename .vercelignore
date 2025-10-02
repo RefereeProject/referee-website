@@ -1,0 +1,12 @@
+# WordPress export (large file, not needed for deployment)
+therefereeproject.WordPress.2025-09-12.xml
+
+# Development files
+*.log
+.DS_Store
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
