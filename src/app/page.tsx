@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -92,6 +93,17 @@ export default function Home() {
             engagement. This model offers several superior benefits compared to traditional models,
             including the following:
           </p>
+
+          <div className="mt-6 flex justify-center">
+            <Image
+              src="/Review-model.png"
+              alt="Referee Review Model"
+              width={800}
+              height={400}
+              className="rounded-lg shadow-lg w-full max-w-3xl h-auto"
+              priority
+            />
+          </div>
           <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
             <li>
               <strong>Market Theory of Value:</strong> Unlike traditional peer review that often operates
