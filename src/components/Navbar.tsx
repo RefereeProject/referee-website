@@ -20,7 +20,17 @@ export function Navbar() {
             height={32}
             className="w-8 h-8"
           />
-          <span>The Referee Project</span>
+          <div className="flex flex-col gap-0.5">
+            <span>The Referee Project</span>
+            {/* Mobile: abbreviated tagline */}
+            <span className="text-[11px] sm:hidden font-normal text-gray-700 leading-tight">
+              Quality & nuance for scholars
+            </span>
+            {/* Desktop: full tagline */}
+            <span className="hidden sm:block text-xs font-normal text-gray-700 leading-tight">
+              Adding quality and nuance to the scholarly record
+            </span>
+          </div>
         </Link>
         <div className="flex items-center gap-3 sm:gap-6 text-sm sm:text-base font-medium">
           <Link href="/about" className="text-gray-700 hover:text-blue-700 transition-colors py-2 px-3 sm:px-0 -mx-3 sm:mx-0 rounded-lg active:bg-gray-100 min-h-[44px] flex items-center">
