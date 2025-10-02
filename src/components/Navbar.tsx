@@ -24,14 +24,6 @@ export function Navbar() {
           <Link href="/faq" className="text-gray-700 hover:text-blue-700 transition-colors">
             FAQ
           </Link>
-          <a
-            href="https://www.referee-project.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-gray-700 hover:text-blue-700 transition-colors"
-          >
-            Legacy
-          </a>
         </div>
       </nav>
     </motion.header>

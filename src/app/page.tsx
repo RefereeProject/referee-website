@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { CardStack, type Card } from "@/components/CardStack";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { getSite } from "@/lib/content";
 import Image from "next/image";
 
@@ -135,7 +136,11 @@ export default function Home() {
       <div className="mt-10 flex items-center justify-center">
         <CardStack items={items} />
       </div>
-      <section id="get-involved" className="mt-12 text-center">
+      <section id="newsletter" className="mt-12">
+        <NewsletterSignup />
+      </section>
+      
+      <section id="get-involved" className="mt-8 text-center">
         <a
           href="https://x.com/referee_project"
           target="_blank"
