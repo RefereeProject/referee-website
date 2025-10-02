@@ -1,11 +1,8 @@
-import { motion } from "motion/react"
-import { VideoCard } from "@/components/VideoCard"
-import type { Metadata } from "next"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Recorded Talks | The Referee Project",
-  description: "Watch presentations and discussions about The Referee Project and our mission to transform research evaluation",
-}
+import { motion } from "framer-motion"
+import { VideoCard } from "@/components/VideoCard"
+
 
 const talks = [
   {

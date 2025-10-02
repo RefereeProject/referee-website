@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion } from "framer-motion"
 import { VideoEmbed } from "./VideoEmbed"
 import { ExpandableSummary } from "./ExpandableSummary"
 import { Calendar, Clock } from "lucide-react"
