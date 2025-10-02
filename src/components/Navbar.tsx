@@ -24,6 +24,9 @@ export function Navbar() {
           <Link href="/faq" className="text-gray-700 hover:text-blue-700 transition-colors">
             FAQ
           </Link>
+          <Link href="/talks" className="text-gray-700 hover:text-blue-700 transition-colors">
+            Talks
+          </Link>
         </div>
       </nav>
     </motion.header>
