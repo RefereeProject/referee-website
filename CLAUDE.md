@@ -4,11 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Structure
 
-This is a Next.js 15 project called "The Referee Project" that converts WordPress content into a modern web application.
+This is a Next.js 15 project called "The Referee Project".
 
 Key architecture components:
-- **Content Pipeline**: WordPress XML export → parsed JSON → Next.js static content
-- **Content Management**: JSON-based content store with pages and posts from WordPress
+- **Content Management**: JSON-based content store (`content/content.json`) with pages and posts
 - **Styling**: Tailwind CSS v4 with custom typography plugin
 - **Fonts**: Inter (display) and JetBrains Mono (monospace)
 
@@ -19,12 +18,6 @@ All commands should be run from the repository root:
 ```bash
 # Development server
 pnpm dev
-
-# Content pipeline (parse WordPress XML and build)
-pnpm run content:build
-
-# Parse WordPress XML manually (if XML is in parent directory)
-pnpm run parse:wp "../therefereeproject.WordPress.2025-09-12.xml"
 
 # Build production
 pnpm build
@@ -38,12 +31,10 @@ pnpm start
 
 ## Content Architecture
 
-The project uses a two-phase content system:
+The project uses a simple JSON-based content system:
 
-1. **WordPress Parser**: `scripts/parse-wordpress.mjs` converts WordPress XML exports to structured JSON
-2. **Content Library**: `src/lib/content.ts` provides typed access to pages and posts
-
-Content flow: WordPress XML → `content/content.json` → Next.js pages
+- **Content Store**: Pre-generated `content/content.json` contains all site content (migrated from WordPress)
+- **Content Library**: `src/lib/content.ts` provides typed access to pages and posts
 
 ### Content Types
 - `WPEntry`: WordPress pages/posts with id, title, slug, status, date, link, content, excerpt
@@ -59,11 +50,9 @@ Content flow: WordPress XML → `content/content.json` → Next.js pages
 
 ## Build Process
 
-The build process requires content generation before Next.js build:
-1. `pnpm run content:build` - Parses WordPress XML into JSON
-2. `next build` - Builds Next.js application with content
-
-The build command in package.json chains these: `pnpm run content:build && next build`
+Standard Next.js build process:
+- `pnpm build` - Builds the Next.js application
+- Content is pre-generated and committed in `content/content.json`
 
 ## File Structure
 
@@ -87,27 +76,13 @@ The build command in package.json chains these: `pnpm run content:build && next 
 │       ├── content.ts      # Content access layer
 │       └── utils.ts        # Utility functions (cn helper)
 ├── content/
-│   └── content.json        # Generated content from WordPress
-├── scripts/
-│   └── parse-wordpress.mjs # WordPress XML parser
-├── public/                 # Static assets
-└── therefereeproject.WordPress.2025-09-12.xml # WordPress export file
+│   └── content.json        # Pre-generated content (migrated from WordPress)
+└── public/                 # Static assets
 ```
 
-## WordPress Integration
+## Content Management
 
-The site consumes content from a WordPress XML export located at the repository root (`therefereeproject.WordPress.2025-09-12.xml`). The parser handles:
-- CDATA extraction from WordPress XML
-- Post type filtering (pages vs posts)  
-- Status filtering (published content only)
-- Slug sanitization
-- Content and excerpt extraction
-
-### WordPress Parser Details
-- Default XML path: `../therefereeproject.WordPress.2025-09-12.xml` (parent directory)
-- Can accept custom path via command line argument: `pnpm run parse:wp "path/to/export.xml"`
-- Output: `content/content.json`
-- Parsing options configured for CDATA preservation and explicit array handling
+Content is stored in `content/content.json` (pre-migrated from WordPress). To update content, manually edit this JSON file.
 
 ## Technology Stack
 
@@ -115,7 +90,7 @@ The site consumes content from a WordPress XML export located at the repository 
 - **React**: v19.1.0
 - **Styling**: Tailwind CSS v4 with typography plugin
 - **Animation**: Framer Motion v12
-- **Content**: XML parsing (xml2js), HTML sanitization (sanitize-html)
+- **Content**: HTML sanitization (sanitize-html)
 - **TypeScript**: Full type coverage
 - **Package Manager**: pnpm
 - **Linting**: ESLint with Next.js presets

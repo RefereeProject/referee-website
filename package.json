@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run content:build && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "parse:wp": "node scripts/parse-wordpress.mjs \"../therefereeproject.WordPress.2025-09-12.xml\"",
-    "content:build": "pnpm run parse:wp"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

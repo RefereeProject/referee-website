@@ -48,3 +48,4 @@ pnpm-debug.log*
 
 # WordPress export
 therefereeproject.WordPress.2025-09-12.xml
+.claude/settings.local.json
