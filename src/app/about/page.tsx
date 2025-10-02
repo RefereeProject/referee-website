@@ -23,7 +23,7 @@ export default function AboutPage() {
       name: "Dr. Marcus Thomas",
       role: "Computational Scientist",
       image: "/Marcus_Thomas.jpg",
-      bio: "Dr. Thomas is a computational scientist working as a postdoctoral fellow at Mount Sinai Hospital in NYC. His work at the intersection of immuno-oncology, computer science and statistical physics aims to improve the computational pipelines used to create personalized tumor vaccines for cancer patients in clinical trials.",
+      bio: "Dr. Thomas is a computational scientist working as a Research Associate at Memorial Sloan Kettering Cancer Center in NYC. His work at the intersection of immuno-oncology, computer science and statistical physics aims to improve the computational pipelines used to create personalized tumor vaccines for cancer patients in clinical trials.",
     },
   ];
 
@@ -61,11 +61,8 @@ export default function AboutPage() {
           className="text-center mb-20"
         >
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
-            About The Referee Project
+            True transparency
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transform the research evaluation system fundamentally by applying a universal reliability score to papers, enhancing transparency, efficiency, and accountability in the review process.
-          </p>
         </motion.div>
 
         {/* Mission Section */}
@@ -82,7 +79,7 @@ export default function AboutPage() {
                 Our Mission
               </h2>
               <p className="text-xl text-blue-50 leading-relaxed max-w-4xl">
-                Adding quality and nuance to the scholarly record. The Referee Project is a non-profit stichting (foundation) registered in the Netherlands, dedicated to revolutionizing how research quality is evaluated and communicated.
+                At Referee, we are driven by the mission to transform the research evaluation system fundamentally. Our innovative approach applies a universal reliability score to papers to enhance transparency, efficiency, and accountability in the review process. By prioritizing results over effort, our system incentivizes deep, focused scrutiny of research, ensuring that published works are both reliable and valid. We aim to democratize access to the peer review process, allowing a diverse range of contributors to participate and be rewarded for uncovering research inaccuracies. Our ultimate goal is to improve the quality of academic publications globally, making reliable research accessible and influential in shaping future advancements.
               </p>
             </div>
           </div>
@@ -139,12 +136,17 @@ export default function AboutPage() {
                         {founder.bio}
                       </p>
 
-                      {/* Optional social links - can be added later */}
+                      {/* LinkedIn link */}
                       <div className="flex gap-3 pt-4">
-                        <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200">
+                        <a
+                          href="https://www.linkedin.com/in/erikschneider1/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200"
+                        >
                           <Linkedin className="w-4 h-4" />
                           <span className="text-sm font-medium">LinkedIn</span>
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -162,64 +164,90 @@ export default function AboutPage() {
         >
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our Advisors
+              Our Advisor
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our advisors bring a wealth of research and technical expertise to the project. They are instrumental in building the common enumeration of research weaknesses and reliability score.
-            </p>
           </div>
 
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="max-w-4xl mx-auto"
           >
             {advisors.map((advisor, index) => (
               <motion.div key={index} variants={cardVariants}>
-                <div className="group h-full relative overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  {/* Top gradient accent */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400" />
+                <div className="group relative overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500">
+                  {/* Gradient accent bar */}
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-700 via-blue-500 to-blue-700" />
 
-                  <div className="p-6 md:p-8 flex flex-col h-full">
-                    {/* Profile Image */}
-                    <div className="mb-6">
-                      <div className="relative w-32 h-32 mx-auto rounded-xl overflow-hidden ring-4 ring-gray-100 shadow-lg group-hover:ring-blue-100 transition-all duration-300">
-                        <Image
-                          src={advisor.image}
-                          alt={advisor.name}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                          sizes="128px"
-                        />
+                  <div className="p-8 md:p-12">
+                    <div className="flex flex-col md:flex-row gap-8 items-start">
+                      {/* Profile Image */}
+                      <div className="shrink-0">
+                        <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden ring-4 ring-blue-100 shadow-xl group-hover:ring-blue-200 transition-all duration-300">
+                          <Image
+                            src={advisor.image}
+                            alt={advisor.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(max-width: 768px) 160px, 192px"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="text-center mb-4">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {advisor.name}
-                      </h3>
-                      <p className="text-sm font-semibold text-blue-700 uppercase tracking-wide">
-                        {advisor.role}
-                      </p>
-                    </div>
+                      {/* Bio Content */}
+                      <div className="flex-1 space-y-4">
+                        <div>
+                          <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                            {advisor.name}
+                          </h3>
+                          <p className="text-lg font-medium text-blue-700 mb-4">
+                            {advisor.role}
+                          </p>
+                        </div>
 
-                    <p className="text-gray-600 leading-relaxed text-sm flex-1">
-                      {advisor.bio}
-                    </p>
+                        <p className="text-gray-700 leading-relaxed text-lg">
+                          {advisor.bio}
+                        </p>
 
-                    {/* Optional contact - can be activated later */}
-                    <div className="mt-6 pt-4 border-t border-gray-100">
-                      <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-50 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200 text-sm font-medium">
-                        <Mail className="w-4 h-4" />
-                        Contact
-                      </button>
+                        {/* LinkedIn link */}
+                        <div className="flex gap-3 pt-4">
+                          <a
+                            href="https://www.linkedin.com/in/marcus-thomas-a8359477/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200"
+                          >
+                            <Linkedin className="w-4 h-4" />
+                            <span className="text-sm font-medium">LinkedIn</span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* Call for additional advisors */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-block rounded-2xl bg-gradient-to-r from-blue-50 to-blue-100/50 px-8 py-6 border border-blue-200">
+              <p className="text-lg text-gray-700">
+                We're actively seeking additional qualified advisors to join our mission. If you have expertise in research methodology, statistical analysis, or academic publishing, we'd love to hear from you at{" "}
+                <a
+                  href="mailto:erik@referee-project.com"
+                  className="text-blue-700 hover:text-blue-800 font-semibold underline decoration-2 underline-offset-2 transition-colors"
+                >
+                  erik@referee-project.com
+                </a>
+              </p>
+            </div>
           </motion.div>
         </motion.section>
 
