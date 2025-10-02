@@ -1,41 +1,10 @@
 import { Hero } from "@/components/Hero";
-import { CardStack, type Card } from "@/components/CardStack";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { getSite } from "@/lib/content";
 import Image from "next/image";
 
 export default function Home() {
   const site = getSite();
-  const items: Card[] = [
-    {
-      id: 1,
-      name: "Erik Schneider",
-      designation: "Founder",
-      content: (
-        <p>
-          {site.description ||
-            "Adding quality and nuance to the scholarly record."}
-        </p>
-      ),
-    },
-    {
-      id: 2,
-      name: "The Referee Project",
-      designation: "Mission",
-      content: (
-        <p>
-          A pre-seed project focused on elevating research evaluation with
-          modern tools.
-        </p>
-      ),
-    },
-    {
-      id: 3,
-      name: "Blog",
-      designation: "Notes",
-      content: <p>Short posts with updates and ideas.</p>,
-    },
-  ];
 
   return (
     <div className="py-6 md:py-10">
@@ -200,10 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mt-10 flex items-center justify-center">
-        <CardStack items={items} />
-      </div>
-      <section id="newsletter" className="mt-12">
+      <section id="newsletter" className="mt-10">
         <NewsletterSignup />
       </section>
       
