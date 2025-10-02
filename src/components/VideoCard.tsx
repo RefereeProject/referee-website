@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { VideoEmbed } from "./VideoEmbed"
 import { ExpandableSummary } from "./ExpandableSummary"
 import { Calendar, Clock } from "lucide-react"
@@ -22,18 +21,18 @@ export function VideoCard({ videoId, title, date, duration, summary, description
   return (
     <div className="group rounded-2xl border border-transparent hover:border-neutral-200/60 hover:bg-neutral-50/50 transition-all duration-300 p-6 -m-6">
       <VideoEmbed videoId={videoId} title={title} />
-      
+
       <div className="mt-6">
         <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">
           {title}
         </h2>
-        
+
         {description && (
           <p className="mt-3 text-lg text-neutral-600 leading-relaxed">
             {description}
           </p>
         )}
-        
+
         {(date || duration) && (
           <div className="mt-4 flex flex-wrap gap-4 text-sm text-neutral-500">
             {date && (
@@ -50,7 +49,7 @@ export function VideoCard({ videoId, title, date, duration, summary, description
             )}
           </div>
         )}
-        
+
         <ExpandableSummary summary={summary} />
       </div>
     </div>

@@ -17,7 +17,7 @@ export function NewsletterSignup() {
 
     // Mailchimp form action URL from the content.json
     const formUrl = "https://referee-project.us17.list-manage.com/subscribe/post?u=3d5634b1315d3daa737ca37ab&id=7fee4f2f04&f_id=00826ae0f0";
-    
+
     try {
       // Create form data
       const formData = new FormData();
@@ -30,7 +30,7 @@ export function NewsletterSignup() {
       form.method = "POST";
       form.action = formUrl;
       form.target = "_blank";
-      
+
       const emailInput = document.createElement("input");
       emailInput.type = "hidden";
       emailInput.name = "EMAIL";
@@ -50,7 +50,8 @@ export function NewsletterSignup() {
       setStatus("success");
       setEmail("");
       setFirstName("");
-    } catch (error) {
+    } catch {
+      // Error handling without unused variable
       setStatus("error");
     }
   };

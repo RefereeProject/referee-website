@@ -1,14 +1,11 @@
 import { Hero } from "@/components/Hero";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { getSite } from "@/lib/content";
 
 export default function Home() {
-  const site = getSite();
-
   return (
     <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-10">
       <Hero />
-      
+
       <section id="overview" className="mt-6 md:mt-8 space-y-4">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Overview</h2>
         <p>
@@ -21,7 +18,7 @@ export default function Home() {
           through APIs. This transparency helps researchers and others understand
           the strengths and limitations of various studies.
         </p>
-        <p className="font-semibold text-lg">Isn't it crucial to know the reliability of the research you rely on?</p>
+        <p className="font-semibold text-lg">Isn&apos;t it crucial to know the reliability of the research you rely on?</p>
       </section>
 
       <section className="mt-10 space-y-6">
@@ -29,7 +26,7 @@ export default function Home() {
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight">The Problem</h3>
           <p className="mt-3">
             The Referee Project addresses critical flaws in research evaluation and paper
-            reliability communication. Academia's emphasis on publishing has skewed
+            reliability communication. Academia&apos;s emphasis on publishing has skewed
             incentives, distorting the scholarly record. Meanwhile, the existing system
             offers only vague indicators of paper reliability—papers are labeled as published
             (trustworthy), retracted (untrustworthy), or unpublished (questionable). We aim to
@@ -50,7 +47,7 @@ export default function Home() {
             <li><strong>Superficial Review Focus:</strong> Referees may prioritize the aesthetics and perceived interest of a paper over its scientific merit, thus favoring subjective criteria over objective scientific validity.</li>
             <li><strong>Rejection of Innovative Research:</strong> Pioneering, risky, or interdisciplinary research is disproportionately likely to be rejected, which discourages innovative thinking and stifles the development of new ideas.</li>
             <li><strong>Negligence in Reviewing Technical Content:</strong> Referees frequently overlook thorough checks on mathematical equations or theoretical proofs, potentially missing critical errors.</li>
-            <li><strong>Bias Influenced by Author's Reputation or Affiliation:</strong> The review process can be biased by the author's identity or institutional ties, perpetuating a system of status-based inequalities.</li>
+            <li><strong>Bias Influenced by Author&apos;s Reputation or Affiliation:</strong> The review process can be biased by the author&apos;s identity or institutional ties, perpetuating a system of status-based inequalities.</li>
             <li><strong>Lack of Transparency:</strong> The reluctance of journals to publish referee comments obscures the review process, making it difficult for the academic community and the public to gauge the credibility of research and the rigor with which it was reviewed. In addition, outsiders have to pour through the review narratives to understand and classify the problems with papers.</li>
           </ul>
           <h4 className="mt-6 text-lg md:text-xl font-semibold">Current Approaches</h4>
@@ -63,9 +60,9 @@ export default function Home() {
             <li>Create communities to provide feedback collectively</li>
           </ol>
           <p className="mt-4">
-            There's just one problem with these efforts: they're all echoes of the current system that
-            doesn't work. And why doesn't the current system work? Because all the evidence suggests
-            that most academics don't want to do the hard work of peer review.
+            There&apos;s just one problem with these efforts: they&apos;re all echoes of the current system that
+            doesn&apos;t work. And why doesn&apos;t the current system work? Because all the evidence suggests
+            that most academics don&apos;t want to do the hard work of peer review.
           </p>
           <p className="mt-3">
             Even among those who take reviews seriously, few can be expected to master all aspects of a
@@ -81,7 +78,7 @@ export default function Home() {
             their expertise in specific cases.
           </p>
           <p className="mt-4 font-semibold text-lg">
-            Let's stop relying solely on academics to solve this problem!
+            Let&apos;s stop relying solely on academics to solve this problem!
           </p>
         </div>
       </section>
@@ -90,7 +87,7 @@ export default function Home() {
         <div>
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight">The Referee Solution</h3>
           <p className="mt-3">
-            Referee's overall goal is to create a reliability score for academic papers using a
+            Referee&apos;s overall goal is to create a reliability score for academic papers using a
             standard taxonomy for research assessment and a targeted bug bounty approach to incentivize
             engagement. This model offers several superior benefits compared to traditional models,
             including the following:
@@ -98,13 +95,13 @@ export default function Home() {
           <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
             <li>
               <strong>Market Theory of Value:</strong> Unlike traditional peer review that often operates
-              on a labor theory of value (pay by the hour or by the paper), Referee's bug bounties are
+              on a labor theory of value (pay by the hour or by the paper), Referee&apos;s bug bounties are
               based on the market theory of value. This ensures that compensations are made only for
               results that add real value, rather than just effort.
             </li>
             <li>
               <strong>Common Research Weakness Enumeration (CRWE):</strong> Referee uses a tiered framework
-              similar to cybersecurity's Common Weakness Enumeration (CWE), which brings multiple advantages:
+              similar to cybersecurity&apos;s Common Weakness Enumeration (CWE), which brings multiple advantages:
               <ul className="mt-2 list-disc pl-4 sm:pl-5 space-y-2 text-sm sm:text-base">
                 <li><strong>Targeted Bounties:</strong> Allows for bounties to be specifically set on the weaknesses deemed most critical, ensuring focused and effective reviewing.</li>
                 <li><strong>Prevents Duplicate Claims:</strong> Reduces the risk of multiple claims for the same weakness, a common issue in early stages of bug-bounty systems.</li>
@@ -133,7 +130,7 @@ export default function Home() {
             <li>
               <strong>Supplementary to Existing Metrics:</strong> Aims to supplement traditional academic metrics
               such as the h-index with a quality score that reflects the reliability and integrity of research,
-              providing a more holistic view of a researcher's output.
+              providing a more holistic view of a researcher&apos;s output.
             </li>
           </ul>
         </div>
@@ -142,7 +139,7 @@ export default function Home() {
       <section id="newsletter" className="mt-10">
         <NewsletterSignup />
       </section>
-      
+
       <section id="get-involved" className="mt-8 text-center">
         <a
           href="https://x.com/referee_project"
