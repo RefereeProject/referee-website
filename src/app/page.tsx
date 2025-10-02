@@ -1,42 +1,30 @@
 import { Hero } from "@/components/Hero";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { getSite } from "@/lib/content";
-import Image from "next/image";
 
 export default function Home() {
   const site = getSite();
 
   return (
-    <div className="py-6 md:py-10">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-10">
       <Hero />
-      <section id="overview" className="mt-6 grid md:grid-cols-2 gap-6 md:gap-10 items-center">
-        <div>
-          <Image
-            src="/Referee_new_logo.png"
-            alt="Referee Logo"
-            width={640}
-            height={640}
-            className="w-full h-auto rounded-xl border border-neutral-200/60 dark:border-neutral-800/60"
-            priority
-          />
-        </div>
-        <div className="space-y-4">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Overview</h2>
-          <p>
-            The Referee Project is a non-profit initiative that develops reliability
-            scores for research papers, ranging from 0 to 100. We calculate these
-            scores using a detailed taxonomy of research weaknesses. Moreover, a bug
-            bounty program motivates individuals to identify flaws in these papers.
-            Each identified weakness becomes part of the metadata, clarifying why a
-            paper received its specific score. Users can easily access this metadata
-            through APIs. This transparency helps researchers and others understand
-            the strengths and limitations of various studies.
-          </p>
-          <p className="font-semibold text-lg">Isn't it crucial to know the reliability of the research you rely on?</p>
-        </div>
+      
+      <section id="overview" className="mt-6 md:mt-8 space-y-4">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Overview</h2>
+        <p>
+          The Referee Project is a non-profit initiative that develops reliability
+          scores for research papers, ranging from 0 to 100. We calculate these
+          scores using a detailed taxonomy of research weaknesses. Moreover, a bug
+          bounty program motivates individuals to identify flaws in these papers.
+          Each identified weakness becomes part of the metadata, clarifying why a
+          paper received its specific score. Users can easily access this metadata
+          through APIs. This transparency helps researchers and others understand
+          the strengths and limitations of various studies.
+        </p>
+        <p className="font-semibold text-lg">Isn't it crucial to know the reliability of the research you rely on?</p>
       </section>
 
-      <section className="mt-10 grid md:grid-cols-2 gap-6 md:gap-10 items-start">
+      <section className="mt-10 space-y-6">
         <div>
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight">The Problem</h3>
           <p className="mt-3">
@@ -53,7 +41,7 @@ export default function Home() {
             The current academic peer review system faces several significant issues that undermine
             its effectiveness and integrity:
           </p>
-          <ul className="mt-4 list-disc pl-5 space-y-2 text-neutral-700 dark:text-neutral-300">
+          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 sm:space-y-2 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
             <li><strong>Poor Incentives:</strong> There is a lack of incentives and motivation among peers to conduct thorough and diligent reviews.</li>
             <li><strong>Cultural Conflicts:</strong> Academia often lacks a culture of open criticism, which is crucial for rigorous scholarly discourse.</li>
             <li><strong>Opaque Criteria:</strong> Reviewers frequently apply their personal standards to evaluations, and the reviews remain confidential, adding to the opacity of the process.</li>
@@ -70,7 +58,7 @@ export default function Home() {
             There are numerous initiatives aimed at addressing the problems highlighted previously,
             primarily through two approaches:
           </p>
-          <ol className="mt-3 list-decimal pl-5 space-y-1 text-neutral-700 dark:text-neutral-300">
+          <ol className="mt-3 list-decimal pl-4 sm:pl-5 space-y-2 sm:space-y-1 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
             <li>Incentivize referees by either paying them for their time or offering bounties for well-written holistic reviews</li>
             <li>Create communities to provide feedback collectively</li>
           </ol>
@@ -96,27 +84,9 @@ export default function Home() {
             Let's stop relying solely on academics to solve this problem!
           </p>
         </div>
-        <div>
-          <Image
-            src="/retractions.png"
-            alt="Retractions graphic"
-            width={900}
-            height={700}
-            className="w-full h-auto rounded-xl border border-neutral-200/60 dark:border-neutral-800/60"
-          />
-        </div>
       </section>
 
-      <section className="mt-10 grid md:grid-cols-2 gap-6 md:gap-10 items-start">
-        <div>
-          <Image
-            src="/Academic Library.png"
-            alt="Academic library"
-            width={900}
-            height={700}
-            className="w-full h-auto rounded-xl border border-neutral-200/60 dark:border-neutral-800/60"
-          />
-        </div>
+      <section className="mt-10 space-y-6">
         <div>
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight">The Referee Solution</h3>
           <p className="mt-3">
@@ -125,7 +95,7 @@ export default function Home() {
             engagement. This model offers several superior benefits compared to traditional models,
             including the following:
           </p>
-          <ul className="mt-4 list-disc pl-5 space-y-3 text-neutral-700 dark:text-neutral-300">
+          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
             <li>
               <strong>Market Theory of Value:</strong> Unlike traditional peer review that often operates
               on a labor theory of value (pay by the hour or by the paper), Referee's bug bounties are
@@ -135,7 +105,7 @@ export default function Home() {
             <li>
               <strong>Common Research Weakness Enumeration (CRWE):</strong> Referee uses a tiered framework
               similar to cybersecurity's Common Weakness Enumeration (CWE), which brings multiple advantages:
-              <ul className="mt-2 list-disc pl-5 space-y-1">
+              <ul className="mt-2 list-disc pl-4 sm:pl-5 space-y-2 text-sm sm:text-base">
                 <li><strong>Targeted Bounties:</strong> Allows for bounties to be specifically set on the weaknesses deemed most critical, ensuring focused and effective reviewing.</li>
                 <li><strong>Prevents Duplicate Claims:</strong> Reduces the risk of multiple claims for the same weakness, a common issue in early stages of bug-bounty systems.</li>
                 <li><strong>Enhances Transparency:</strong> Improves the clarity and transparency of the review process, explaining clearly why a paper is considered unreliable.</li>
@@ -178,11 +148,11 @@ export default function Home() {
           href="https://x.com/referee_project"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white shadow-lg transition-colors duration-200"
+          className="inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white shadow-lg transition-all duration-200 min-h-[48px] touch-manipulation text-center"
         >
           Follow updates on X
         </a>
       </section>
-    </div>
+    </main>
   );
 }

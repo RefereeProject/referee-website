@@ -14,17 +14,17 @@ export function Navbar() {
         <Link href="/" className="font-bold text-blue-700 tracking-tight">
           The Referee Project
         </Link>
-        <div className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/about" className="text-gray-700 hover:text-blue-700 transition-colors">
+        <div className="flex items-center gap-3 sm:gap-6 text-sm sm:text-base font-medium">
+          <Link href="/about" className="text-gray-700 hover:text-blue-700 transition-colors py-2 px-3 sm:px-0 -mx-3 sm:mx-0 rounded-lg active:bg-gray-100 min-h-[44px] flex items-center">
             About
           </Link>
-          <Link href="/blog" className="text-gray-700 hover:text-blue-700 transition-colors">
+          <Link href="/blog" className="text-gray-700 hover:text-blue-700 transition-colors py-2 px-3 sm:px-0 -mx-3 sm:mx-0 rounded-lg active:bg-gray-100 min-h-[44px] flex items-center">
             Blog
           </Link>
-          <Link href="/faq" className="text-gray-700 hover:text-blue-700 transition-colors">
+          <Link href="/faq" className="text-gray-700 hover:text-blue-700 transition-colors py-2 px-3 sm:px-0 -mx-3 sm:mx-0 rounded-lg active:bg-gray-100 min-h-[44px] flex items-center">
             FAQ
           </Link>
-          <Link href="/talks" className="text-gray-700 hover:text-blue-700 transition-colors">
+          <Link href="/talks" className="text-gray-700 hover:text-blue-700 transition-colors py-2 px-3 sm:px-0 -mx-3 sm:mx-0 rounded-lg active:bg-gray-100 min-h-[44px] flex items-center">
             Talks
           </Link>
         </div>

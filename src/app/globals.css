@@ -46,6 +46,39 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Mobile optimizations */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Improve tap highlighting */
+* {
+  -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Mobile-specific typography and touch targets */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+}
+
+/* Improve button/link touch response on mobile */
+@media (hover: none) and (pointer: coarse) {
+  button:active,
+  a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Touch manipulation utility */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
 /* Typography plugin base */
 @plugin "@tailwindcss/typography";
 
