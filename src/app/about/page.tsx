@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 /**
  * About page component featuring team bio cards with profile images
@@ -239,7 +239,7 @@ export default function AboutPage() {
           >
             <div className="inline-block rounded-2xl bg-gradient-to-r from-blue-50 to-blue-100/50 px-8 py-6 border border-blue-200">
               <p className="text-lg text-gray-700">
-                We're actively seeking additional qualified advisors to join our mission. If you have expertise in research methodology, statistical analysis, or academic publishing, we'd love to hear from you at{" "}
+                We&apos;re actively seeking additional qualified advisors to join our mission. If you have expertise in research methodology, statistical analysis, or academic publishing, we&apos;d love to hear from you at{" "}
                 <a
                   href="mailto:erik@referee-project.com"
                   className="text-blue-700 hover:text-blue-800 font-semibold underline decoration-2 underline-offset-2 transition-colors"
