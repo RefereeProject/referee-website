@@ -12,43 +12,32 @@ const talks = [
     description: "Executive director Erik Schneider provides an update on the Referee Project in this conversation with Sebastián Buriticá Arias.",
     date: "2024",
     duration: "53:00",
-    summary: `### Core Summary
+    summary: `<h3>Core Summary</h3>
+<p>The Referee Project aims to radically reform academic peer review by introducing an adversarial "bug bounty" model—similar to cybersecurity—where individuals are financially incentivized to find and report flaws in academic papers. Instead of relying solely on academics for peer review, the system would be open to anyone with relevant skills. Each paper would be given a transparent reliability score (0–100) based on the flaws discovered and their severity, making the trustworthiness of published research quantifiable and continuously improvable.</p>
 
-The Referee Project aims to radically reform academic peer review by introducing an adversarial "bug bounty" model—similar to cybersecurity—where individuals are financially incentivized to find and report flaws in academic papers. Instead of relying solely on academics for peer review, the system would be open to anyone with relevant skills. Each paper would be given a transparent reliability score (0–100) based on the flaws discovered and their severity, making the trustworthiness of published research quantifiable and continuously improvable.
+<h3>Key Points and Details</h3>
+<ul>
+  <li><strong>Background & Motivation:</strong> Erik Schneider, who lives in the Netherlands and has a background in academia, finance, and cybersecurity, was inspired to tackle the flaws in peer review after hearing from researchers frustrated with the process. He points out that academic publishing is a $30 billion industry, yet authors often pay to publish, pay to read, and peer reviewers get nothing.</li>
+  
+  <li><strong>Problems in Peer Review:</strong> Peer review has become industrialized in the last 50 years, and journals play both a gatekeeping and profit-maximizing role. Rising numbers of retracted papers (58,000+) and estimates that up to 85% of biomedical research is wasted highlight issues of quality, duplication, and integrity. New threats include "paper mills" that sell authorship and the huge influx of AI-generated publications.</li>
+  
+  <li><strong>Referee Project's Approach:</strong> Adopts a "bug bounty" model from cybersecurity, develops a taxonomy of 250+ distinct research flaws, assigns each flaw a severity weight to calculate reliability scores, and allows challenge and appeal for continual improvement.</li>
+  
+  <li><strong>Incentives and Roles:</strong> Rewards attract both "makers" (creators of research) and "breakers" (critics/fraud-detectors), using a combination of AI for data extraction and statistical checking, and humans for domain judgment and oversight. The project envisions career pathways in academia for "breakers" akin to security auditors in tech.</li>
+  
+  <li><strong>Workflow Example:</strong> The MVP focuses on identifying statistical anomalies in published clinical trial papers, specifically implausible heartbeat ranges, using AI to extract and analyze data. The first public demonstration re-examines historic flawed studies that misinformed European medical guidelines.</li>
+  
+  <li><strong>Openness and Society Focus:</strong> The project serves society at large, including policymakers, doctors, and the public, by preventing waste of research funding and harm caused by unreliable findings. Anyone with expertise or interest can contribute, regardless of credentials.</li>
+  
+  <li><strong>Current Status & Involvement:</strong> The MVP is near completion, focused on a narrowly defined flaw type. Broader participation is welcomed—commitment and willingness to learn are more important than formal credentials.</li>
+</ul>
 
-### Key Points and Details
-
-- **Background & Motivation:**  
-  Erik Schneider, who lives in the Netherlands and has a background in academia, finance, and cybersecurity, was inspired to tackle the flaws in peer review after hearing from researchers frustrated with the process. He points out that academic publishing is a $30 billion industry, yet authors often pay to publish, pay to read, and peer reviewers get nothing.
-
-- **Problems in Peer Review:**  
-  Peer review has become industrialized in the last 50 years, and journals play both a gatekeeping and profit-maximizing role. Rising numbers of retracted papers (58,000+) and estimates that up to 85% of biomedical research is wasted highlight issues of quality, duplication, and integrity. New threats include "paper mills" that sell authorship and the huge influx of AI-generated publications.
-
-- **Referee Project's Approach:**  
-  - Adopts a "bug bounty" model from cybersecurity, rewarding those who find flaws in academic works.
-  - Develops a taxonomy of 250+ distinct research flaws.
-  - Assigns each flaw a severity weight, and calculates a reliability score for each paper based on a transparent sum-product mechanism.
-  - Allows challenge and appeal—users can submit evidence to contest specific flaw identifications or weighing, and the system is designed for continual improvement.
-
-- **Incentives and Roles:**  
-  - Rewards are designed to attract both "makers" (creators of research) and "breakers" (critics/fraud-detectors).
-  - Uses a combination of AI (for tasks like extracting data from tables and statistical checking) and humans (for domain judgment, oversight, and improvement).
-  - Envisions career pathways in academia for "breakers" akin to security auditors in tech.
-
-- **Workflow Example:**  
-  The MVP focuses on identifying statistical anomalies in published clinical trial papers, specifically implausible heartbeat ranges, using AI to extract and analyze data. The tool's first public demonstration involves re-examining historic flawed studies that misinformed European medical guidelines and caused vast harm.
-
-- **Openness and Society Focus:**  
-  The project is not just for academia—it seeks to serve society at large, including policymakers, doctors, and the public, by preventing waste of research funding and harm caused by unreliable findings. Anyone with expertise or interest can contribute, regardless of credentials, and the system is built for transparency and learning from appeal.
-
-- **Current Status & Involvement:**  
-  The MVP is near completion, focused on a narrowly defined flaw type. Broader participation is welcomed, not limited to academics; commitment and willingness to learn are more important than formal credentials. Funding and credible MVP results are expected to attract stakeholders and partners in the future.
-
-### Notable Quotes
-
-- On peer review: "Peer review is absolutely needed... the way it's implemented is flawed."
-- On incentives: "Truth is best discovered through adversarial processes like the Socratic method."
-- On project ambition: "This project is for society, not just academia... So much public money is on the line."`
+<h3>Notable Quotes</h3>
+<ul>
+  <li>"Peer review is absolutely needed... the way it's implemented is flawed."</li>
+  <li>"Truth is best discovered through adversarial processes like the Socratic method."</li>
+  <li>"This project is for society, not just academia... So much public money is on the line."</li>
+</ul>`
   },
   {
     id: 2,
@@ -57,31 +46,41 @@ The Referee Project aims to radically reform academic peer review by introducing
     description: "Erik Schneider discusses the Referee Project with the DeSci Labs team, explaining how we're taking the peer out of peer review.",
     date: "2023",
     duration: "45:00",
-    summary: `### Key Points of the Referee Project
+    summary: `<h3>Key Points of the Referee Project</h3>
+<ul>
+  <li>The Referee Project seeks to "harden human knowledge by taking the peer out of peer review," addressing flaws in the current academic review system by redistributing the labor of reviewing and incentivizing error discovery with clear, structured mechanisms.</li>
+  
+  <li>Schneider draws on his experiences in finance and cybersecurity, proposing a distinction between "makers" (research producers) and "breakers" (those who excel at finding flaws in research). The project seeks to elevate and reward breakers—similar to ethical hackers in cybersecurity—by building a system that actively incentivizes finding errors in research.</li>
+  
+  <li>The proposed model functions like a bug bounty system, using a taxonomy of research flaws similar to the Common Weakness Enumeration in software security. All research goes directly to public pre-prints, with papers' reliability evolving over time via transparent, adversarial review and bounties for error discovery.</li>
+  
+  <li>Each paper is assigned a reliability score (1–100) based on claimed bounties and flaw categories, making its trustworthiness explicit. Schneider acknowledges this score will never be perfect but sees its imperfection and controversy as a way to involve the wider community in constant improvement.</li>
+</ul>
 
-- The Referee Project seeks to "harden human knowledge by taking the peer out of peer review," aiming to address flaws in the current academic review system by redistributing the labor of reviewing and incentivizing error discovery with clear, structured mechanisms.
-- Schneider draws on his experiences in finance and cybersecurity, proposing a distinction between "makers" (research producers) and "breakers" (those who excel at finding flaws in research). While academia currently prioritizes the maker role, the project seeks to elevate and reward breakers—similar to ethical hackers in cybersecurity—by building a system that actively incentivizes finding errors in research.
-- The proposed model functions more like a bug bounty system than traditional paid review, using a taxonomy of research flaws similar to the Common Weakness Enumeration in software security.
-- Instead of closed, gatekeeped journal processes, the Referee Project pushes all research directly to public pre-prints, with papers' reliability evolving over time via transparent, adversarial review and bounties for error discovery.
-- Each paper is assigned a reliability score (1–100) based on claimed bounties and flaw categories, making its trustworthiness explicit. Schneider acknowledges this score will never be perfect but sees its imperfection and controversy as a way to involve the wider community in constant improvement.
+<h3>Incentives and System Mechanics</h3>
+<ul>
+  <li>Bounties are paid in stablecoins or established cryptocurrencies, avoiding project-specific tokens, which Schneider views as risky and distracting.</li>
+  
+  <li>A potential future layer includes non-transferable "reputation tokens," which can be staked on papers as a public demonstration of belief in their reliability; if the paper's reliability falls, staked reputation is slashed.</li>
+  
+  <li>The protocol welcomes AI and bots as both reviewers and tools to scale error detection and review, though human oversight is expected at the outset.</li>
+</ul>
 
-### Incentives and System Mechanics
+<h3>System Focus and Challenges</h3>
+<ul>
+  <li>Initial focus will be on reviewing and correcting past research, where there are tens of thousands of unaddressed retractions and likely far more undetected issues.</li>
+  
+  <li>The project's design is inspired by the adversarial, public-by-default model in cybersecurity, positing that publicly exposing flaws leads to more robust systems. Schneider references retraction watch and other post-publication review platforms, noting the persistence and citation of flawed or retracted papers as evidence of the current system's shortcomings.</li>
+  
+  <li>Objections are anticipated around whether non-experts should be allowed to review specialized research, but Schneider argues that, as in cybersecurity, public adversarial review by granular specialists is essential and educational for the community. He acknowledges the risk of gaming the system but views these as features that incentivize continuous improvement through adversarial testing.</li>
+</ul>
 
-- Bounties are paid in stablecoins or established cryptocurrencies, avoiding project-specific tokens, which Schneider views as risky and distracting.
-- A potential future layer includes non-transferable "reputation tokens," which can be staked on papers as a public demonstration of belief in their reliability; if the paper's reliability falls, staked reputation is slashed.
-- The protocol welcomes AI and bots as both reviewers and tools to scale error detection and review, though human oversight is expected at the outset.
-
-### System Focus and Challenges
-
-- Initial focus will be on reviewing and correcting past research, where Schneider notes there are tens of thousands of unaddressed retractions and likely far more undetected issues.
-- The project's design is inspired by the adversarial, public-by-default model in cybersecurity, positing that publicly exposing flaws leads to more robust systems. Schneider references the experience of retraction watch and other post-publication review platforms, noting the persistence and citation of flawed or retracted papers as evidence of the current system's shortcomings.
-- Objections are anticipated around whether non-experts should be allowed to review specialized research, but Schneider argues that, as in cybersecurity, public adversarial review by granular specialists is essential and educational for the community.
-- He acknowledges the risk of gaming the system or bounties claimed by planted flaws, but views these as features that incentivize continuous improvement through adversarial testing.
-
-### Limitations and Open Questions
-
-- Schneider is aware that compressing paper quality to a single number (reliability score) is controversial and possibly demoralizing, yet sees this metric as necessary for accountability and transparency.
-- He raises the problem of legitimate ambiguity: when many expert teams, given the same data and questions, reach widely divergent conclusions, as highlighted by a 2022 study involving dozens of research teams analyzing identical data on immigration attitudes. The project does not provide a solution here but recognizes this as a persistent meta-problem for all peer review approaches.`
+<h3>Limitations and Open Questions</h3>
+<ul>
+  <li>Schneider is aware that compressing paper quality to a single number (reliability score) is controversial and possibly demoralizing, yet sees this metric as necessary for accountability and transparency.</li>
+  
+  <li>He raises the problem of legitimate ambiguity: when many expert teams, given the same data and questions, reach widely divergent conclusions, as highlighted by a 2022 study involving dozens of research teams analyzing identical data on immigration attitudes. The project does not provide a solution here but recognizes this as a persistent meta-problem for all peer review approaches.</li>
+</ul>`
   }
 ]
 

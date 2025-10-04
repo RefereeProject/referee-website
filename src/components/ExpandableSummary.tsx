@@ -12,12 +12,10 @@ interface ExpandableSummaryProps {
 /**
  * Accordion component for displaying expandable video summaries
  * Features smooth animations and keyboard accessibility
+ * Now supports HTML content with blog post styling
  */
 export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSummaryProps) {
   const [isOpen, setIsOpen] = useState(initialOpen)
-
-  // Parse summary into sections (separated by ### headers)
-  const sections = summary.split('\n###').map(s => s.trim()).filter(Boolean)
 
   return (
     <div className="mt-6">
@@ -54,48 +52,10 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
               transition={{ delay: 0.1, duration: 0.2 }}
               className="mt-4 p-6 rounded-lg bg-neutral-50/80 border border-neutral-200/60"
             >
-              {sections.map((section, index) => {
-                // Check if section starts with a header
-                const lines = section.split('\n')
-                const hasHeader = lines[0].startsWith('#')
-                const header = hasHeader ? lines[0].replace(/^#+\s*/, '').trim() : null
-                const content = hasHeader ? lines.slice(1).join('\n') : section
-
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 + index * 0.05, duration: 0.2 }}
-                    className={index > 0 ? "mt-6" : ""}
-                  >
-                    {header && (
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-3">
-                        {header}
-                      </h3>
-                    )}
-                    <div 
-                      className="prose prose-neutral prose-sm max-w-none"
-                      dangerouslySetInnerHTML={{ 
-                        __html: content
-                          .split('\n')
-                          .map(line => {
-                            // Convert markdown-style bullets to HTML
-                            if (line.trim().startsWith('- ')) {
-                              return `<li>${line.trim().substring(2)}</li>`
-                            }
-                            // Handle bold text
-                            line = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            return line ? `<p>${line}</p>` : ''
-                          })
-                          .join('')
-                          .replace(/<li>/g, '<ul class="list-disc pl-5 space-y-1"><li>')
-                          .replace(/<\/li>(?![\s\S]*<li>)/g, '</li></ul>')
-                      }}
-                    />
-                  </motion.div>
-                )
-              })}
+              <div
+                className="prose prose-lg prose-neutral dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-neutral-700 dark:prose-p:text-neutral-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-neutral-900 dark:prose-strong:text-neutral-100 prose-ul:my-4 prose-li:my-2 prose-li:text-neutral-700 dark:prose-li:text-neutral-300 max-w-none"
+                dangerouslySetInnerHTML={{ __html: summary }}
+              />
             </motion.div>
           </motion.div>
         )}
