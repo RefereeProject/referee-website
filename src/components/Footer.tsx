@@ -6,6 +6,11 @@ export function Footer() {
           © {new Date().getFullYear()} The Referee Project. All rights
           reserved.
         </p>
+        <p className="text-center sm:text-left mt-2">
+          An initiative of The Alethea Foundation
+          <br />
+          Chamber of Commerce (KVK) number: 93470140
+        </p>
       </div>
     </footer>
   );
