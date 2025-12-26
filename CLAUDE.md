@@ -70,7 +70,6 @@ Standard Next.js build process:
 │   │   ├── Footer.tsx      # Site footer  
 │   │   ├── Hero.tsx        # Homepage hero section
 │   │   ├── ColourfulText.tsx # Animated text component
-│   │   ├── CardStack.tsx   # Card animation component
 │   │   └── aurora-background.tsx # Aurora effect background
 │   └── lib/
 │       ├── content.ts      # Content access layer
