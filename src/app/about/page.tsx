@@ -262,9 +262,12 @@ export default function AboutPage() {
             <p className="text-lg text-gray-700 mb-4">
               Interested in joining our mission?
             </p>
-            <button className="px-8 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <a
+              href="mailto:erik@referee-project.com"
+              className="inline-block px-8 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-200 shadow-lg hover:shadow-xl"
+            >
               Get In Touch
-            </button>
+            </a>
           </div>
         </motion.section>
       </div>
