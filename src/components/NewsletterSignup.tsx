@@ -3,56 +3,46 @@
 import { useState } from "react";
 
 /**
- * Newsletter signup component using Mailchimp
+ * Newsletter signup component using server-side Mailchimp integration
  * Provides a clean, modern form for users to subscribe to project updates
  */
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-
-    // Mailchimp form action URL from the content.json
-    const formUrl = "https://referee-project.us17.list-manage.com/subscribe/post?u=3d5634b1315d3daa737ca37ab&id=7fee4f2f04&f_id=00826ae0f0";
+    setErrorMessage("");
 
     try {
-      // Create form data
-      const formData = new FormData();
-      formData.append("EMAIL", email);
-      formData.append("FNAME", firstName);
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          firstName: firstName || undefined,
+        }),
+      });
 
-      // Note: Mailchimp forms require actual form submission or JSONP for CORS
-      // For a production setup, consider using Mailchimp's API or a server-side endpoint
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = formUrl;
-      form.target = "_blank";
+      const data = await response.json();
 
-      const emailInput = document.createElement("input");
-      emailInput.type = "hidden";
-      emailInput.name = "EMAIL";
-      emailInput.value = email;
-      form.appendChild(emailInput);
-
-      const fnameInput = document.createElement("input");
-      fnameInput.type = "hidden";
-      fnameInput.name = "FNAME";
-      fnameInput.value = firstName;
-      form.appendChild(fnameInput);
-
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-
-      setStatus("success");
-      setEmail("");
-      setFirstName("");
-    } catch {
-      // Error handling without unused variable
+      if (response.ok) {
+        setStatus("success");
+        setEmail("");
+        setFirstName("");
+      } else {
+        setStatus("error");
+        setErrorMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
       setStatus("error");
+      setErrorMessage("Unable to connect. Please check your internet connection and try again.");
+      console.error("Newsletter signup error:", error);
     }
   };
 
@@ -80,7 +70,8 @@ export function NewsletterSignup() {
                 placeholder="First Name (optional)"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                disabled={status === "loading"}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
             <div>
@@ -90,12 +81,13 @@ export function NewsletterSignup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                disabled={status === "loading"}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
-            {status === "error" && (
+            {status === "error" && errorMessage && (
               <p className="text-red-600 text-sm">
-                Something went wrong. Please try again.
+                {errorMessage}
               </p>
             )}
             <button
