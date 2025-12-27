@@ -39,7 +39,7 @@ export default function Home() {
             The current academic peer review system faces several significant issues that undermine
             its effectiveness and integrity:
           </p>
-          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 sm:space-y-2 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
+          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 sm:space-y-2 text-sm sm:text-base text-neutral-700">
             <li><strong>Poor Incentives:</strong> There is a lack of incentives and motivation among peers to conduct thorough and diligent reviews.</li>
             <li><strong>Cultural Conflicts:</strong> Academia often lacks a culture of open criticism, which is crucial for rigorous scholarly discourse.</li>
             <li><strong>Opaque Criteria:</strong> Reviewers frequently apply their personal standards to evaluations, and the reviews remain confidential, adding to the opacity of the process.</li>
@@ -56,7 +56,7 @@ export default function Home() {
             There are numerous initiatives aimed at addressing the problems highlighted previously,
             primarily through two approaches:
           </p>
-          <ol className="mt-3 list-decimal pl-4 sm:pl-5 space-y-2 sm:space-y-1 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
+          <ol className="mt-3 list-decimal pl-4 sm:pl-5 space-y-2 sm:space-y-1 text-sm sm:text-base text-neutral-700">
             <li>Incentivize referees by either paying them for their time or offering bounties for well-written holistic reviews</li>
             <li>Create communities to provide feedback collectively</li>
           </ol>
@@ -104,7 +104,7 @@ export default function Home() {
               priority
             />
           </div>
-          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-neutral-700 dark:text-neutral-300">
+          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-neutral-700">
             <li>
               <strong>Market Theory of Value:</strong> Unlike traditional peer review that often operates
               on a labor theory of value (pay by the hour or by the paper), Referee&apos;s bug bounties are

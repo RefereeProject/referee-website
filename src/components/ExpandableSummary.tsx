@@ -53,7 +53,7 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
               className="mt-4 p-6 rounded-lg bg-neutral-50/80 border border-neutral-200/60"
             >
               <div
-                className="prose prose-lg prose-neutral dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-neutral-700 dark:prose-p:text-neutral-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-neutral-900 dark:prose-strong:text-neutral-100 prose-ul:my-4 prose-li:my-2 prose-li:text-neutral-700 dark:prose-li:text-neutral-300 max-w-none"
+                className="prose prose-lg prose-neutral prose-headings:font-bold prose-headings:tracking-tight prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-neutral-900 prose-ul:my-4 prose-li:my-2 prose-li:text-neutral-700 max-w-none"
                 dangerouslySetInnerHTML={{ __html: summary }}
               />
             </motion.div>
