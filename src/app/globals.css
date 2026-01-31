@@ -202,6 +202,19 @@ html {
   }
 }
 
+/* Respect prefers-reduced-motion for CSS animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-navbar-slide-in,
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-fade-up-delay-4,
+  .animate-fade-up-delay-5 {
+    animation: none !important;
+  }
+}
+
 /* Utility classes */
 .line-clamp-3 {
   overflow: hidden;
