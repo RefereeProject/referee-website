@@ -47,18 +47,18 @@ export function NewsletterSignup() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
+    <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-2xl p-8 border border-primary-200">
       <div className="max-w-md mx-auto text-center">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 className="text-2xl font-bold text-foreground mb-2">
           Stay Updated
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-foreground-muted mb-6">
           Get monthly updates on the Referee Project. No spam, just insights.
         </p>
 
         {status === "success" ? (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800 font-medium">
+          <div className="bg-primary-50 border border-primary-300 rounded-lg p-4">
+            <p className="text-primary-800 font-medium">
               ✓ Thanks for subscribing! Check your email to confirm.
             </p>
           </div>
@@ -71,7 +71,7 @@ export function NewsletterSignup() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 rounded-lg border border-border bg-card-bg text-foreground placeholder:text-foreground-muted focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
             <div>
@@ -82,18 +82,18 @@ export function NewsletterSignup() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 rounded-lg border border-border bg-card-bg text-foreground placeholder:text-foreground-muted focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
-            {status === "error" && errorMessage && (
-              <p className="text-red-600 text-sm">
+            {status === "error" && errorMessage ? (
+              <p className="text-accent-600 text-sm">
                 {errorMessage}
               </p>
-            )}
+            ) : null}
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full bg-blue-700 hover:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === "loading" ? "Subscribing..." : "Subscribe"}
             </button>

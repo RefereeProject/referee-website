@@ -75,7 +75,7 @@ export default async function BlogPostPage({
           {post.title}
         </h1>
 
-        {post.date && (
+        {post.date ? (
           <div className="mt-6 flex items-center justify-center text-foreground-muted">
             <time dateTime={post.date} className="text-sm font-medium">
               {new Date(post.date).toLocaleDateString('en-US', {
@@ -85,7 +85,7 @@ export default async function BlogPostPage({
               })}
             </time>
           </div>
-        )}
+        ) : null}
       </header>
 
       {/* Article Content */}

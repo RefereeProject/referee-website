@@ -38,7 +38,7 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
       </button>
 
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {isOpen ? (
           <motion.div
             id={contentId}
             initial={{ height: 0, opacity: 0 }}
@@ -59,7 +59,7 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
               />
             </motion.div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   )

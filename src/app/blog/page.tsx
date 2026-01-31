@@ -45,11 +45,11 @@ export default async function BlogIndexPage() {
                         day: 'numeric'
                       })}
                     </span>
-                    {index === 0 && (
+                    {index === 0 ? (
                       <span className="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-full">
                         Latest
                       </span>
-                    )}
+                    ) : null}
                   </div>
 
                   <h2 className="text-2xl lg:text-3xl font-bold text-foreground group-hover:text-primary-600 transition-colors duration-200 mb-4 leading-tight">
@@ -75,13 +75,13 @@ export default async function BlogIndexPage() {
         ))}
       </div>
 
-      {posts.length === 0 && (
+      {posts.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-foreground-muted">
             No blog posts available yet.
           </p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

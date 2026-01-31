@@ -31,28 +31,28 @@ export function VideoCard({ videoId, title, date, duration, summary, description
           {title}
         </h2>
 
-        {description && (
+        {description ? (
           <p className="mt-3 text-lg text-foreground-muted leading-relaxed">
             {description}
           </p>
-        )}
+        ) : null}
 
-        {(date || duration) && (
+        {(date || duration) ? (
           <div className="mt-4 flex flex-wrap gap-4 text-sm text-foreground-muted">
-            {date && (
+            {date ? (
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />
                 <span>{date}</span>
               </div>
-            )}
-            {duration && (
+            ) : null}
+            {duration ? (
               <div className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4" />
                 <span>{duration}</span>
               </div>
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
 
         <ExpandableSummary summary={summary} />
       </div>
