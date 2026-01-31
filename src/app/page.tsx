@@ -6,7 +6,7 @@ const Hero = dynamic(() => import("@/components/Hero").then((m) => m.Hero));
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+    <div className="py-6 md:py-10">
       <Hero />
 
       <section id="overview" className="mt-6 md:mt-8 space-y-4">
@@ -164,6 +164,6 @@ export default function Home() {
           Follow updates on X
         </a>
       </section>
-    </main>
+    </div>
   );
 }

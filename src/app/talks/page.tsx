@@ -83,7 +83,7 @@ const talks = [
 
 export default function TalksPage() {
   return (
-    <main className="min-h-screen py-12 px-4">
+    <div className="min-h-screen py-12">
       <div className="mx-auto max-w-4xl">
         <div className="mb-16 animate-fade-up">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground">
@@ -106,6 +106,6 @@ export default function TalksPage() {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   )
 }

@@ -45,7 +45,8 @@ export async function getPosts(): Promise<WPEntry[]> {
   return content.posts.filter((p) => p.status === 'publish' || p.status === '');
 }
 
-export async function findPostBySlug(slug: string): Promise<WPEntry | undefined> {
+/** Finds a post by slug or id to handle both URL patterns consistently */
+export async function findPostBySlug(slugOrId: string): Promise<WPEntry | undefined> {
   const posts = await getPosts();
-  return posts.find((p) => p.slug === slug);
+  return posts.find((p) => p.slug === slugOrId || p.id === slugOrId);
 }
