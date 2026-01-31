@@ -1,4 +1,11 @@
+import type { Metadata } from "next"
 import { VideoCard } from "@/components/VideoCard"
+
+export const metadata: Metadata = {
+  title: "Talks — The Referee Project",
+  description:
+    "Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review.",
+}
 
 
 const talks = [

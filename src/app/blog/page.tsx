@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getPosts } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Blog — The Referee Project",
+  description:
+    "Insights and updates from The Referee Project — exploring the future of academic research evaluation.",
+};
 
 export const dynamic = "force-static";
 

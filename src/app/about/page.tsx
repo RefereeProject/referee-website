@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Linkedin } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About — The Referee Project",
+  description:
+    "Meet the team behind The Referee Project. Learn about our mission to transform research evaluation through transparency, reliability scores, and adversarial review.",
+};
 
 /**
  * About page component featuring team bio cards with profile images

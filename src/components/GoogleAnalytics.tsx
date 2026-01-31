@@ -1,36 +1,55 @@
 'use client';
 
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 import Script from 'next/script';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, Suspense } from 'react';
+
+/**
+ * Tracks SPA route changes by calling gtag on each pathname change.
+ * Wrapped in Suspense because useSearchParams() requires it in App Router.
+ */
+function RouteChangeTracker() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!window.gtag) return;
+    const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+    if (!measurementId) return;
+
+    const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
+    window.gtag('config', measurementId, { page_path: url });
+  }, [pathname, searchParams]);
+
+  return null;
+}
 
 /**
  * Google Analytics component for GA4 tracking
  * 
- * This component loads the gtag.js script and initializes Google Analytics.
- * It automatically tracks page views in Next.js App Router via the navigation events.
+ * Loads gtag.js, initializes GA4, and tracks SPA navigations
+ * via usePathname()/useSearchParams() hooks.
  * 
  * Environment variable required:
  * - NEXT_PUBLIC_GA_MEASUREMENT_ID: Your GA4 Measurement ID (format: G-XXXXXXXXXX)
- * 
- * @see https://developers.google.com/analytics/devguides/collection/ga4
  */
 export function GoogleAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-  // Don't render if no measurement ID is configured
-  if (!measurementId) {
-    console.warn('Google Analytics: NEXT_PUBLIC_GA_MEASUREMENT_ID is not set');
-    return null;
-  }
+  if (!measurementId) return null;
 
   return (
     <>
-      {/* Load gtag.js script from Google */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="afterInteractive"
       />
-      
-      {/* Initialize gtag and configure GA4 */}
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -41,6 +60,9 @@ export function GoogleAnalytics() {
           });
         `}
       </Script>
+      <Suspense fallback={null}>
+        <RouteChangeTracker />
+      </Suspense>
     </>
   );
 }

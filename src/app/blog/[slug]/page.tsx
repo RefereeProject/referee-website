@@ -32,9 +32,25 @@ export default async function BlogPostPage({
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption"]),
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
-      img: ["src", "alt", "width", "height"],
-      a: ["href", "name", "target", "rel"],
-      '*': ["style", "class"],
+      img: ["src", "alt", "width", "height", "class"],
+      a: ["href", "name", "target", "rel", "class"],
+      div: ["class"],
+      span: ["class"],
+      figure: ["class"],
+      figcaption: ["class"],
+      p: ["class"],
+      pre: ["class"],
+      code: ["class"],
+    },
+    /* Enforce rel=noopener noreferrer on all links for security */
+    transformTags: {
+      a: (tagName, attribs) => ({
+        tagName,
+        attribs: {
+          ...attribs,
+          rel: "noopener noreferrer",
+        },
+      }),
     },
   });
 
