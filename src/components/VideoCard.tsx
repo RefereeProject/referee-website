@@ -1,8 +1,12 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { VideoEmbed } from "./VideoEmbed"
-import { ExpandableSummary } from "./ExpandableSummary"
 import { Calendar, Clock } from "lucide-react"
+
+const ExpandableSummary = dynamic(
+  () => import("./ExpandableSummary").then((m) => m.ExpandableSummary),
+)
 
 interface VideoCardProps {
   videoId: string
@@ -19,22 +23,22 @@ interface VideoCardProps {
  */
 export function VideoCard({ videoId, title, date, duration, summary, description }: VideoCardProps) {
   return (
-    <div className="group rounded-2xl border border-transparent hover:border-neutral-200/60 hover:bg-neutral-50/50 transition-all duration-300 p-6 -m-6">
+    <div className="group rounded-2xl border border-transparent hover:border-border hover:bg-card-hover transition-all duration-300 p-6 -m-6">
       <VideoEmbed videoId={videoId} title={title} />
 
       <div className="mt-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           {title}
         </h2>
 
         {description && (
-          <p className="mt-3 text-lg text-neutral-600 leading-relaxed">
+          <p className="mt-3 text-lg text-foreground-muted leading-relaxed">
             {description}
           </p>
         )}
 
         {(date || duration) && (
-          <div className="mt-4 flex flex-wrap gap-4 text-sm text-neutral-500">
+          <div className="mt-4 flex flex-wrap gap-4 text-sm text-foreground-muted">
             {date && (
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />

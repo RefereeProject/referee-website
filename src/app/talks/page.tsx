@@ -1,6 +1,3 @@
-"use client"
-
-import { motion } from "framer-motion"
 import { VideoCard } from "@/components/VideoCard"
 
 
@@ -88,30 +85,24 @@ export default function TalksPage() {
   return (
     <main className="min-h-screen py-12 px-4">
       <div className="mx-auto max-w-4xl">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900">
+        <div className="mb-16 animate-fade-up">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
             Recorded Talks
           </h1>
-          <p className="mt-4 text-lg text-neutral-600 leading-relaxed">
+          <p className="mt-4 text-lg text-foreground-muted leading-relaxed">
             Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-16">
           {talks.map((talk, index) => (
-            <motion.div
+            <div
               key={talk.id}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 + index * 0.1, duration: 0.4 }}
+              className="animate-fade-up"
+              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <VideoCard {...talk} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,5 +1,7 @@
-import { readFileSync, existsSync } from 'fs';
+import { readFile } from 'fs/promises';
+import { existsSync } from 'fs';
 import path from 'path';
+import { cache } from 'react';
 
 export type SiteInfo = { title: string; link: string; description: string };
 export type WPEntry = {
@@ -19,32 +21,31 @@ export type ContentStore = {
   posts: WPEntry[];
 };
 
-let cached: ContentStore | null = null;
-
-export function getContent(): ContentStore {
-  if (cached) return cached;
+/** Per-request deduplication via React.cache(); avoids module-global caching pitfalls in serverless */
+export const getContent = cache(async (): Promise<ContentStore> => {
   const filePath = path.join(process.cwd(), 'referee-next', 'content', 'content.json');
   const altPath = path.join(process.cwd(), 'content', 'content.json');
   const finalPath = existsSync(filePath) ? filePath : altPath;
-  const raw = readFileSync(finalPath, 'utf8');
-  cached = JSON.parse(raw) as ContentStore;
-  return cached;
+  const raw = await readFile(finalPath, 'utf8');
+  return JSON.parse(raw) as ContentStore;
+});
+
+export async function getSite(): Promise<SiteInfo> {
+  const content = await getContent();
+  return content.site;
 }
 
-export function getSite(): SiteInfo {
-  return getContent().site;
+export async function getPages(): Promise<WPEntry[]> {
+  const content = await getContent();
+  return content.pages.filter((p) => p.status === 'publish' || p.status === '');
 }
 
-export function getPages(): WPEntry[] {
-  return getContent().pages.filter((p) => p.status === 'publish' || p.status === '');
+export async function getPosts(): Promise<WPEntry[]> {
+  const content = await getContent();
+  return content.posts.filter((p) => p.status === 'publish' || p.status === '');
 }
 
-export function getPosts(): WPEntry[] {
-  return getContent().posts.filter((p) => p.status === 'publish' || p.status === '');
+export async function findPostBySlug(slug: string): Promise<WPEntry | undefined> {
+  const posts = await getPosts();
+  return posts.find((p) => p.slug === slug);
 }
-
-export function findPostBySlug(slug: string): WPEntry | undefined {
-  return getPosts().find((p) => p.slug === slug);
-}
-
-

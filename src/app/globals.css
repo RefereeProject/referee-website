@@ -1,49 +1,145 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surface Colors - Sophisticated Light Theme */
+  --background: #fafbfc;
+  --background-secondary: #f1f4f8;
+  --background-tertiary: #e8ecf2;
+  --foreground: #0f172a;
+  --foreground-secondary: #334155;
+  --foreground-muted: #64748b;
   
-  /* McKinsey-Inspired Professional Blues */
-  --blue-900: #0d2847;
-  --blue-800: #1e3a54;
-  --blue-700: #24477f;
-  --blue-600: #2563eb;
-  --blue-500: #3b82f6;
-  --blue-400: #60a5fa;
-  --blue-300: #93c5fd;
-  --blue-200: #dbeafe;
-  --blue-100: #eff6ff;
-  --blue-50: #f8fafc;
+  /* Primary - Refined Teal (scholarly but fresh) */
+  --primary-900: #0f3d3e;
+  --primary-800: #134e4a;
+  --primary-700: #115e59;
+  --primary-600: #0d9488;
+  --primary-500: #14b8a6;
+  --primary-400: #2dd4bf;
+  --primary-300: #5eead4;
+  --primary-200: #99f6e4;
+  --primary-100: #ccfbf1;
+  --primary-50: #f0fdfa;
+  
+  /* Accent - Warm Amber for CTAs */
+  --accent-700: #b45309;
+  --accent-600: #d97706;
+  --accent-500: #f59e0b;
+  --accent-400: #fbbf24;
+  --accent-300: #fcd34d;
+  
+  /* Neutral Slate */
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50: #f8fafc;
+  
+  /* Border and Divider */
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  
+  /* Card Surfaces */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-hover: #f8fafc;
+  
+  /* Navbar */
+  --nav-bg: rgba(250, 251, 252, 0.85);
+  --nav-border: rgba(226, 232, 240, 0.6);
+}
 
-  /* Professional Neutrals */
-  --gray-900: #111827;
-  --gray-800: #1f2937;
-  --gray-600: #4b5563;
-  --gray-400: #9ca3af;
-  --gray-200: #e5e7eb;
-  --gray-100: #f3f4f6;
-  --gray-50: #f9fafb;
+/* Dark Mode - Sophisticated deep slate with premium feel */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0c1222;
+    --background-secondary: #111827;
+    --background-tertiary: #1e293b;
+    --foreground: #f1f5f9;
+    --foreground-secondary: #cbd5e1;
+    --foreground-muted: #94a3b8;
+    
+    /* Primary adapts for dark - slightly brighter for visibility */
+    --primary-900: #ccfbf1;
+    --primary-800: #99f6e4;
+    --primary-700: #5eead4;
+    --primary-600: #2dd4bf;
+    --primary-500: #14b8a6;
+    --primary-400: #0d9488;
+    --primary-300: #115e59;
+    --primary-200: #134e4a;
+    --primary-100: #0f3d3e;
+    --primary-50: #0a2928;
+    
+    /* Border and Divider - Dark mode */
+    --border: #1e293b;
+    --border-subtle: #0f172a;
+    
+    /* Card Surfaces - Dark mode */
+    --card-bg: #111827;
+    --card-border: #1e293b;
+    --card-hover: #1e293b;
+    
+    /* Navbar - Dark mode */
+    --nav-bg: rgba(12, 18, 34, 0.85);
+    --nav-border: rgba(30, 41, 59, 0.6);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-muted: var(--foreground-muted);
+  
+  --color-primary-900: var(--primary-900);
+  --color-primary-800: var(--primary-800);
+  --color-primary-700: var(--primary-700);
+  --color-primary-600: var(--primary-600);
+  --color-primary-500: var(--primary-500);
+  --color-primary-400: var(--primary-400);
+  --color-primary-300: var(--primary-300);
+  --color-primary-200: var(--primary-200);
+  --color-primary-100: var(--primary-100);
+  --color-primary-50: var(--primary-50);
+  
+  --color-accent-700: var(--accent-700);
+  --color-accent-600: var(--accent-600);
+  --color-accent-500: var(--accent-500);
+  --color-accent-400: var(--accent-400);
+  --color-accent-300: var(--accent-300);
+  
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-hover: var(--card-hover);
+  --color-nav-bg: var(--nav-bg);
+  --color-nav-border: var(--nav-border);
+  
   --font-sans: var(--font-display);
   --font-mono: var(--font-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --animate-navbar-slide-in: navbar-slide-in 0.4s ease-out both;
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  --animate-fade-up-delay-1: fade-up 0.7s ease-out 0.1s both;
+  --animate-fade-up-delay-2: fade-up 0.7s ease-out 0.2s both;
+  --animate-fade-up-delay-3: fade-up 0.7s ease-out 0.3s both;
+  --animate-fade-up-delay-4: fade-up 0.7s ease-out 0.4s both;
+  --animate-fade-up-delay-5: fade-up 0.7s ease-out 0.5s both;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 /* Mobile optimizations */
@@ -55,7 +151,7 @@ html {
 
 /* Improve tap highlighting */
 * {
-  -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
+  -webkit-tap-highlight-color: rgba(20, 184, 166, 0.15);
 }
 
 /* Mobile-specific typography and touch targets */
@@ -82,10 +178,55 @@ html {
 /* Typography plugin base */
 @plugin "@tailwindcss/typography";
 
-/* Utility classes for better blog styling */
+/* Fade-up animation (replaces Framer Motion across pages) */
+@keyframes fade-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Navbar slide-in animation (replaces Framer Motion) */
+@keyframes navbar-slide-in {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Utility classes */
 .line-clamp-3 {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+
+/* Glow effects for dark mode */
+@media (prefers-color-scheme: dark) {
+  .glow-primary {
+    box-shadow: 0 0 40px -10px rgba(20, 184, 166, 0.3);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* Subtle gradient noise texture overlay */
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
 }
