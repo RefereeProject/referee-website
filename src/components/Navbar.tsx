@@ -21,20 +21,20 @@ export function Navbar() {
         <Link href="/" className="font-bold text-primary-700 tracking-tight flex items-center gap-2">
           <Image
             src="/Referee_new_logo.png"
-            alt="Referee Project Logo"
+            alt="Referee logo"
             width={32}
             height={32}
             className="w-8 h-8"
           />
           <div className="flex flex-col gap-0.5">
-            <span>The Referee Project</span>
+            <span>Referee</span>
             {/* Mobile: abbreviated tagline */}
             <span className="text-[11px] sm:hidden font-normal text-foreground-muted leading-tight">
-              Quality & nuance for scholars
+              Research-integrity infrastructure
             </span>
             {/* Desktop: full tagline */}
             <span className="hidden sm:block text-xs font-normal text-foreground-muted leading-tight">
-              Adding quality and nuance to the scholarly record
+              Infrastructure for scholarly publishing reliability
             </span>
           </div>
         </Link>

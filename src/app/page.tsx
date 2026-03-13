@@ -1,168 +1,221 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
 import Image from "next/image";
 
 const Hero = dynamic(() => import("@/components/Hero").then((m) => m.Hero));
+
+export const metadata: Metadata = {
+  title: "Referee | Research-integrity infrastructure for scholarly publishing",
+  description:
+    "Referee is founder-led infrastructure for high-volume scholarly publishing, turning technical evidence into transparent, machine-readable reliability scores for structured triage.",
+};
 
 export default function Home() {
   return (
     <div className="py-6 md:py-10">
       <Hero />
 
-      <section id="overview" className="mt-6 md:mt-8 space-y-4">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Overview</h2>
-        <p className="text-foreground-secondary">
-          The Referee Project is a non-profit initiative that develops reliability
-          scores for research papers, ranging from 0 to 100. We calculate these
-          scores using a detailed taxonomy of research weaknesses. Moreover, a bug
-          bounty program motivates individuals to identify flaws in these papers.
-          Each identified weakness becomes part of the metadata, clarifying why a
-          paper received its specific score. Users can easily access this metadata
-          through APIs. This transparency helps researchers and others understand
-          the strengths and limitations of various studies.
+      <section id="problem" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">The problem</h2>
+        <p className="max-w-4xl text-foreground-secondary">
+          Submission volume keeps rising across conferences, journals, and publisher workflows, but intake review capacity does not scale at the same pace. Most teams still depend on fragmented checks and manual triage, which creates bottlenecks and inconsistent screening quality.
         </p>
-        <p className="font-semibold text-lg text-foreground">Isn&apos;t it crucial to know the reliability of the research you rely on?</p>
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">High volume, limited intake capacity</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Organizers cannot fully review every submission at intake, so weak papers and high-priority papers are often mixed together too late.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Fragmented integrity checks</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Current tools typically solve one check at a time, leaving teams without a unified view of what has been evaluated and what remains open.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Low auditability</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Traditional peer review was not designed for today&apos;s scale or threat models, and its outputs are hard to audit in structured, reusable form.
+            </p>
+          </article>
+        </div>
       </section>
 
-      <section className="mt-10 space-y-6">
-        <div>
-          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">The Problem</h3>
-          <p className="mt-3 text-foreground-secondary">
-            The Referee Project addresses critical flaws in research evaluation and paper
-            reliability communication. Academia&apos;s emphasis on publishing has skewed
-            incentives, distorting the scholarly record. Meanwhile, the existing system
-            offers only vague indicators of paper reliability—papers are labeled as published
-            (trustworthy), retracted (untrustworthy), or unpublished (questionable). We aim to
-            revolutionize this system by implementing a universal reliability score, underpinned
-            by a standardized research weakness taxonomy and a dynamic bug bounty system.
-          </p>
-          <h4 className="mt-6 text-lg md:text-xl font-semibold text-foreground">Academic Peer Review is Broken. Referee Can Fix It.</h4>
-          <p className="mt-3 text-foreground-secondary">
-            The current academic peer review system faces several significant issues that undermine
-            its effectiveness and integrity:
-          </p>
-          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 sm:space-y-2 text-sm sm:text-base text-foreground-muted">
-            <li><strong className="text-foreground">Poor Incentives:</strong> There is a lack of incentives and motivation among peers to conduct thorough and diligent reviews.</li>
-            <li><strong className="text-foreground">Cultural Conflicts:</strong> Academia often lacks a culture of open criticism, which is crucial for rigorous scholarly discourse.</li>
-            <li><strong className="text-foreground">Opaque Criteria:</strong> Reviewers frequently apply their personal standards to evaluations, and the reviews remain confidential, adding to the opacity of the process.</li>
-            <li><strong className="text-foreground">Extended Delays:</strong> Researchers endure long wait times and numerous delays during the peer review process, causing significant setbacks in the dissemination of new findings.</li>
-            <li><strong className="text-foreground">Difficulty in Referee Recruitment:</strong> Editors often struggle to find appropriate referees, which leads to further delays and complications.</li>
-            <li><strong className="text-foreground">Superficial Review Focus:</strong> Referees may prioritize the aesthetics and perceived interest of a paper over its scientific merit, thus favoring subjective criteria over objective scientific validity.</li>
-            <li><strong className="text-foreground">Rejection of Innovative Research:</strong> Pioneering, risky, or interdisciplinary research is disproportionately likely to be rejected, which discourages innovative thinking and stifles the development of new ideas.</li>
-            <li><strong className="text-foreground">Negligence in Reviewing Technical Content:</strong> Referees frequently overlook thorough checks on mathematical equations or theoretical proofs, potentially missing critical errors.</li>
-            <li><strong className="text-foreground">Bias Influenced by Author&apos;s Reputation or Affiliation:</strong> The review process can be biased by the author&apos;s identity or institutional ties, perpetuating a system of status-based inequalities.</li>
-            <li><strong className="text-foreground">Lack of Transparency:</strong> The reluctance of journals to publish referee comments obscures the review process, making it difficult for the academic community and the public to gauge the credibility of research and the rigor with which it was reviewed. In addition, outsiders have to pour through the review narratives to understand and classify the problems with papers.</li>
-          </ul>
-          <h4 className="mt-6 text-lg md:text-xl font-semibold text-foreground">Current Approaches</h4>
-          <p className="mt-3 text-foreground-secondary">
-            There are numerous initiatives aimed at addressing the problems highlighted previously,
-            primarily through two approaches:
-          </p>
-          <ol className="mt-3 list-decimal pl-4 sm:pl-5 space-y-2 sm:space-y-1 text-sm sm:text-base text-foreground-muted">
-            <li>Incentivize referees by either paying them for their time or offering bounties for well-written holistic reviews</li>
-            <li>Create communities to provide feedback collectively</li>
-          </ol>
-          <p className="mt-4 text-foreground-secondary">
-            There&apos;s just one problem with these efforts: they&apos;re all echoes of the current system that
-            doesn&apos;t work. And why doesn&apos;t the current system work? Because all the evidence suggests
-            that most academics don&apos;t want to do the hard work of peer review.
-          </p>
-          <p className="mt-3 text-foreground-secondary">
-            Even among those who take reviews seriously, few can be expected to master all aspects of a
-            research paper, from statistical nuances to sampling procedures. This is precisely why peer
-            reviews exist—to have another set of eyes catch potential flaws. Despite this, even the most
-            diligent scrutiny can allow some errors to slip through, leading to the publication of papers
-            with overlooked defects.
-          </p>
-          <p className="mt-3 text-foreground-secondary">
-            A final flawed assumption of these initiatives is that only academics can conduct such reviews.
-            The field of software security demonstrates that many non-academic individuals possess the
-            motivation and capability to master complex systems, sometimes even surpassing academics in
-            their expertise in specific cases.
-          </p>
-          <p className="mt-4 font-semibold text-lg text-foreground">
-            Let&apos;s stop relying solely on academics to solve this problem!
+      <section id="solution" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">The solution</h2>
+        <p className="max-w-4xl text-foreground-secondary">
+          Referee is infrastructure for structured research screening and triage. We do not deliver a black-box score and we do not replace expert review. Instead, Referee organizes screening signals into a structured evaluation record that maps reliability signals to explicit flaw categories and unresolved checks.
+        </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Transparent reliability scoring</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Reliability scores are machine-readable outputs tied to concrete evidence. Each score can be inspected through supporting flaw categories and open questions that still need human judgment.
+            </p>
+          </article>
+          <article className="rounded-xl border border-primary-200 bg-primary-50/50 p-5">
+            <h3 className="text-lg font-semibold text-foreground">Current demo scope</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              A live dashboard and paper-checking workflow are available for walkthroughs today. The platform is early: coverage breadth and false-positive handling are still being improved.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="mt-12 md:mt-16 space-y-6 scroll-mt-24">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">How it works</h2>
+        <p className="max-w-4xl text-foreground-secondary">
+          Our proprietary Common Research Weakness Enumeration (CRWE) is the core framework behind Referee&apos;s workflow.
+        </p>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-base font-semibold text-foreground">1. Ingest paper evidence</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Referee analyzes scientific and technical evidence from submission materials and creates a structured screening context.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-base font-semibold text-foreground">2. Map checks to CRWE categories</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Screening checks are mapped to explicit flaw classes so teams can see where the paper appears weak and where evidence is incomplete.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-base font-semibold text-foreground">3. Record checked vs unresolved items</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              The system logs what has been checked, what remains unresolved, and which items require expert judgment before final decisions.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-base font-semibold text-foreground">4. Produce reliability signals for triage</h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Outputs become machine-readable reliability signals that support intake triage and targeted human review, not autonomous acceptance or rejection.
+            </p>
+          </article>
+        </div>
+
+        <div className="mt-2 rounded-xl border border-border bg-card-bg p-4 sm:p-5">
+          <Image
+            src="/Review-model.png"
+            alt="Referee workflow from evidence checks to structured evaluation output"
+            width={1200}
+            height={600}
+            className="rounded-lg w-full h-auto"
+          />
+          <p className="mt-3 text-sm text-foreground-muted">
+            Workflow direction: the demo already shows dashboard and paper-checking foundations, while broader coverage is still in progress.
           </p>
         </div>
       </section>
 
-      <section className="mt-10 space-y-6">
-        <div>
-          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">The Referee Solution</h3>
-          <p className="mt-3 text-foreground-secondary">
-            Referee&apos;s overall goal is to create a reliability score for academic papers using a
-            standard taxonomy for research assessment and a targeted bug bounty approach to incentivize
-            engagement. This model offers several superior benefits compared to traditional models,
-            including the following:
-          </p>
+      <section id="why-it-matters" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Why it matters</h2>
+        <p className="max-w-4xl text-foreground-secondary">
+          Referee helps teams triage faster, use expert time more effectively, and maintain clear records of research risk without making claims that correctness can be fully automated.
+        </p>
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Better triage</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Sort submissions by structured risk signals before expert review queues become overloaded.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Better use of expert time</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Focus reviewers on unresolved technical weaknesses instead of repeating broad preliminary checks.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Clear documentation and auditability</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Keep a transparent record of what was checked, what is weak, and what still needs human decision-making.</p>
+          </article>
+        </div>
+      </section>
 
-          <div className="mt-6 flex justify-center">
+      <section id="audience" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Who it is for</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Conference organizers</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Create structured intake triage when submission volume outpaces available reviewer capacity.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Publishers and journals</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Unify fragmented integrity checks and improve visibility into what is complete versus still pending.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Research organizations</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Run structured evaluation at scale with transparent records of potential weaknesses and unresolved risks.</p>
+          </article>
+        </div>
+        <p className="text-sm text-foreground-muted max-w-4xl">
+          Future expansion markets are below this wedge and include investment due diligence, pharma and biotech scouting, grant allocation, and enterprise R&D decisions.
+        </p>
+      </section>
+
+      <section id="differentiation" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">What makes Referee different</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Beyond point solutions</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Most integrity tools focus on isolated checks such as plagiarism or anomaly detection. Referee adds an evaluation layer that combines checks into a reusable, structured record.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Transparent, challengeable output</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Referee reliability signals are linked to explicit flaw categories and unresolved checks, making the output auditable instead of opaque.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Infrastructure mindset</h3>
+            <p className="mt-2 text-sm text-foreground-muted">Referee is built as workflow infrastructure for scholarly publishing operations, not as a manifesto or nonprofit movement layer.</p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5">
+            <h3 className="text-lg font-semibold text-foreground">Founder-owned technical architecture</h3>
+            <p className="mt-2 text-sm text-foreground-muted">The platform is architected and implemented by the founder, with core infrastructure built in Rust for reliability and performance.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="founder" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Founder</h2>
+        <div className="grid gap-5 md:grid-cols-[220px_minmax(0,1fr)] md:items-start rounded-xl border border-border bg-card-bg p-5">
+          <div className="w-full max-w-[220px]">
             <Image
-              src="/Review-model.png"
-              alt="Referee Review Model"
-              width={800}
-              height={400}
-              className="rounded-lg shadow-lg w-full max-w-3xl h-auto"
-              priority
+              src="/Erik_Schneider.png"
+              alt="Erik Schneider, founder of Referee"
+              width={220}
+              height={220}
+              className="rounded-lg w-full h-auto"
             />
           </div>
-          <ul className="mt-4 list-disc pl-4 sm:pl-5 space-y-3 text-sm sm:text-base text-foreground-muted">
-            <li>
-              <strong className="text-foreground">Market Theory of Value:</strong> Unlike traditional peer review that often operates
-              on a labor theory of value (pay by the hour or by the paper), Referee&apos;s bug bounties are
-              based on the market theory of value. This ensures that compensations are made only for
-              results that add real value, rather than just effort.
-            </li>
-            <li>
-              <strong className="text-foreground">Common Research Weakness Enumeration (CRWE):</strong> Referee uses a tiered framework
-              similar to cybersecurity&apos;s Common Weakness Enumeration (CWE), which brings multiple advantages:
-              <ul className="mt-2 list-disc pl-4 sm:pl-5 space-y-2 text-sm sm:text-base">
-                <li><strong className="text-foreground">Targeted Bounties:</strong> Allows for bounties to be specifically set on the weaknesses deemed most critical, ensuring focused and effective reviewing.</li>
-                <li><strong className="text-foreground">Prevents Duplicate Claims:</strong> Reduces the risk of multiple claims for the same weakness, a common issue in early stages of bug-bounty systems.</li>
-                <li><strong className="text-foreground">Enhances Transparency:</strong> Improves the clarity and transparency of the review process, explaining clearly why a paper is considered unreliable.</li>
-                <li><strong className="text-foreground">Facilitates Large-Scale Studies:</strong> Supports reliable, large-scale studies to analyze common failings in research.</li>
-                <li><strong className="text-foreground">Universal Reliability Score:</strong> Enables the creation of a standardized score to assess the reliability of research papers.</li>
-              </ul>
-            </li>
-            <li>
-              <strong className="text-foreground">Democratization of Knowledge Curation:</strong> Bug bounties democratize the process of
-              knowledge curation, reducing the influence of status and traditional gatekeepers like prestigious
-              institutions and journals. This opens up opportunities for a broader range of participants to
-              contribute to the vetting process.
-            </li>
-            <li>
-              <strong className="text-foreground">Reliability Scoring System:</strong> Introduces a reliability score for papers that can be
-              tracked and influenced by subsequent research. This feature ensures that ongoing research builds
-              on a foundation that is scrutinized for accuracy and reliability.
-            </li>
-            <li>
-              <strong className="text-foreground">Rectifies Past Research:</strong> Unlike many DeSci projects that focus primarily on future
-              research infrastructure, Referee prioritizes addressing existing problems in published research.
-              This approach is crucial because much of the current academic challenges stem from past research
-              inaccuracies and biases.
-            </li>
-            <li>
-              <strong className="text-foreground">Supplementary to Existing Metrics:</strong> Aims to supplement traditional academic metrics
-              such as the h-index with a quality score that reflects the reliability and integrity of research,
-              providing a more holistic view of a researcher&apos;s output.
-            </li>
-          </ul>
+          <div>
+            <p className="text-foreground-secondary">
+              Erik Schneider is the founder of Referee. He owns the vision, product roadmap, system architecture, and implementation end to end.
+            </p>
+            <p className="mt-3 text-foreground-secondary">
+              He defines the evaluation model, translates it into product and technical decisions, and builds the platform in Rust. The focus is practical: deliver auditable screening infrastructure that supports expert judgment in high-volume publishing workflows.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section id="newsletter" className="mt-10">
-        <NewsletterSignup />
-      </section>
-
-      <section id="get-involved" className="mt-8 text-center">
-        <a
-          href="https://x.com/referee_project"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 min-h-[48px] touch-manipulation text-center"
-        >
-          Follow updates on X
-        </a>
+      <section id="book-demo" className="mt-12 md:mt-16 mb-8 rounded-xl border border-border bg-primary-50/50 p-6 sm:p-8 text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Book a demo</h2>
+        <p className="mt-3 max-w-3xl mx-auto text-foreground-secondary">
+          If you run conference, journal, publishing, or research-intake workflows, let&apos;s walk through the current product together. The demo includes a live dashboard and paper-checking flow, and we&apos;ll be explicit about what is ready now versus still in progress.
+        </p>
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="mailto:erik@referee-project.com?subject=Referee%20demo%20request"
+            className="w-full sm:w-auto rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold text-center min-h-[48px] flex items-center justify-center"
+          >
+            Book a demo
+          </a>
+          <a
+            href="#how-it-works"
+            className="w-full sm:w-auto rounded-full px-8 py-3 sm:py-3.5 border-2 border-primary-600 text-primary-600 hover:bg-primary-100 transition-all duration-200 font-semibold text-center min-h-[48px] flex items-center justify-center"
+          >
+            See how it works
+          </a>
+        </div>
+        <p className="mt-4 text-sm text-foreground-muted">Or email directly: erik@referee-project.com</p>
       </section>
     </div>
   );

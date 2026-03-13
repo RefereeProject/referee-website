@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Inter } from "next/font/google";
+import { JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
-const display = Inter({
+const display = Sora({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const mono = JetBrains_Mono({
@@ -18,8 +18,8 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Referee Project",
-  description: "Adding quality and nuance to the scholarly record",
+  title: "Referee",
+  description: "Research-integrity infrastructure for high-volume scholarly publishing",
 };
 
 export const viewport: Viewport = {
