@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { VideoCard } from "@/components/VideoCard"
+import { PageIntro } from "@/components/PageIntro"
 
 export const metadata: Metadata = {
   title: "Talks — The Referee Project",
@@ -90,29 +91,18 @@ const talks = [
 
 export default function TalksPage() {
   return (
-    <div className="min-h-screen py-12">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-16 animate-fade-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-            Recorded Talks
-          </h1>
-          <p className="mt-4 text-lg text-foreground-muted leading-relaxed">
-            Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review.
-          </p>
-        </div>
+    <div className="py-6 md:py-10">
+      <PageIntro
+        eyebrow="Talks"
+        title="Recorded Talks"
+        description="Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review."
+      />
 
-        <div className="grid gap-16">
-          {talks.map((talk, index) => (
-            <div
-              key={talk.id}
-              className="animate-fade-up"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-            >
-              <VideoCard {...talk} />
-            </div>
-          ))}
-        </div>
-      </div>
+      <section className="mt-12 md:mt-16 space-y-6">
+        {talks.map((talk) => (
+          <VideoCard key={talk.id} {...talk} />
+        ))}
+      </section>
     </div>
   )
 }

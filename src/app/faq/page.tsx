@@ -1,3 +1,5 @@
+import { PageIntro } from "@/components/PageIntro";
+
 export const metadata = {
   title: "FAQ – The Referee Project",
   description: "Frequently asked questions about The Referee Project",
@@ -60,28 +62,25 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          The following questions have been asked about the project. We present our responses here to inform others who may have the same questions.
-        </p>
-      </div>
-      
-      <div className="space-y-8">
+    <div className="py-6 md:py-10">
+      <PageIntro
+        eyebrow="FAQ"
+        title="Frequently Asked Questions"
+        description="The following questions have been asked about the project. We present our responses here to inform others who may have the same questions."
+      />
+
+      <section className="mt-12 md:mt-16 space-y-5">
         {faqs.map((faq, index) => (
-          <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-700 mb-3">
+          <div key={index} className="rounded-xl border border-border bg-card-bg p-5 sm:p-6">
+            <h2 className="text-lg font-semibold text-foreground mb-2">
               {faq.question}
             </h2>
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+            <p className="text-sm text-foreground-muted leading-relaxed whitespace-pre-line">
               {faq.answer}
             </p>
           </div>
         ))}
-      </div>
+      </section>
     </div>
   );
 }

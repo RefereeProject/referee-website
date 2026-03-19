@@ -23,22 +23,22 @@ interface VideoCardProps {
  */
 export function VideoCard({ videoId, title, date, duration, summary, description }: VideoCardProps) {
   return (
-    <div className="group rounded-2xl border border-transparent hover:border-border hover:bg-card-hover transition-all duration-300 p-6 -m-6">
+    <div className="rounded-xl border border-border bg-card-bg p-5 sm:p-6">
       <VideoEmbed videoId={videoId} title={title} />
 
       <div className="mt-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+        <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">
           {title}
         </h2>
 
         {description ? (
-          <p className="mt-3 text-lg text-foreground-muted leading-relaxed">
+          <p className="mt-2 text-sm text-foreground-muted leading-relaxed">
             {description}
           </p>
         ) : null}
 
         {(date || duration) ? (
-          <div className="mt-4 flex flex-wrap gap-4 text-sm text-foreground-muted">
+          <div className="mt-3 flex flex-wrap gap-4 text-sm text-foreground-muted">
             {date ? (
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />

@@ -11,7 +11,7 @@ interface VideoEmbedProps {
  */
 export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   return (
-    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-200/60 shadow-sm">
+    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-card-bg">
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
         title={title}
