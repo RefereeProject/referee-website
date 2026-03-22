@@ -1,0 +1,18 @@
+# Referee
+
+Referee is founder-led research-integrity infrastructure for scholarly publishing, producing transparent, machine-readable reliability signals for structured review triage.
+
+## Key pages
+- / — Product overview, workflow, audience, and differentiation.
+- /about — Mission, founder, and advisor information.
+- /blog — Blog index.
+- /blog/{slug} — Individual blog articles.
+- /faq — Frequently asked questions.
+- /talks — Recorded talks and interviews.
+
+## Content categories
+- Product overview and screening workflow
+- Mission, founder, and advisor information
+- Blog articles on research integrity, peer review, adversarial review, and AI-assisted research validation
+- FAQs about reliability scoring, incentives, AI, and academic adoption
+- Recorded talks and interviews
