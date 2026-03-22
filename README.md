@@ -37,6 +37,14 @@ The site also serves static markdown versions of key pages from `public/`:
 
 If a new blog post is published, add a matching file under `public/blog/*.md`.
 
+## Content-Signal Header
+
+Key public HTML and machine-readable endpoints emit:
+
+- `Content-Signal: machine-consumable`
+
+This includes `/`, `/about`, `/blog`, `/blog/<slug>`, `/faq`, `/talks`, plus `/llms*.txt`, `/robots.txt`, and the public markdown endpoints.
+
 ## Deployment
 
 The site is deployed on Vercel with automatic deployments via GitHub Actions.
