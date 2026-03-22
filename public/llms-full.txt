@@ -71,6 +71,7 @@ Referee does not claim to replace expert peer review with a black box. It organi
   - Behavior: validates input, submits double-opt-in signup request, returns JSON status/message.
 
 ## Notes for machine consumers
+- Agent discovery endpoint: `/.well-known/agent-card.json`.
 - Canonical human-facing route inventory is based on current App Router pages and navigation.
 - Blog inventory above reflects currently published posts in the repository content store.
 - Legacy content entries that are not represented as current App Router routes are intentionally excluded from canonical page inventory.

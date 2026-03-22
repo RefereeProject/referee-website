@@ -15,6 +15,7 @@ const contentSignalSources = [
   "/llms.txt",
   "/llms-full.txt",
   "/robots.txt",
+  "/.well-known/agent-card.json",
   "/index.md",
   "/about.md",
   "/blog.md",

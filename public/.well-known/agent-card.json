@@ -1,0 +1,17 @@
+{
+  "name": "Referee",
+  "description": "Research-integrity infrastructure for high-volume scholarly publishing",
+  "url": "https://www.referee-project.com",
+  "version": "1.0",
+  "endpoints": {
+    "home": "https://www.referee-project.com/",
+    "about": "https://www.referee-project.com/about",
+    "blog": "https://www.referee-project.com/blog",
+    "faq": "https://www.referee-project.com/faq",
+    "talks": "https://www.referee-project.com/talks",
+    "llms": "https://www.referee-project.com/llms.txt",
+    "llms_full": "https://www.referee-project.com/llms-full.txt",
+    "robots": "https://www.referee-project.com/robots.txt",
+    "index_markdown": "https://www.referee-project.com/index.md"
+  }
+}

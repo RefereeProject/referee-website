@@ -37,13 +37,17 @@ The site also serves static markdown versions of key pages from `public/`:
 
 If a new blog post is published, add a matching file under `public/blog/*.md`.
 
+## Agent Discovery Endpoint
+
+- `/.well-known/agent-card.json`
+
 ## Content-Signal Header
 
 Key public HTML and machine-readable endpoints emit:
 
 - `Content-Signal: machine-consumable`
 
-This includes `/`, `/about`, `/blog`, `/blog/<slug>`, `/faq`, `/talks`, plus `/llms*.txt`, `/robots.txt`, and the public markdown endpoints.
+This includes `/`, `/about`, `/blog`, `/blog/<slug>`, `/faq`, `/talks`, plus `/llms*.txt`, `/robots.txt`, `/.well-known/agent-card.json`, and the public markdown endpoints.
 
 ## Deployment
 

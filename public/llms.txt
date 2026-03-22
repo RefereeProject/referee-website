@@ -10,6 +10,9 @@ Referee is founder-led research-integrity infrastructure for scholarly publishin
 - /faq — Frequently asked questions.
 - /talks — Recorded talks and interviews.
 
+## Machine discovery
+- /.well-known/agent-card.json — Agent discovery metadata and machine endpoint index.
+
 ## Content categories
 - Product overview and screening workflow
 - Mission, founder, and advisor information
