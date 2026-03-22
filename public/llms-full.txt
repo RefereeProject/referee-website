@@ -1,0 +1,76 @@
+# Referee
+
+Referee is founder-led research-integrity infrastructure for scholarly publishing. The platform turns technical evidence into transparent, machine-readable reliability signals that support structured triage and targeted expert review at high submission volume.
+
+Referee does not claim to replace expert peer review with a black box. It organizes checks into a structured evaluation record with explicit flaw categories, unresolved items, and auditable outputs.
+
+## Key routes
+- / — Homepage with product positioning, workflow, audience, differentiation, founder context, and demo call to action.
+- /about — Mission, leadership profile, advisor profile, and collaboration/contact invitations.
+- /blog — Index of published long-form articles.
+- /blog/{slug} — Individual published blog articles.
+- /faq — Frequently asked questions about model assumptions, incentives, adoption, AI, and governance concerns.
+- /talks — Recorded presentations and interviews about the project.
+
+## Homepage coverage
+- Problem framing: rising submission volume, limited intake review capacity, fragmented integrity checks, and low auditability.
+- Solution framing: structured screening and triage with transparent reliability scoring tied to evidence.
+- Workflow model (CRWE-based):
+  1) ingest paper evidence
+  2) map checks to explicit weakness categories
+  3) record checked vs unresolved items
+  4) output machine-readable reliability signals for triage
+- Value claims: better triage, better allocation of expert reviewer time, and clearer documentation of research risk.
+- Target users: conference organizers, publishers/journals, and research organizations.
+- Positioning: infrastructure layer that unifies checks into a reusable record rather than isolated one-off tools.
+- Current demo scope: a live dashboard and paper-checking workflow are available today; false positives and coverage depth are still being improved.
+- Founder context: founder-owned technical architecture and implementation.
+
+## About coverage
+- Mission: improve transparency, efficiency, and accountability in research evaluation through reliability-oriented infrastructure.
+- Leadership: Erik Schneider (Founder & Executive Director), background spanning finance, cybersecurity, insider risk, and computing.
+- Advisor: Dr. Marcus Thomas (computational scientist; immuno-oncology/personalized cancer vaccine pipeline expertise).
+- Collaboration posture: active outreach for additional qualified advisors and collaborators.
+
+## Blog coverage (published posts)
+- /blog/academic-collegiality-is-a-bug-not-a-feature
+  - Title: Academic collegiality is a bug, not a feature (and it's largely not true)
+  - Focus: critiques assumptions about collegial peer review and argues for more direct, democratized, adversarial criticism in research evaluation.
+- /blog/gaming-referee
+  - Title: Gaming Referee
+  - Focus: living threat model describing how adversaries might game the system (collusion, sybils, flooding, corruption, etc.) and corresponding mitigations.
+- /blog/no-ai-agents-no-scalability-in-research-validation
+  - Title: No AI Agents, No Scalability in Research Validation
+  - Focus: argues that scalable research validation requires specialized AI agents paired with validation controls and expert oversight.
+
+## FAQ topic coverage
+- Journal adoption skepticism and incentives to participate.
+- Relationship to existing post-publication commentary systems (for example, PubPeer and related ecosystems).
+- Handling non-binary or subjective weakness assessments.
+- Cross-disciplinary taxonomy standardization challenges.
+- Limits and usefulness of a single reliability score.
+- Adversarial/gaming behavior and why it is expected.
+- Participation by non-academics and credential boundary concerns.
+- Resistance to public criticism of research flaws.
+- AI and bot roles in both detection and evaluation workflows.
+- Anonymity, accountability, and abuse mitigation.
+- Funding sustainability for incentives and operations.
+- Career and morale implications of transparent flaw exposure.
+- Variability in research interpretation and unresolved subjectivity.
+
+## Talks coverage
+- The Referee Project: An Update with Sebastián Buriticá Arias (2024)
+  - Focus: bug-bounty-inspired review model, reliability scoring, adversarial process design, and current MVP direction.
+- The Referee Project at DeSci Labs Forum (2023)
+  - Focus: taking the peer out of peer review, maker/breaker role separation, transparent scoring, incentives, and AI/human review dynamics.
+
+## Public API surface
+- POST /api/newsletter
+  - Purpose: newsletter subscription endpoint.
+  - Request body: `email` (required), `firstName` (optional).
+  - Behavior: validates input, submits double-opt-in signup request, returns JSON status/message.
+
+## Notes for machine consumers
+- Canonical human-facing route inventory is based on current App Router pages and navigation.
+- Blog inventory above reflects currently published posts in the repository content store.
+- Legacy content entries that are not represented as current App Router routes are intentionally excluded from canonical page inventory.
