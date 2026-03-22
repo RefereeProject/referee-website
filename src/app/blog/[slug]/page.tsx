@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
-import { findPostBySlug, getPosts } from "@/lib/content";
+import { findPostBySlug, getPosts, getSite } from "@/lib/content";
 import { PageIntro } from "@/components/PageIntro";
+import {
+  buildArticleSchema,
+  CANONICAL_SITE_NAME,
+  serializeJsonLd,
+} from "@/lib/structuredData";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -29,6 +34,16 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = await findPostBySlug(slug);
   if (!post) return notFound();
+
+  const site = await getSite();
+  const articleJsonLd = serializeJsonLd(
+    buildArticleSchema({
+      post,
+      siteName: CANONICAL_SITE_NAME,
+      siteUrl: site.link,
+    }),
+  );
+
   const safe = sanitizeHtml(post.content || "", {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption"]),
     allowedAttributes: {
@@ -56,7 +71,12 @@ export default async function BlogPostPage({
   });
 
   return (
-    <div className="py-6 md:py-10">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: articleJsonLd }}
+      />
+      <div className="py-6 md:py-10">
       {/* Back navigation */}
       <div className="mb-6">
         <Link 
@@ -109,6 +129,7 @@ export default async function BlogPostPage({
           </Link>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

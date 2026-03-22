@@ -1,12 +1,13 @@
 import { PageIntro } from "@/components/PageIntro";
+import { getSite } from "@/lib/content";
+import { buildFaqPageSchema, serializeJsonLd } from "@/lib/structuredData";
 
 export const metadata = {
   title: "FAQ – The Referee Project",
   description: "Frequently asked questions about The Referee Project",
 };
 
-export default function FAQPage() {
-  const faqs = [
+const faqs = [
     {
       question: "How will academic journals react?",
       answer: "We expect journals to be highly sceptical and dismissive at first. Eventually, however, they might even welcome the service Referee provides if they trust the results. One day we hope they even consider paying for bounties themselves."
@@ -61,8 +62,27 @@ export default function FAQPage() {
     }
   ];
 
+export default async function FAQPage() {
+  const site = await getSite();
+  const faqJsonLd =
+    faqs.length > 0
+      ? serializeJsonLd(
+          buildFaqPageSchema({
+            siteUrl: site.link,
+            faqs,
+          }),
+        )
+      : null;
+
   return (
-    <div className="py-6 md:py-10">
+    <>
+      {faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+        />
+      ) : null}
+      <div className="py-6 md:py-10">
       <PageIntro
         eyebrow="FAQ"
         title="Frequently Asked Questions"
@@ -81,6 +101,7 @@ export default function FAQPage() {
           </div>
         ))}
       </section>
-    </div>
+      </div>
+    </>
   );
 }
