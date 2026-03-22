@@ -54,41 +54,9 @@
   --nav-border: rgba(226, 232, 240, 0.6);
 }
 
-/* Dark Mode - Sophisticated deep slate with premium feel */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0c1222;
-    --background-secondary: #111827;
-    --background-tertiary: #1e293b;
-    --foreground: #f1f5f9;
-    --foreground-secondary: #cbd5e1;
-    --foreground-muted: #94a3b8;
-    
-    /* Primary adapts for dark - slightly brighter for visibility */
-    --primary-900: #ccfbf1;
-    --primary-800: #99f6e4;
-    --primary-700: #5eead4;
-    --primary-600: #2dd4bf;
-    --primary-500: #14b8a6;
-    --primary-400: #0d9488;
-    --primary-300: #115e59;
-    --primary-200: #134e4a;
-    --primary-100: #0f3d3e;
-    --primary-50: #0a2928;
-    
-    /* Border and Divider - Dark mode */
-    --border: #1e293b;
-    --border-subtle: #0f172a;
-    
-    /* Card Surfaces - Dark mode */
-    --card-bg: #111827;
-    --card-border: #1e293b;
-    --card-hover: #1e293b;
-    
-    /* Navbar - Dark mode */
-    --nav-bg: rgba(12, 18, 34, 0.85);
-    --nav-border: rgba(30, 41, 59, 0.6);
-  }
+/* Force light mode regardless of OS preference */
+html {
+  color-scheme: light;
 }
 
 @theme inline {
@@ -223,16 +191,7 @@ html {
   -webkit-line-clamp: 3;
 }
 
-/* Glow effects for dark mode */
-@media (prefers-color-scheme: dark) {
-  .glow-primary {
-    box-shadow: 0 0 40px -10px rgba(20, 184, 166, 0.3);
-  }
-  
-  .glow-accent {
-    box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3);
-  }
-}
+
 
 /* Subtle gradient noise texture overlay */
 .noise-overlay::before {

@@ -51,7 +51,7 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
           >
             <div className="mt-3 p-5 sm:p-6 rounded-xl bg-card-bg border border-border">
               <div
-                className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-foreground-secondary prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-ul:my-4 prose-li:my-2 prose-li:text-foreground-secondary max-w-none"
+                className="prose prose-lg prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-foreground-secondary prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-ul:my-4 prose-li:my-2 prose-li:text-foreground-secondary max-w-none"
                 dangerouslySetInnerHTML={{ __html: summary }}
               />
             </div>
