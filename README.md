@@ -24,6 +24,19 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 Content is stored in `content/content.json` and accessed via `src/lib/content.ts`.
 
+## Markdown Endpoints
+
+The site also serves static markdown versions of key pages from `public/`:
+
+- `/index.md`
+- `/about.md`
+- `/blog.md`
+- `/faq.md`
+- `/talks.md`
+- `/blog/<slug>.md` for current published posts
+
+If a new blog post is published, add a matching file under `public/blog/*.md`.
+
 ## Deployment
 
 The site is deployed on Vercel with automatic deployments via GitHub Actions.
