@@ -4,9 +4,9 @@ import { Linkedin } from "lucide-react";
 import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
-  title: "About — The Referee Project",
+  title: "About — Referee",
   description:
-    "Meet the team behind The Referee Project. Learn how Referee applies structured evaluation and transparent reliability scores to scholarly research.",
+    "Learn why Referee exists and how transparent reliability scoring works for scholarly publishing.",
 };
 
 /**
@@ -87,10 +87,26 @@ export default function AboutPage() {
   return (
     <div className="py-6 md:py-10">
       <PageIntro
-        eyebrow="About"
-        title="True transparency"
-        description="Referee is research-integrity infrastructure for scholarly publishing, built to make research reliability transparent, auditable, and machine-readable."
+        eyebrow="About Referee"
+        title="Why a transparent reliability score needs to exist"
+        description="The scholarly record has no structured, inspectable way to communicate what was checked and what remains uncertain. Referee adds a transparent reliability layer — mapping every check to an explicit flaw category so the output can be audited, not just trusted."
       />
+
+      {/* Hero CTA buttons */}
+      <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores"
+          className="inline-flex items-center justify-center rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold min-h-[48px]"
+        >
+          Explore scored papers
+        </a>
+        <a
+          href="/#how-it-works"
+          className="inline-flex items-center justify-center rounded-full px-8 py-3 sm:py-3.5 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 transition-all duration-200 font-semibold min-h-[48px]"
+        >
+          How scoring works
+        </a>
+      </div>
 
       {/* Mission */}
       <section className="mt-12 md:mt-16 space-y-5">

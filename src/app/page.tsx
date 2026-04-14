@@ -1,100 +1,252 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { BookOpen, Users, Landmark, Building2, Search } from "lucide-react";
+import {
+  ScoreAnatomy,
+  ProcessSteps,
+  ProofCardGrid,
+  AudienceCardGrid,
+  StatusCallout,
+  FounderTeaser,
+  CTABlock,
+} from "@/components/shared";
+import { HOME_META_DESCRIPTION } from "@/lib/copy";
 
 const Hero = dynamic(() => import("@/components/Hero").then((m) => m.Hero));
 
 export const metadata: Metadata = {
-  title: "Referee | Research-integrity infrastructure for scholarly publishing",
-  description:
-    "Referee is research-integrity infrastructure for high-volume scholarly publishing, turning technical evidence into transparent, machine-readable reliability scores for structured triage.",
+  title: "Referee | A transparent reliability score for every scholarly paper",
+  description: HOME_META_DESCRIPTION,
 };
+
+// ---------------------------------------------------------------------------
+// Static data for shared components
+// ---------------------------------------------------------------------------
+
+/** LP-3: Sample score categories for the anatomy visualization */
+const SCORE_CATEGORIES = [
+  { name: "Methodology", score: 18, maxScore: 25 },
+  { name: "Statistical validity", score: 15, maxScore: 20 },
+  { name: "Reproducibility", score: 12, maxScore: 15 },
+  { name: "Transparency", score: 14, maxScore: 20 },
+  { name: "Citation integrity", score: 13, maxScore: 20 },
+];
+
+/** LP-4: Steps describing how the score is produced */
+const PROCESS_STEPS = [
+  {
+    title: "Ingest paper evidence",
+    description:
+      "Referee analyzes submission materials and creates structured screening context.",
+  },
+  {
+    title: "Run structured checks",
+    description:
+      "Checks map to categories in the CRWE flaw taxonomy covering methodology, statistics, reproducibility, and more.",
+  },
+  {
+    title: "Record evidence and open items",
+    description:
+      "System logs what\u2019s been checked, what\u2019s unresolved, and what needs expert judgment.",
+  },
+  {
+    title: "Compute and preserve score",
+    description:
+      "Outputs become a versioned, machine-readable reliability score tied to concrete evidence.",
+  },
+];
+
+/** LP-5: Trust proof pillars */
+const PROOF_ITEMS = [
+  {
+    title: "Defined taxonomy",
+    description:
+      "Every check maps to explicit flaw categories in the CRWE framework \u2014 not ad-hoc opinion.",
+    category: "Structure",
+  },
+  {
+    title: "Transparent calculation",
+    description:
+      "Scoring rules are documented and versioned. The same evidence produces the same score.",
+    category: "Reproducibility",
+  },
+  {
+    title: "Stored evidence",
+    description:
+      "Each finding links to source evidence and unresolved items, so reviewers can inspect the reasoning.",
+    category: "Auditability",
+  },
+  {
+    title: "Versioned output",
+    description:
+      "Scores include provenance: when computed, which taxonomy version, what was in scope.",
+    category: "Traceability",
+  },
+];
+
+/** LP-6: Audience segments with lucide-react icons */
+const AUDIENCE_ITEMS = [
+  {
+    title: "Journals & publishers",
+    description:
+      "Unify fragmented integrity checks and improve visibility into what has been evaluated.",
+    icon: <BookOpen className="h-5 w-5" />,
+  },
+  {
+    title: "Conference organizers",
+    description:
+      "Create structured intake triage when submission volume outpaces reviewer capacity.",
+    icon: <Users className="h-5 w-5" />,
+  },
+  {
+    title: "Funders & policy teams",
+    description:
+      "Assess reliability of research before funding decisions with auditable evidence.",
+    icon: <Landmark className="h-5 w-5" />,
+  },
+  {
+    title: "Research organizations",
+    description:
+      "Run structured evaluation at scale with transparent records of potential weaknesses.",
+    icon: <Building2 className="h-5 w-5" />,
+  },
+  {
+    title: "Diligence teams",
+    description:
+      "Evaluate scholarly claims behind investment, biotech, and enterprise R&D decisions.",
+    icon: <Search className="h-5 w-5" />,
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Page component
+// ---------------------------------------------------------------------------
 
 export default function Home() {
   return (
     <div className="py-6 md:py-10">
+      {/* LP-1: Hero */}
       <Hero />
 
-      <section id="problem" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">The problem</h2>
+      {/* LP-2: Why this needs to exist */}
+      <section id="why-exists" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          The scholarly record asks too much trust
+        </h2>
         <p className="max-w-4xl text-foreground-secondary">
-          Submission volume keeps rising across conferences, journals, and publisher workflows, but intake review capacity does not scale at the same pace. Most teams still depend on fragmented checks and manual triage, which creates bottlenecks and inconsistent screening quality.
+          Opaque peer review hides key judgments about methodology, data
+          integrity, and reproducibility. Reliability should be visible, yet
+          there is no structured way to inspect what was checked, what was
+          missed, or how confident the evaluation actually is.
+        </p>
+
+        {/* Gap visualization: current state */}
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-border bg-card-bg p-5 text-center">
+            <p className="text-sm font-medium text-foreground-muted uppercase tracking-wide">
+              Today
+            </p>
+            <h3 className="mt-2 text-lg font-semibold text-foreground">
+              Paper submission
+            </h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Manuscripts enter the pipeline with no structured reliability
+              metadata attached.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5 text-center">
+            <p className="text-sm font-medium text-foreground-muted uppercase tracking-wide">
+              Black box
+            </p>
+            <h3 className="mt-2 text-lg font-semibold text-foreground">
+              Opaque review process
+            </h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Evaluation criteria vary by reviewer, and the reasoning is
+              rarely preserved in machine-readable form.
+            </p>
+          </article>
+          <article className="rounded-xl border border-border bg-card-bg p-5 text-center">
+            <p className="text-sm font-medium text-foreground-muted uppercase tracking-wide">
+              Result
+            </p>
+            <h3 className="mt-2 text-lg font-semibold text-foreground">
+              No structured output
+            </h3>
+            <p className="mt-2 text-sm text-foreground-muted">
+              Accept/reject decisions leave no inspectable record of what was
+              checked or what weaknesses remain.
+            </p>
+          </article>
+        </div>
+
+        {/* Referee's approach */}
+        <p className="text-sm font-medium text-foreground-muted pt-2">
+          Referee&apos;s approach:
         </p>
         <div className="grid gap-4 md:grid-cols-3">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">High volume, limited intake capacity</h3>
+          <article className="rounded-xl border border-primary-200 bg-primary-50/50 p-5 text-center">
+            <h3 className="text-lg font-semibold text-foreground">Paper</h3>
             <p className="mt-2 text-sm text-foreground-muted">
-              Organizers cannot fully review every submission at intake, so weak papers and high-priority papers are often mixed together too late.
+              Submission materials enter Referee with full-text and metadata
+              context.
             </p>
           </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Fragmented integrity checks</h3>
+          <article className="rounded-xl border border-primary-200 bg-primary-50/50 p-5 text-center">
+            <h3 className="text-lg font-semibold text-foreground">
+              Structured checks
+            </h3>
             <p className="mt-2 text-sm text-foreground-muted">
-              Current tools typically solve one check at a time, leaving teams without a unified view of what has been evaluated and what remains open.
+              Each paper runs through categorized flaw checks tied to the CRWE
+              taxonomy.
             </p>
           </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Low auditability</h3>
+          <article className="rounded-xl border border-primary-200 bg-primary-50/50 p-5 text-center">
+            <h3 className="text-lg font-semibold text-foreground">
+              Transparent score
+            </h3>
             <p className="mt-2 text-sm text-foreground-muted">
-              Traditional peer review was not designed for today&apos;s scale or threat models, and its outputs are hard to audit in structured, reusable form.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="solution" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">The solution</h2>
-        <p className="max-w-4xl text-foreground-secondary">
-          Referee is infrastructure for structured research screening and triage. We do not deliver a black-box score and we do not replace expert review. Instead, Referee organizes screening signals into a structured evaluation record that maps reliability signals to explicit flaw categories and unresolved checks.
-        </p>
-        <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Transparent reliability scoring</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              Reliability scores are machine-readable outputs tied to concrete evidence. Each score can be inspected through supporting flaw categories and open questions that still need human judgment.
-            </p>
-          </article>
-          <article className="rounded-xl border border-primary-200 bg-primary-50/50 p-5">
-            <h3 className="text-lg font-semibold text-foreground">Current demo scope</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              A live dashboard and paper-checking workflow are available for walkthroughs today. The platform is early: coverage breadth and false-positive handling are still being improved.
+              A versioned, machine-readable reliability score with inspectable
+              evidence and open items.
             </p>
           </article>
         </div>
       </section>
 
-      <section id="how-it-works" className="mt-12 md:mt-16 space-y-6 scroll-mt-24">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">How it works</h2>
+      {/* LP-3: Anatomy of a Referee score */}
+      <section id="score-anatomy" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          Anatomy of a Referee score
+        </h2>
+        <ScoreAnatomy
+          score={72}
+          categories={SCORE_CATEGORIES}
+          evidenceCount={47}
+          unresolvedCount={3}
+          version="CRWE-taxonomy v0.4.1"
+        />
         <p className="max-w-4xl text-foreground-secondary">
-          Our proprietary Common Research Weakness Enumeration (CRWE) is the core framework behind Referee&apos;s workflow.
+          A score of 72/100 means the paper cleared most structured checks but
+          has identifiable gaps: methodology is strong at 18/25, while
+          transparency (14/20) and citation integrity (13/20) flag areas that
+          need further inspection. Three items remain unresolved and require
+          expert judgment before the score is final. Every number links back to
+          the specific evidence that produced it.
         </p>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-base font-semibold text-foreground">1. Ingest paper evidence</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              Referee analyzes scientific and technical evidence from submission materials and creates a structured screening context.
-            </p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-base font-semibold text-foreground">2. Map checks to CRWE categories</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              Screening checks are mapped to explicit flaw classes so teams can see where the paper appears weak and where evidence is incomplete.
-            </p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-base font-semibold text-foreground">3. Record checked vs unresolved items</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              The system logs what has been checked, what remains unresolved, and which items require expert judgment before final decisions.
-            </p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-base font-semibold text-foreground">4. Produce reliability signals for triage</h3>
-            <p className="mt-2 text-sm text-foreground-muted">
-              Outputs become machine-readable reliability signals that support intake triage and targeted human review, not autonomous acceptance or rejection.
-            </p>
-          </article>
-        </div>
+      </section>
 
+      {/* LP-4: How the score is produced */}
+      <section
+        id="how-it-works"
+        className="mt-12 md:mt-16 space-y-6 scroll-mt-24"
+      >
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          How the score is produced
+        </h2>
+        <ProcessSteps steps={PROCESS_STEPS} />
+
+        {/* Workflow diagram */}
         <div className="mt-2 rounded-xl border border-border bg-card-bg p-4 sm:p-5">
           <Image
             src="/Review-model.png"
@@ -104,118 +256,77 @@ export default function Home() {
             className="rounded-lg w-full h-auto"
           />
           <p className="mt-3 text-sm text-foreground-muted">
-            Workflow direction: the demo already shows dashboard and paper-checking foundations, while broader coverage is still in progress.
+            End-to-end workflow: from paper ingestion through structured checks
+            to a versioned reliability score with full evidence provenance.
           </p>
         </div>
       </section>
 
-      <section id="why-it-matters" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Why it matters</h2>
-        <p className="max-w-4xl text-foreground-secondary">
-          Referee helps teams triage faster, use expert time more effectively, and maintain clear records of research risk without making claims that correctness can be fully automated.
-        </p>
-        <div className="grid gap-4 md:grid-cols-3">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Better triage</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Sort submissions by structured risk signals before expert review queues become overloaded.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Better use of expert time</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Focus reviewers on unresolved technical weaknesses instead of repeating broad preliminary checks.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Clear documentation and auditability</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Keep a transparent record of what was checked, what is weak, and what still needs human decision-making.</p>
-          </article>
-        </div>
+      {/* LP-5: Why the score deserves trust */}
+      <section id="trust" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          Why the score deserves trust
+        </h2>
+        <ProofCardGrid items={PROOF_ITEMS} className="md:grid-cols-2" />
       </section>
 
+      {/* LP-6: Who it helps */}
       <section id="audience" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Who it is for</h2>
-        <div className="grid gap-4 md:grid-cols-3">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Conference organizers</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Create structured intake triage when submission volume outpaces available reviewer capacity.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Publishers and journals</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Unify fragmented integrity checks and improve visibility into what is complete versus still pending.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Research organizations</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Run structured evaluation at scale with transparent records of potential weaknesses and unresolved risks.</p>
-          </article>
-        </div>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          Who it helps
+        </h2>
+        <AudienceCardGrid items={AUDIENCE_ITEMS} />
         <p className="text-sm text-foreground-muted max-w-4xl">
-          Future expansion markets are below this wedge and include investment due diligence, pharma and biotech scouting, grant allocation, and enterprise R&D decisions.
+          Future expansion includes investment due diligence, pharma and
+          biotech scouting, grant allocation, and enterprise R&amp;D decisions.
         </p>
       </section>
 
-      <section id="differentiation" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">What makes Referee different</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Beyond point solutions</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Most integrity tools focus on isolated checks such as plagiarism or anomaly detection. Referee adds an evaluation layer that combines checks into a reusable, structured record.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Transparent, challengeable output</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Referee reliability signals are linked to explicit flaw categories and unresolved checks, making the output auditable instead of opaque.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Infrastructure mindset</h3>
-            <p className="mt-2 text-sm text-foreground-muted">Referee is built as workflow infrastructure for scholarly publishing operations, not as a manifesto or nonprofit movement layer.</p>
-          </article>
-          <article className="rounded-xl border border-border bg-card-bg p-5">
-            <h3 className="text-lg font-semibold text-foreground">Founder-owned technical architecture</h3>
-            <p className="mt-2 text-sm text-foreground-muted">The platform is architected and implemented by the founder, with core infrastructure built in Rust for reliability and performance.</p>
-          </article>
-        </div>
+      {/* LP-7: Product state and honest limits */}
+      <section id="status" className="mt-12 md:mt-16 space-y-5">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          Where the product stands today
+        </h2>
+        <StatusCallout
+          title="Current status"
+          working={[
+            "Live demo with dashboard and paper-checking workflow",
+            "Structured scoring across CRWE flaw categories",
+            "Machine-readable output with evidence links",
+            "Versioned scores with full provenance",
+          ]}
+          improving={[
+            "Coverage breadth across research domains",
+            "False-positive reduction in edge cases",
+            "Additional flaw categories under development",
+            "API access for integration partners",
+          ]}
+        />
       </section>
 
+      {/* LP-8: Founder teaser */}
       <section id="founder" className="mt-12 md:mt-16 space-y-5">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Founder</h2>
-        <div className="grid gap-5 md:grid-cols-[220px_minmax(0,1fr)] md:items-start rounded-xl border border-border bg-card-bg p-5">
-          <div className="w-full max-w-[220px]">
-            <Image
-              src="/Erik_Schneider.png"
-              alt="Erik Schneider, founder of Referee"
-              width={220}
-              height={220}
-              className="rounded-lg w-full h-auto"
-            />
-          </div>
-          <div>
-            <p className="text-foreground-secondary">
-              Erik Schneider is the founder of Referee. He owns the vision, product roadmap, system architecture, and implementation end to end.
-            </p>
-            <p className="mt-3 text-foreground-secondary">
-              He defines the evaluation model, translates it into product and technical decisions, and builds the platform in Rust. The focus is practical: deliver auditable screening infrastructure that supports expert judgment in high-volume publishing workflows.
-            </p>
-          </div>
-        </div>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+          Built by someone who cares about the problem
+        </h2>
+        <FounderTeaser
+          name="Erik Schneider"
+          image="/Erik_Schneider.png"
+          tagline="Erik built Referee because he saw that the gap between what gets published and what's actually reliable keeps growing — and the tools to close it didn't exist. He owns the vision, architecture, and implementation end to end."
+          link="/about"
+        />
       </section>
 
-      <section id="book-demo" className="mt-12 md:mt-16 mb-8 rounded-xl border border-border bg-primary-50/50 p-6 sm:p-8 text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Book a demo</h2>
-        <p className="mt-3 max-w-3xl mx-auto text-foreground-secondary">
-          If you run conference, journal, publishing, or research-intake workflows, let&apos;s walk through the current product together. The demo includes a live dashboard and paper-checking flow, and we&apos;ll be explicit about what is ready now versus still in progress.
-        </p>
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href="mailto:erik@referee-project.com?subject=Referee%20demo%20request"
-            className="w-full sm:w-auto rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold text-center min-h-[48px] flex items-center justify-center"
-          >
-            Book a demo
-          </a>
-          <a
-            href="#how-it-works"
-            className="w-full sm:w-auto rounded-full px-8 py-3 sm:py-3.5 border-2 border-primary-600 text-primary-600 hover:bg-primary-100 transition-all duration-200 font-semibold text-center min-h-[48px] flex items-center justify-center"
-          >
-            See how it works
-          </a>
-        </div>
-        <p className="mt-4 text-sm text-foreground-muted">Or email directly: erik@referee-project.com</p>
+      {/* LP-9: Final CTA block */}
+      <section id="book-demo" className="mt-12 md:mt-16 mb-8">
+        <CTABlock
+          heading="See the score in action"
+          description="Walk through a live paper evaluation. We'll show you the dashboard, the scoring process, and be transparent about what's ready and what's still improving."
+          primaryHref="mailto:erik@referee-project.com?subject=Referee%20demo%20request"
+          primaryLabel="Book a demo"
+          secondaryHref="#how-it-works"
+          secondaryLabel="How scoring works"
+        />
       </section>
     </div>
   );
