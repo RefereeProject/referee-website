@@ -26,10 +26,25 @@ import { ProcessSteps } from "@/components/shared/ProcessSteps";
 import { StatusCallout } from "@/components/shared/StatusCallout";
 import { CTABlock } from "@/components/shared/CTABlock";
 
+const aboutDescription =
+  "Learn why Referee exists and how transparent reliability scoring works for scholarly publishing.";
+
 export const metadata: Metadata = {
   title: "About — Referee",
-  description:
-    "Learn why Referee exists and how transparent reliability scoring works for scholarly publishing.",
+  description: aboutDescription,
+  openGraph: {
+    title: "About — Referee",
+    description: aboutDescription,
+    type: "website",
+    siteName: "Referee",
+    images: [{ url: "/Referee_new_logo.png", width: 512, height: 512, alt: "Referee logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "About — Referee",
+    description: aboutDescription,
+    images: ["/Referee_new_logo.png"],
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -306,6 +321,7 @@ export default function AboutPage() {
         <a
           href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores"
           className="inline-flex items-center justify-center rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold min-h-[48px]"
+          aria-label="Explore scored papers via email"
         >
           Explore scored papers
         </a>

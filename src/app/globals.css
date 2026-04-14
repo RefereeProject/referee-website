@@ -193,6 +193,14 @@ html {
 
 
 
+/* Subtle text gradient — editorial accent for headings when needed */
+.text-gradient-subtle {
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Subtle gradient noise texture overlay */
 .noise-overlay::before {
   content: "";

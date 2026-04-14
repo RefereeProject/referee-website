@@ -24,6 +24,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://referee-project.com"
+  ),
   title: "Referee",
   description: "Research-integrity infrastructure for high-volume scholarly publishing",
 };

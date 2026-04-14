@@ -54,6 +54,7 @@ export function Navbar() {
           <a
             href="mailto:erik@referee-project.com?subject=Referee%20demo%20request"
             className={ctaClassName}
+            aria-label="Request a demo via email"
           >
             Demo
           </a>

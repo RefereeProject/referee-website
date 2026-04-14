@@ -50,6 +50,7 @@ export function CTABlock({
         <a
           href={primaryHref}
           className="w-full sm:w-auto rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold text-center min-h-[48px] flex items-center justify-center"
+          {...(primaryHref.startsWith("mailto:") ? { "aria-label": `${primaryLabel} via email` } : {})}
         >
           {primaryLabel}
         </a>

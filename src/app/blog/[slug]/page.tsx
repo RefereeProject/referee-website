@@ -83,7 +83,7 @@ export default async function BlogPostPage({
           href="/blog"
           className="inline-flex items-center gap-2 rounded-full px-4 py-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 transition-colors duration-200 text-sm font-semibold"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7-7l-7 7 7 7" />
           </svg>
           Back to Blog

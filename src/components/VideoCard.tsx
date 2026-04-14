@@ -41,13 +41,13 @@ export function VideoCard({ videoId, title, date, duration, summary, description
           <div className="mt-3 flex flex-wrap gap-4 text-sm text-foreground-muted">
             {date ? (
               <div className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4" aria-hidden="true" />
                 <span>{date}</span>
               </div>
             ) : null}
             {duration ? (
               <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-4 h-4" aria-hidden="true" />
                 <span>{duration}</span>
               </div>
             ) : null}
