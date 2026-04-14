@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { PageIntro } from "@/components/PageIntro";
 import { ProcessSteps } from "@/components/shared/ProcessSteps";
+import { MethodologyAccordion } from "@/components/shared/MethodologyAccordion";
 import { StatusCallout } from "@/components/shared/StatusCallout";
 import { CTABlock } from "@/components/shared/CTABlock";
 
@@ -196,6 +197,35 @@ const howItWorksSteps = [
     title: "Score and publish",
     description:
       "A reliability score is computed from the evaluation record with full provenance.",
+  },
+];
+
+/** AP-5b methodology accordion items */
+const methodologyItems = [
+  {
+    title: "Versioned taxonomy",
+    content:
+      "The CRWE flaw taxonomy is version-controlled. Each release adds, refines, or deprecates categories with a changelog. Scores reference the exact taxonomy version used.",
+  },
+  {
+    title: "Evidence schemas",
+    content:
+      "Every finding follows a structured schema: source location in the paper, flaw category, severity assessment, and supporting evidence. This makes findings comparable across papers.",
+  },
+  {
+    title: "Deterministic enrichment",
+    content:
+      "The screening pipeline applies the same checks in the same order to every paper. Human reviewers add judgment; the system adds consistency.",
+  },
+  {
+    title: "Audit trail",
+    content:
+      "Every step — from ingestion through scoring — is logged with timestamps, input hashes, and version identifiers. The full evaluation history is preserved.",
+  },
+  {
+    title: "Score vectors",
+    content:
+      "The reliability score is not a single magic number. It decomposes into category scores, each backed by specific checks, creating a vector that shows exactly where reliability is strong or weak.",
   },
 ];
 
@@ -385,6 +415,12 @@ export default function AboutPage() {
           steps={howItWorksSteps}
           className="lg:grid-cols-5"
         />
+
+        {/* Methodology details accordion */}
+        <h3 className="text-xl font-semibold tracking-tight text-foreground mt-8">
+          Methodology details
+        </h3>
+        <MethodologyAccordion items={methodologyItems} />
       </section>
 
       {/* AP-6: What Referee is not */}

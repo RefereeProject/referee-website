@@ -36,16 +36,19 @@ export function ScoreAnatomy({
   const maxTotal = categories.reduce((sum, c) => sum + c.maxScore, 0);
 
   return (
-    <div className="rounded-xl border border-border bg-card-bg p-5 space-y-5">
-      {/* Overall score header */}
-      <div className="flex items-baseline justify-between">
+    <div className="rounded-2xl border-2 border-primary-200 bg-card-bg p-6 sm:p-8 space-y-6 shadow-sm">
+      {/* Overall score header — designed as a standalone, screenshot-worthy artifact */}
+      <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-foreground-muted">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary-600">
+            Referee Score
+          </p>
+          <p className="text-sm font-medium text-foreground-muted mt-1">
             Overall reliability score
           </p>
-          <p className="mt-1 text-4xl font-bold tracking-tight text-foreground">
+          <p className="mt-2 text-6xl sm:text-7xl font-extrabold tracking-tighter text-primary-600">
             {score}
-            <span className="text-lg font-normal text-foreground-muted">
+            <span className="text-2xl sm:text-3xl font-normal text-foreground-muted">
               {" "}
               / {maxTotal}
             </span>
@@ -104,11 +107,13 @@ export function ScoreAnatomy({
         })}
       </div>
 
-      {/* Version provenance footer */}
+      {/* Version provenance footer — helps establish the score as a traceable artifact */}
       {version && (
-        <p className="text-xs text-foreground-muted">
-          Scoring model: {version}
-        </p>
+        <div className="pt-2 border-t border-border">
+          <p className="text-xs text-foreground-muted">
+            Scoring model: {version}
+          </p>
+        </div>
       )}
     </div>
   );

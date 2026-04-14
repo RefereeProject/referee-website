@@ -10,6 +10,7 @@ import {
   StatusCallout,
   FounderTeaser,
   CTABlock,
+  ComparisonToggle,
 } from "@/components/shared";
 import { HOME_META_DESCRIPTION } from "@/lib/copy";
 
@@ -227,8 +228,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LP-3: Anatomy of a Referee score */}
-      <section id="score-anatomy" className="mt-12 md:mt-16 space-y-5">
+      {/* LP-3: Anatomy of a Referee score — visually emphasized as the brand object */}
+      <section id="score-anatomy" className="mt-12 md:mt-16 space-y-5 rounded-2xl border border-primary-100 bg-primary-50/30 p-6 sm:p-8">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
           Anatomy of a Referee score
         </h2>
@@ -281,6 +282,7 @@ export default function Home() {
           Why the score deserves trust
         </h2>
         <ProofCardGrid items={PROOF_ITEMS} className="md:grid-cols-2" />
+        <ComparisonToggle />
       </section>
 
       {/* LP-6: Who it helps */}

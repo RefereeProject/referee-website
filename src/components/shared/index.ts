@@ -10,3 +10,5 @@ export { AudienceCard, AudienceCardGrid } from "./AudienceCard";
 export { StatusCallout } from "./StatusCallout";
 export { FounderTeaser } from "./FounderTeaser";
 export { CTABlock } from "./CTABlock";
+export { MethodologyAccordion } from "./MethodologyAccordion";
+export { ComparisonToggle } from "./ComparisonToggle";
