@@ -18,7 +18,7 @@ export function Hero() {
           transition={prefersReducedMotion ? undefined : { duration: 0.5 }}
           className="text-sm sm:text-base font-semibold tracking-wide uppercase text-primary-700"
         >
-          Founder-led, pre-seed infrastructure startup
+          Transparent scholarly evaluation infrastructure
         </motion.p>
 
         <motion.h1

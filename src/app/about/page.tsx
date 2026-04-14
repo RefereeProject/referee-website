@@ -6,7 +6,7 @@ import { PageIntro } from "@/components/PageIntro";
 export const metadata: Metadata = {
   title: "About — The Referee Project",
   description:
-    "Meet the team behind The Referee Project. Learn about our mission to transform research evaluation through transparency, reliability scores, and adversarial review.",
+    "Meet the team behind The Referee Project. Learn how Referee applies structured evaluation and transparent reliability scores to scholarly research.",
 };
 
 /**
@@ -89,7 +89,7 @@ export default function AboutPage() {
       <PageIntro
         eyebrow="About"
         title="True transparency"
-        description="Referee is founder-led infrastructure for scholarly publishing, built to make research reliability transparent, auditable, and machine-readable."
+        description="Referee is research-integrity infrastructure for scholarly publishing, built to make research reliability transparent, auditable, and machine-readable."
       />
 
       {/* Mission */}
@@ -97,7 +97,7 @@ export default function AboutPage() {
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">Our Mission</h2>
         <div className="rounded-xl border border-primary-200 bg-primary-50/50 p-6 sm:p-8">
           <p className="text-foreground-secondary leading-relaxed">
-            At Referee, we are driven by the mission to transform the research evaluation system fundamentally. Our innovative approach applies a universal reliability score to papers to enhance transparency, efficiency, and accountability in the review process. By prioritizing results over effort, our system incentivizes deep, focused scrutiny of research, ensuring that published works are both reliable and valid. We aim to democratize access to the peer review process, allowing a diverse range of contributors to participate and be rewarded for uncovering research inaccuracies. Our ultimate goal is to improve the quality of academic publications globally, making reliable research accessible and influential in shaping future advancements.
+            Referee applies a structured flaw taxonomy to scholarly papers, producing transparent reliability scores that surface specific weaknesses and unresolved checks. The system is designed to support — not replace — expert review by making screening outputs inspectable, machine-readable, and auditable. The goal is practical: improve the consistency and traceability of intake evaluation at scale so that expert time is spent on substantive questions rather than preliminary screening.
           </p>
         </div>
       </section>

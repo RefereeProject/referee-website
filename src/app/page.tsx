@@ -7,7 +7,7 @@ const Hero = dynamic(() => import("@/components/Hero").then((m) => m.Hero));
 export const metadata: Metadata = {
   title: "Referee | Research-integrity infrastructure for scholarly publishing",
   description:
-    "Referee is founder-led infrastructure for high-volume scholarly publishing, turning technical evidence into transparent, machine-readable reliability scores for structured triage.",
+    "Referee is research-integrity infrastructure for high-volume scholarly publishing, turning technical evidence into transparent, machine-readable reliability scores for structured triage.",
 };
 
 export default function Home() {
