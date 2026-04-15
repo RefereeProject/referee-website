@@ -11,22 +11,26 @@ Key architecture components:
 - **Styling**: Tailwind CSS v4 with custom typography plugin
 - **Fonts**: Inter (display) and JetBrains Mono (monospace)
 
+## Runtime Management
+
+- **Node version management:** Uses [mise](https://mise.jdx.dev/) (not nvm). Version auto-activates from `mise.toml` or `.nvmrc` on `cd`. Run `mise install` if needed.
+
 ## Development Commands
 
 All commands should be run from the repository root:
 
 ```bash
 # Development server
-pnpm dev
+npm run dev
 
 # Build production
-pnpm build
+npm run build
 
 # Lint code
-pnpm run lint
+npm run lint
 
 # Production server
-pnpm start
+npm start
 ```
 
 ## Content Architecture
@@ -51,7 +55,7 @@ The project uses a simple JSON-based content system:
 ## Build Process
 
 Standard Next.js build process:
-- `pnpm build` - Builds the Next.js application
+- `npm run build` - Builds the Next.js application
 - Content is pre-generated and committed in `content/content.json`
 
 ## File Structure
@@ -91,7 +95,7 @@ Content is stored in `content/content.json` (pre-migrated from WordPress). To up
 - **Animation**: Framer Motion v12
 - **Content**: HTML sanitization (sanitize-html)
 - **TypeScript**: Full type coverage
-- **Package Manager**: pnpm
+- **Package Manager**: npm
 - **Linting**: ESLint with Next.js presets
 - **Utilities**: class-variance-authority, clsx, tailwind-merge, lucide-react
 

@@ -71,7 +71,7 @@ export const HERO_HEADLINE =
 
 /** Hero subtitle */
 export const HERO_SUBTITLE =
-  "We turn scientific and technical evidence into machine-readable reliability scores through a transparent flaw taxonomy. The taxonomy shows where a paper is weak, what has been checked, and what still requires human judgment. Referee supports structured triage and targeted expert review rather than replacing peer review.";
+  "We turn scientific and technical evidence into machine-readable reliability scores through a transparent flaw taxonomy. The taxonomy shows where a paper is weak and what has been checked. Referee supports structured triage by making screening outputs inspectable, reproducible, and auditable.";
 
 /** Honest-limits disclaimer shown below hero CTAs */
 export const HERO_DISCLAIMER =
@@ -79,7 +79,7 @@ export const HERO_DISCLAIMER =
 
 /** Footer description — product-focused, no banned terms */
 export const FOOTER_DESCRIPTION =
-  "Research-integrity infrastructure for scholarly publishing.";
+  "Adding quality and nuance to the scholarly record.";
 
 /** Homepage meta description */
 export const HOME_META_DESCRIPTION =
@@ -91,7 +91,7 @@ export const ABOUT_INTRO_DESCRIPTION =
 
 /** About page mission statement — clinical, not manifesto */
 export const ABOUT_MISSION =
-  "Referee applies a structured flaw taxonomy to scholarly papers, producing transparent reliability scores that surface specific weaknesses and unresolved checks. The system is designed to support — not replace — expert review by making screening outputs inspectable, machine-readable, and auditable. The goal is practical: improve the consistency and traceability of intake evaluation at scale so that expert time is spent on substantive questions rather than preliminary screening.";
+  "Referee applies a structured flaw taxonomy to scholarly papers, producing transparent reliability scores that surface specific weaknesses. The system makes screening outputs inspectable, machine-readable, and auditable. The goal is practical: improve the consistency and traceability of intake evaluation at scale.";
 
 /** About page meta description */
 export const ABOUT_META_DESCRIPTION =

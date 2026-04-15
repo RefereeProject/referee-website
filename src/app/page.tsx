@@ -60,9 +60,9 @@ const PROCESS_STEPS = [
       "Checks map to categories in the CRWE flaw taxonomy covering methodology, statistics, reproducibility, and more.",
   },
   {
-    title: "Record evidence and open items",
+    title: "Record evidence trail",
     description:
-      "System logs what\u2019s been checked, what\u2019s unresolved, and what needs expert judgment.",
+      "System logs what\u2019s been checked and links every finding to its source evidence.",
   },
   {
     title: "Compute and preserve score",
@@ -88,7 +88,7 @@ const PROOF_ITEMS = [
   {
     title: "Stored evidence",
     description:
-      "Each finding links to source evidence and unresolved items, so reviewers can inspect the reasoning.",
+      "Each finding links to source evidence, so reviewers can inspect the reasoning.",
     category: "Auditability",
   },
   {
@@ -237,16 +237,14 @@ export default function Home() {
           score={72}
           categories={SCORE_CATEGORIES}
           evidenceCount={47}
-          unresolvedCount={3}
           version="CRWE-taxonomy v0.4.1"
         />
         <p className="max-w-4xl text-foreground-secondary">
           A score of 72/100 means the paper cleared most structured checks but
           has identifiable gaps: methodology is strong at 18/25, while
           transparency (14/20) and citation integrity (13/20) flag areas that
-          need further inspection. Three items remain unresolved and require
-          expert judgment before the score is final. Every number links back to
-          the specific evidence that produced it.
+          need further inspection. Every number links back to the specific
+          evidence that produced it.
         </p>
       </section>
 

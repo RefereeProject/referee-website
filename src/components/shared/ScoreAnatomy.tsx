@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-
 /** Single category within a score breakdown */
 interface ScoreCategory {
   name: string;
@@ -14,22 +12,19 @@ interface ScoreAnatomyProps {
   categories: ScoreCategory[];
   /** Total number of evidence references examined */
   evidenceCount: number;
-  /** Number of checks that remain unresolved */
-  unresolvedCount: number;
   /** Optional scoring-model version identifier */
   version?: string;
 }
 
 /**
  * Displays a score breakdown module showing an overall score,
- * per-category progress bars, evidence count, and unresolved items.
+ * per-category progress bars and evidence count.
  * Designed to be embedded in landing or detail pages.
  */
 export function ScoreAnatomy({
   score,
   categories,
   evidenceCount,
-  unresolvedCount,
   version,
 }: ScoreAnatomyProps) {
   // Derive max possible score from categories for the overall display
@@ -55,26 +50,13 @@ export function ScoreAnatomy({
           </p>
         </div>
 
-        {/* Evidence and unresolved counters */}
-        <div className="text-right space-y-1">
+        {/* Evidence counter */}
+        <div className="text-right">
           <p className="text-sm text-foreground-muted">
             <span className="font-semibold text-foreground">
               {evidenceCount}
             </span>{" "}
             evidence refs
-          </p>
-          <p className="text-sm text-foreground-muted">
-            <span
-              className={cn(
-                "font-semibold",
-                unresolvedCount > 0
-                  ? "text-amber-600"
-                  : "text-foreground"
-              )}
-            >
-              {unresolvedCount}
-            </span>{" "}
-            unresolved
           </p>
         </div>
       </div>

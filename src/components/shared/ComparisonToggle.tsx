@@ -85,10 +85,6 @@ export function ComparisonToggle() {
                 <span className="mt-0.5 text-foreground-muted/60" aria-hidden="true">&#x2715;</span>
                 <span>No evidence trail linking judgments to source material</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-0.5 text-foreground-muted/60" aria-hidden="true">&#x2715;</span>
-                <span>Unresolved issues are not tracked or surfaced</span>
-              </li>
             </ul>
           </div>
         </div>
@@ -127,10 +123,6 @@ export function ComparisonToggle() {
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-primary-600" aria-hidden="true">&#x2713;</span>
                 <span>47 evidence items linked to source material</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-0.5 text-primary-600" aria-hidden="true">&#x2713;</span>
-                <span>3 unresolved items explicitly flagged for expert review</span>
               </li>
             </ul>
           </div>

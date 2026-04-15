@@ -7,7 +7,7 @@ A Next.js 15 web application with content migrated from WordPress.
 Run the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.

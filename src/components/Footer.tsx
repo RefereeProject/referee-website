@@ -29,7 +29,7 @@ export function Footer() {
         </nav>
 
         <p className="text-center sm:text-left">&copy; 2026 Referee. All rights reserved.</p>
-        <p className="text-center sm:text-left mt-2">Research-integrity infrastructure for scholarly publishing.</p>
+        <p className="text-center sm:text-left mt-2">Adding quality and nuance to the scholarly record.</p>
       </div>
     </footer>
   );
