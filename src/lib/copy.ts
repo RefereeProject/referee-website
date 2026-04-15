@@ -63,7 +63,7 @@ export const TAGLINE =
   "Research-integrity infrastructure for high-volume scholarly publishing";
 
 /** Hero eyebrow — replaces the banned "Founder-led, pre-seed..." line */
-export const HERO_EYEBROW = "Transparent scholarly evaluation infrastructure";
+export const HERO_EYEBROW = "Adding quality and nuance to the scholarly record";
 
 /** Hero headline */
 export const HERO_HEADLINE =

@@ -5,7 +5,7 @@ const FOOTER_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "How it works", href: "/#how-it-works" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Objections & Principles", href: "/faq" },
   { label: "Demo", href: "mailto:erik@referee-project.com?subject=Referee%20demo%20request" },
   { label: "Blog", href: "/blog" },
   { label: "Talks", href: "/blog" },
