@@ -51,3 +51,7 @@ therefereeproject.WordPress.2025-09-12.xml
 
 # Beads database files
 *.db
+
+# Beads SQLite files must never be tracked (wrongly committed historically)
+.beads/sqlite*
+firebase-debug.log

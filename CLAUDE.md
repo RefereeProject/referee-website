@@ -104,3 +104,22 @@ Content is stored in `content/content.json` (pre-migrated from WordPress). To up
 The project uses two Google Fonts configured in `src/app/layout.tsx`:
 - **Inter**: Display font (weights 300-900) via `--font-display` CSS variable
 - **JetBrains Mono**: Monospace font via `--font-mono` CSS variable
+
+<!-- gh-auth-recovery:v1 -->
+## Git push auth recovery
+
+This repo pushes to **RefereeProject/** on github.com. If `git push`, `gh pr create`,
+`gh pr merge`, `gh api`, or any remote write fails with an authentication
+error — `403`, `401`, `Permission denied`, `Permission to ... denied`,
+`could not read Username`, `Resource not accessible by integration`, or
+`The requested URL returned error: 40[13]` — the active `gh` account is
+wrong. **Do not stop.** Recover automatically:
+
+1. `gh auth status --hostname github.com` — note the active account.
+2. If it is not `RefereeProject`, run `gh auth switch --user RefereeProject`.
+3. Re-run the failed command exactly once.
+4. Only if it still fails after the switch, surface the error to the user.
+
+Never ask the user to switch accounts manually — just switch. The same
+rule applies to SSH-origin pushes (`git@github.com:RefereeProject/...`); `gh auth
+switch` also rewrites the ssh key gh wraps around.

@@ -1,5 +1,7 @@
 # Agent Instructions
 
+> **Start here:** Read `CLAUDE.md` in the project root for full project context, tech stack, and development commands.
+
 This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get started.
 
 ## Quick Reference
@@ -47,7 +49,7 @@ bd sync               # Sync with git
 ### Why bd?
 
 - Dependency-aware: Track blockers and relationships between issues
-- Git-friendly: Dolt-powered version control with native sync
+- Git-friendly: SQLite-backed with JSONL sync via git
 - Agent-optimized: JSON output, ready work detection, discovered-from links
 - Prevents duplicate tracking systems and confusion
 
@@ -106,11 +108,11 @@ bd close bd-42 --reason "Completed" --json
 
 ### Auto-Sync
 
-bd automatically syncs via Dolt:
+bd syncs via git:
 
-- Each write auto-commits to Dolt history
-- Use `bd dolt push`/`bd dolt pull` for remote sync
-- No manual export/import needed!
+- Issues are stored in SQLite and exported to JSONL for git tracking
+- Use `bd sync` to commit and push issue changes
+- JSONL files are merged automatically on pull
 
 ### Important Rules
 
@@ -125,3 +127,22 @@ bd automatically syncs via Dolt:
 For more details, see README.md and docs/QUICKSTART.md.
 
 <!-- END BEADS INTEGRATION -->
+
+<!-- gh-auth-recovery:v1 -->
+## Git push auth recovery
+
+This repo pushes to **RefereeProject/** on github.com. If `git push`, `gh pr create`,
+`gh pr merge`, `gh api`, or any remote write fails with an authentication
+error — `403`, `401`, `Permission denied`, `Permission to ... denied`,
+`could not read Username`, `Resource not accessible by integration`, or
+`The requested URL returned error: 40[13]` — the active `gh` account is
+wrong. **Do not stop.** Recover automatically:
+
+1. `gh auth status --hostname github.com` — note the active account.
+2. If it is not `RefereeProject`, run `gh auth switch --user RefereeProject`.
+3. Re-run the failed command exactly once.
+4. Only if it still fails after the switch, surface the error to the user.
+
+Never ask the user to switch accounts manually — just switch. The same
+rule applies to SSH-origin pushes (`git@github.com:RefereeProject/...`); `gh auth
+switch` also rewrites the ssh key gh wraps around.
