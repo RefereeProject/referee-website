@@ -55,3 +55,10 @@ therefereeproject.WordPress.2025-09-12.xml
 # Beads SQLite files must never be tracked (wrongly committed historically)
 .beads/sqlite*
 firebase-debug.log
+
+# Dolt backend artifacts (removed after downgrade to sqlite backend)
+.beads/dolt/
+.beads/dolt-server.*
+.beads/dolt-monitor.*
+.beads/backup/
+.beads/.beads-credential-key
