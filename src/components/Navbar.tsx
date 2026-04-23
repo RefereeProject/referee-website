@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 
-/** Primary navigation links — Blog and Talks are intentionally excluded
- *  from the main nav to keep the product story front-and-center.
- *  They remain accessible at /blog and /talks via direct URL. */
+/** Primary navigation links — Talks is intentionally excluded from the
+ *  main nav to keep the product story front-and-center; it remains
+ *  accessible at /talks via direct URL. */
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/#how-it-works", label: "How it works" },
+  { href: "/blog", label: "Blog" },
   { href: "/faq", label: "Objections & Principles" },
 ];
 
