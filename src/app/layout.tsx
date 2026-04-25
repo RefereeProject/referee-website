@@ -13,8 +13,8 @@ const mono = IBM_Plex_Mono({ variable: "--font-mono", subsets: ["latin"], weight
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://referee-project.com"),
-  title: "Referee",
-  description: "Research-integrity infrastructure for high-volume scholarly publishing",
+  title: "The Referee Project",
+  description: "Adding quality and nuance to the scholarly record.",
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, maximumScale: 5, userScalable: true };

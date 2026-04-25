@@ -23,7 +23,7 @@ export function Footer() {
                 className="brand-logo"
                 style={{ display: "block", transform: "translateY(4px)" }}
               />
-              <span className="brand-name">Referee</span>
+              <span className="brand-name">The Referee Project</span>
             </Link>
             <p style={{ maxWidth: 340, marginTop: 14, fontSize: 13, color: "var(--ink-muted)" }}>
               Adding quality and nuance to the scholarly record.
@@ -66,7 +66,7 @@ export function Footer() {
           total structured (leaf) checks. Constants live in `src/lib/copy.ts`.
         */}
         <div className="footer-bottom">
-          <span>© 2024–{year} Referee Project</span>
+          <span>© 2024–{year} The Referee Project</span>
           <span>
             CRWE {CRWE_VERSION_LABEL} · {CRWE_TOP_LEVEL_CATEGORIES} top-level categories · {CRWE_LEAF_CHECKS} structured checks
           </span>

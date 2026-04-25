@@ -13,7 +13,7 @@ export function Navbar() {
   return (
     <header className="site-header animate-navbar-slide-in">
       <div className="container site-header-inner">
-        <Link href="/" className="brand" aria-label="Referee — home">
+        <Link href="/" className="brand" aria-label="The Referee Project — home">
           {/*
             Brand lockup uses the project logo image instead of the
             CSS `.brand-mark` boxed-R, per design refresh. The image is
@@ -29,10 +29,7 @@ export function Navbar() {
             className="brand-logo"
             style={{ display: "block", transform: "translateY(4px)" }}
           />
-          <span className="brand-name">Referee</span>
-          <span className="brand-meta hide-md" style={{ marginLeft: 4, transform: "translateY(-2px)" }}>
-            The Referee Project
-          </span>
+          <span className="brand-name">The Referee Project</span>
         </Link>
         <nav className="nav" aria-label="Primary">
           {navLinks.map((link) => (

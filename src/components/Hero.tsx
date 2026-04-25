@@ -81,13 +81,24 @@ export function Hero() {
       <div className="container">
         <div className="hero-doi" style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "center", marginBottom: 24 }}>
           <span className="tag tag-primary">CRWE {CRWE_VERSION_LABEL}</span>
-          <span className="eyebrow">Adding quality and nuance to the scholarly record</span>
           <span className="eyebrow" style={{ marginLeft: "auto" }}>Illustrative report</span>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1.1fr) minmax(320px,1fr)", gap: 64, alignItems: "start" }} className="hero-grid">
           <div>
-            <p className="eyebrow"><span className="eyebrow-tick" />Research-integrity infrastructure</p>
             <h1 style={{ marginTop: 8 }}>A transparent reliability score for <em style={{ color: "var(--primary-800)" }}>every</em> scholarly paper.</h1>
+            <p
+              className="lede-serif"
+              style={{
+                marginTop: 18,
+                maxWidth: 620,
+                color: "var(--primary-800)",
+                fontSize: "clamp(24px, 3.1vw, 38px)",
+                lineHeight: 1.12,
+                letterSpacing: "-.025em",
+              }}
+            >
+              Adding quality and nuance to the scholarly record.
+            </p>
             <p className="lede-serif" style={{ marginTop: 24, maxWidth: 560 }}>
               Referee evaluates manuscripts against the CRWE flaw taxonomy and produces versioned, machine-readable reliability scores with inspectable evidence — built for editorial intake, conference triage, and integration into existing scholarly workflows.
             </p>
