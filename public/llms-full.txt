@@ -1,6 +1,6 @@
 # Referee
 
-Referee is founder-led research-integrity infrastructure for scholarly publishing. The platform turns technical evidence into transparent, machine-readable reliability signals that support structured triage and targeted expert review at high submission volume.
+Referee is research-integrity infrastructure for scholarly publishing. The platform turns technical evidence into transparent, machine-readable reliability signals that support structured triage and targeted expert review at high submission volume. Scoring is anchored to the public CRWE v2.1 flaw taxonomy (11 top-level categories, 300 structured checks).
 
 Referee does not claim to replace expert peer review with a black box. It organizes checks into a structured evaluation record with explicit flaw categories, unresolved items, and auditable outputs.
 
@@ -23,7 +23,7 @@ Referee does not claim to replace expert peer review with a black box. It organi
 - Value claims: better triage, better allocation of expert reviewer time, and clearer documentation of research risk.
 - Target users: conference organizers, publishers/journals, and research organizations.
 - Positioning: infrastructure layer that unifies checks into a reusable record rather than isolated one-off tools.
-- Current demo scope: a live dashboard and paper-checking workflow are available today; false positives and coverage depth are still being improved.
+- Current demo scope: a curated scored-paper experience with the full evidence trail is available today; false positives and coverage depth are still being improved.
 - Founder context: founder-owned technical architecture and implementation.
 
 ## About coverage

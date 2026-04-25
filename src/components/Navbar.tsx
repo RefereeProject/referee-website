@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
   { href: "/about", label: "About" },
+  // Anchor link — `How it works` is a homepage section (#method).
   { href: "/#method", label: "How it works" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "Objections & Principles" },
@@ -12,7 +14,21 @@ export function Navbar() {
     <header className="site-header animate-navbar-slide-in">
       <div className="container site-header-inner">
         <Link href="/" className="brand" aria-label="Referee — home">
-          <span className="brand-mark">R</span>
+          {/*
+            Brand lockup uses the project logo image instead of the
+            CSS `.brand-mark` boxed-R, per design refresh. The image is
+            kept square (30×30) to align with the existing baseline
+            (the `.brand-mark` rule in globals.css uses the same size).
+          */}
+          <Image
+            src="/Referee_new_logo.png"
+            alt=""
+            width={30}
+            height={30}
+            priority
+            className="brand-logo"
+            style={{ display: "block", transform: "translateY(4px)" }}
+          />
           <span className="brand-name">Referee</span>
           <span className="brand-meta hide-md" style={{ marginLeft: 4, transform: "translateY(-2px)" }}>
             The Referee Project
@@ -24,8 +40,13 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <a href="mailto:erik@referee-project.com?subject=Referee%20demo%20request" className="nav-cta">
-            Demo →
+          {/*
+            Primary nav CTA — drives traffic to the curated scored-paper
+            demo, matching the homepage hero. Updated from the prior
+            "Demo →" mailto pattern.
+          */}
+          <a href="https://demo.referee-project.com" className="nav-cta">
+            See a scored paper →
           </a>
         </nav>
       </div>

@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Hero, ScoreCard } from "@/components/Hero";
-import { HOME_META_DESCRIPTION } from "@/lib/copy";
+import {
+  CRWE_LEAF_CHECKS,
+  CRWE_TOP_LEVEL_GROUPS,
+  CRWE_VERSION_LABEL,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+  HOME_META_DESCRIPTION,
+} from "@/lib/copy";
 
 export const metadata: Metadata = {
   title: "Referee | A transparent reliability score for every scholarly paper",
@@ -14,15 +23,24 @@ const steps = [
   ["01", "Ingest", "Manuscript and supplementary materials are parsed into structured screening context — text, tables, figures, references, methods.", "Input: manuscript.pdf · hash: sha256/…"],
   ["02", "Map", "Claims are mapped to categories in the CRWE flaw taxonomy. Each claim becomes a checkable assertion with provenance.", "Output: claim graph · 248 nodes"],
   ["03", "Check", "Structured checks run against each claim — statistical sanity, reproducibility, citation integrity, transparency, and methodology.", "Output: 47 evidence refs · 3 unresolved"],
-  ["04", "Preserve", "A versioned, machine-readable reliability score is written to the record, with the full evidence trail attached and re-derivable.", "Output: score.json · v0.4.1 · 72/100"],
+  ["04", "Preserve", "A versioned, machine-readable reliability score is written to the record, with the full evidence trail attached and re-derivable.", `Output: score.json · ${CRWE_VERSION_LABEL} · 72/100`],
 ] as const;
 
+// CRWE v2.1 surface — six core categories (1–6) plus five method modules (M1–M5),
+// totalling eleven top-level categories and 300 leaf checks. Leaf counts come from
+// crwe/taxonomy/2.1/leaf-index.json and stay in sync with `CRWE_LEAF_CHECKS`.
 const taxonomy = [
-  ["CRWE-01", "Methodology", "Study design, controls, sample selection, blinding, and ecological validity.", "25", "12 checks"],
-  ["CRWE-02", "Statistical validity", "Hypothesis testing, multiple comparisons, effect sizes, model assumptions, and p-hacking signatures.", "20", "9 checks"],
-  ["CRWE-03", "Reproducibility", "Data and code availability, environment specifications, preregistration, and analytic transparency.", "15", "7 checks"],
-  ["CRWE-04", "Transparency", "Conflict-of-interest disclosure, funding statements, declared limitations, and authorship contributions.", "20", "6 checks"],
-  ["CRWE-05", "Citation integrity", "Reference accuracy, retraction status, citation context fidelity, and self-citation patterns.", "20", "8 checks"],
+  ["CRWE-01", "Data integrity", "Operational definitions, data sources, missingness, transformations, and merge rules.", "Core", "55 checks"],
+  ["CRWE-02", "Study design", "Research questions, sampling frames, randomization, identification strategy, and preregistration.", "Core", "76 checks"],
+  ["CRWE-03", "Statistical specification", "Model choice, assumption checks, multiplicity correction, missing-data handling, and uncertainty reporting.", "Core", "45 checks"],
+  ["CRWE-04", "Reporting consistency", "Internal coherence between abstract, methods, and results; calibrated claims and limitations.", "Core", "29 checks"],
+  ["CRWE-05", "Figures & evidence linkage", "Axis labelling, axis truncation, citation backing for headline claims, and use of retracted sources.", "Core", "14 checks"],
+  ["CRWE-06", "Reproducibility & availability", "Data and code availability, software/environment specs, persistent identifiers, and execution success.", "Core", "24 checks"],
+  ["CRWE-M1", "Predictive modelling", "Train/validation splits, leakage, hyperparameter procedure, evaluation metrics, and architecture disclosure.", "Module", "16 checks"],
+  ["CRWE-M2", "Systematic review & meta-analysis", "Search reproducibility, data extraction, risk-of-bias assessment, model choice, and sensitivity analyses.", "Module", "14 checks"],
+  ["CRWE-M3", "Simulation & numerical modelling", "Governing equations, solver and discretization choices, and verification/validation evidence.", "Module", "9 checks"],
+  ["CRWE-M4", "Formal & theoretical work", "Definition discipline, lemma dependencies, and step-by-step proof correctness.", "Module", "9 checks"],
+  ["CRWE-M5", "Qualitative research", "Sampling strategy, coding procedures, and interpretive transparency for qualitative inquiry.", "Module", "9 checks"],
 ] as const;
 
 const audiences = [
@@ -58,9 +76,9 @@ export default function Home() {
         <div className="steps">{steps.map(([n, title, body, out]) => <div className="step" key={n}><div className="step-num">Step {n}</div><h4>{title}</h4><p>{body}</p><div className="step-output"><strong>{out}</strong></div></div>)}</div>
       </div></section>
 
-      <section className="section" id="taxonomy" style={{ background: "var(--surface-muted)" }}><div className="container"><SectionHead num="04" label="The CRWE Taxonomy" title="A common taxonomy of research weakness — versioned, public, challengeable." lead="The Common Research Weakness Enumeration (CRWE) is the spine of every Referee score. Five top-level categories, 42 structured checks, and an open mechanism for proposing additions." />
-        <p className="mono" style={{ margin: "14px 0 18px 248px", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>Current version · <strong style={{ color: "var(--ink)" }}>v0.4.1</strong> · Released 2026-04-12</p>
-        <div className="taxonomy"><div className="taxonomy-head"><div>ID</div><div>Category · scope</div><div>Allocation</div><div>Checks</div></div>{taxonomy.map(([id, name, desc, pts, checks]) => <div className="taxonomy-row" key={id}><div className="taxonomy-id">{id}</div><div className="taxonomy-name"><strong>{name}</strong><span>{desc}</span></div><div className="taxonomy-points">{pts} pts</div><div className="taxonomy-checks">{checks}</div></div>)}</div>
+      <section className="section" id="taxonomy" style={{ background: "var(--surface-muted)" }}><div className="container"><SectionHead num="04" label="The CRWE Taxonomy" title="A common taxonomy of research weakness — versioned, public, challengeable." lead={`The Common Research Weakness Enumeration (CRWE) is the spine of every Referee score. ${CRWE_TOP_LEVEL_GROUPS} top-level categories — six core categories and five method modules — and ${CRWE_LEAF_CHECKS} structured checks, with an open mechanism for proposing additions.`} />
+        <p className="mono" style={{ margin: "14px 0 18px 248px", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>Current version · <strong style={{ color: "var(--ink)" }}>{CRWE_VERSION_LABEL}</strong> · {CRWE_LEAF_CHECKS} structured checks across {CRWE_TOP_LEVEL_GROUPS} top-level categories</p>
+        <div className="taxonomy"><div className="taxonomy-head"><div>ID</div><div>Category · scope</div><div>Group</div><div>Checks</div></div>{taxonomy.map(([id, name, desc, group, checks]) => <div className="taxonomy-row" key={id}><div className="taxonomy-id">{id}</div><div className="taxonomy-name"><strong>{name}</strong><span>{desc}</span></div><div className="taxonomy-points">{group}</div><div className="taxonomy-checks">{checks}</div></div>)}</div>
       </div></section>
 
       <section className="section" id="audience"><div className="container"><SectionHead num="05" label="Who It Serves" title="Built for institutions that make consequential decisions about scholarship." />
@@ -68,7 +86,7 @@ export default function Home() {
       </div></section>
 
       <section className="section" id="status"><div className="container"><SectionHead num="06" label="Honest Limits" title="What works today, and what is still imperfect." lead="Referee normalizes uncertainty. The same restraint we ask of published work, we ask of ourselves. This is the current state of the system, written plainly." />
-        <div className="status-grid"><div className="status-col card-flat card-tint"><h3>Working today</h3><ul className="status-list"><li><span className="status-tag">Live</span><span>Live demo with dashboard and paper-checking workflow.</span></li><li><span className="status-tag">Live</span><span>Structured scoring across CRWE flaw categories.</span></li><li><span className="status-tag">Live</span><span>Machine-readable output with evidence links.</span></li><li><span className="status-tag">Live</span><span>Versioned scores with full provenance.</span></li></ul></div><div className="status-col card-flat"><h3>Still improving</h3><ul className="status-list improving"><li><span className="status-tag">WIP</span><span>Coverage breadth across research domains.</span></li><li><span className="status-tag">WIP</span><span>False-positive reduction in edge cases.</span></li><li><span className="status-tag">WIP</span><span>Additional flaw categories under development.</span></li><li><span className="status-tag">WIP</span><span>API access for integration partners.</span></li></ul></div></div>
+        <div className="status-grid"><div className="status-col card-flat card-tint"><h3>Working today</h3><ul className="status-list"><li><span className="status-tag">Live</span><span>Curated scored-paper experience with the full evidence trail.</span></li><li><span className="status-tag">Live</span><span>Structured scoring against CRWE {CRWE_VERSION_LABEL} flaw categories.</span></li><li><span className="status-tag">Live</span><span>Machine-readable output with evidence links.</span></li><li><span className="status-tag">Live</span><span>Versioned scores with full provenance.</span></li></ul></div><div className="status-col card-flat"><h3>Still improving</h3><ul className="status-list improving"><li><span className="status-tag">WIP</span><span>Coverage breadth across research domains.</span></li><li><span className="status-tag">WIP</span><span>False-positive reduction in edge cases.</span></li><li><span className="status-tag">WIP</span><span>Additional flaw categories under development.</span></li><li><span className="status-tag">WIP</span><span>API access for integration partners.</span></li></ul></div></div>
       </div></section>
 
       <section className="section" id="about" style={{ background: "var(--surface)" }}><div className="container"><SectionHead num="07" label="Stewardship" title="Built by people who care about the standing of the record." />
@@ -76,7 +94,7 @@ export default function Home() {
         <div style={{ marginTop: 48, paddingTop: 32, borderTop: "1px solid var(--border)" }}><div className="credential">Advisor</div><div className="founder"><Image className="founder-portrait" src="/Marcus_Thomas.jpg" alt="Portrait of Dr. Marcus Thomas" width={240} height={300} /><div><h3>Dr. Marcus Thomas</h3><div className="credential">Computational Scientist · Research Associate, Memorial Sloan Kettering Cancer Center</div><p>Dr. Thomas’s work at the intersection of immuno-oncology, computer science, and statistical physics informs Referee’s approach to evidence chains in clinical research — where the cost of a hidden flaw is paid by patients in trials.</p></div></div></div>
       </div></section>
 
-      <section className="section" id="demo"><div className="container"><div className="cta-block"><p className="eyebrow"><span className="eyebrow-tick" style={{ background: "rgba(255,255,255,.4)" }} />Demo · 30 minutes</p><h2>See the score derived in real time.</h2><p>Walk through a live paper evaluation. We’ll show the dashboard, the scoring process, and the evidence trail — and be transparent about what’s ready and what’s still improving.</p><div style={{ marginTop: 28, display: "flex", gap: 12, flexWrap: "wrap" }}><a className="btn btn-primary" href="mailto:erik@referee-project.com?subject=Referee%20demo%20request">Book a demo <span className="arrow">→</span></a><a className="btn btn-secondary" href="#method">Read the method</a></div><div className="mono" style={{ marginTop: 32, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,.18)", display: "flex", gap: 32, flexWrap: "wrap", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}><span>Editorial intake</span><span>Conference triage</span><span>API roadmap</span></div></div></div></section>
+      <section className="section" id="demo"><div className="container"><div className="cta-block"><p className="eyebrow"><span className="eyebrow-tick" style={{ background: "rgba(255,255,255,.4)" }} />Curated demo</p><h2>See a real paper, scored against CRWE {CRWE_VERSION_LABEL}.</h2><p>Walk a curated paper end-to-end: the category vector, the evidence trail, and what is still unresolved. Then book a guided walkthrough if you want to see how the same record fits your editorial intake or triage workflow.</p><div style={{ marginTop: 28, display: "flex", gap: 12, flexWrap: "wrap" }}><a className="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL} <span className="arrow">→</span></a><a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a></div><div className="mono" style={{ marginTop: 32, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,.18)", display: "flex", gap: 32, flexWrap: "wrap", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}><span>Editorial intake</span><span>Conference triage</span><span>API roadmap</span></div></div></div></section>
     </>
   );
 }

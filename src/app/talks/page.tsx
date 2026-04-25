@@ -1,11 +1,21 @@
 import type { Metadata } from "next"
 import { VideoCard } from "@/components/VideoCard"
 import { PageIntro } from "@/components/PageIntro"
+import {
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+} from "@/lib/copy"
 
+// Talks-page metadata is institutional and product-focused. We deliberately
+// avoid the older adversarial "taking the peer out of peer review" framing
+// here; the embedded talk summaries below preserve the historical record of
+// what was actually presented in each conversation.
 export const metadata: Metadata = {
   title: "Talks — The Referee Project",
   description:
-    "Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review.",
+    "Recorded talks on Referee — structured reliability metadata, the CRWE flaw taxonomy, evidence trails, and how transparent reliability scoring fits institutional research-evaluation workflows.",
 }
 
 
@@ -14,7 +24,7 @@ const talks = [
     id: 1,
     videoId: "-jipUr9b7_o",
     title: "The Referee Project: An Update with Sebastián Buriticá Arias",
-    description: "Executive director Erik Schneider provides an update on the Referee Project in this conversation with Sebastián Buriticá Arias.",
+    description: "Founder Erik Schneider walks Sebastián Buriticá Arias through Referee's approach to structured reliability metadata, the CRWE flaw taxonomy, and how evidence-backed scoring supports institutional research-evaluation workflows.",
     date: "2024",
     duration: "53:00",
     summary: `<h3>Core Summary</h3>
@@ -48,7 +58,7 @@ const talks = [
     id: 2,
     videoId: "5sY712uSv-s",
     title: "The Referee Project at DeSci Labs Forum",
-    description: "Erik Schneider discusses the Referee Project with the DeSci Labs team, explaining how we're taking the peer out of peer review.",
+    description: "Erik Schneider discusses Referee with the DeSci Labs team: structured reliability scoring, auditable evidence chains, and the role of an open flaw taxonomy in scholarly evaluation.",
     date: "2023",
     duration: "45:00",
     summary: `<h3>Key Points of the Referee Project</h3>
@@ -95,7 +105,7 @@ export default function TalksPage() {
       <PageIntro
         eyebrow="Talks"
         title="Recorded Talks"
-        description="Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review."
+        description="Recorded conversations on Referee — structured reliability metadata, the CRWE flaw taxonomy, auditable evidence trails, and how transparent reliability scoring fits institutional research-evaluation workflows."
       />
 
       <div className="container page-shell">
@@ -103,6 +113,21 @@ export default function TalksPage() {
           {talks.map((talk) => (
             <VideoCard key={talk.id} {...talk} />
           ))}
+        </section>
+        {/*
+          Page-level CTA — mirrors the homepage hero so visitors who arrive via
+          a talk recording have the same primary/secondary action surface.
+        */}
+        <section style={{ marginTop: 48, paddingTop: 32, borderTop: "1px solid var(--border)", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+          <p className="eyebrow" style={{ marginRight: "auto" }}>
+            <span className="eyebrow-tick" />Want the working version, not the talk?
+          </p>
+          <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>
+            {CTA_PRIMARY_LABEL} <span className="arrow">→</span>
+          </a>
+          <a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>
+            {CTA_SECONDARY_LABEL}
+          </a>
         </section>
       </div>
     </>

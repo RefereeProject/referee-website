@@ -96,3 +96,51 @@ export const ABOUT_MISSION =
 /** About page meta description */
 export const ABOUT_META_DESCRIPTION =
   "Meet the team behind The Referee Project. Learn how Referee applies structured evaluation and transparent reliability scores to scholarly research.";
+
+// ---------------------------------------------------------------------------
+// CRWE taxonomy version constants — single source of truth for marketing copy.
+// Update these when the CRWE source of truth (in /Volumes/HomeX/erikschneider/crwe)
+// publishes a new version so every page stays in sync.
+// ---------------------------------------------------------------------------
+
+/** Current published CRWE taxonomy version, prefixed with `v`. */
+export const CRWE_VERSION_LABEL = "v2.1";
+
+/**
+ * Number of top-level categories in CRWE v2.1: six core categories (1–6)
+ * plus five method modules (M1–M5). Surfaces in the homepage taxonomy
+ * section and the footer bottom row. The legacy export name is preserved
+ * so existing imports continue to compile; public-facing copy now reads
+ * "top-level categories" per stakeholder request.
+ */
+export const CRWE_TOP_LEVEL_GROUPS = 11;
+/** Preferred semantic alias used by new call sites. */
+export const CRWE_TOP_LEVEL_CATEGORIES = CRWE_TOP_LEVEL_GROUPS;
+
+/** Total leaf-level structured checks in CRWE v2.1 (verified against `taxonomy/2.1/leaf-index.json`). */
+export const CRWE_LEAF_CHECKS = 300;
+
+// ---------------------------------------------------------------------------
+// Primary call-to-action copy — `See a scored paper` is the high-EV action,
+// `Book a walkthrough` is secondary. Centralised so every page agrees.
+// ---------------------------------------------------------------------------
+
+/**
+ * Public demo URL exposing the curated scored-papers experience. The
+ * marketing site links here for the primary CTA. When the demo is moved or
+ * rebranded, update this constant; do not hardcode the URL elsewhere.
+ */
+export const DEMO_URL = "https://demo.referee-project.com";
+
+/** Primary CTA label — drives traffic to the curated scored-paper demo. */
+export const CTA_PRIMARY_LABEL = "See a scored paper";
+
+/** Primary CTA destination — the public demo. */
+export const CTA_PRIMARY_HREF = DEMO_URL;
+
+/** Secondary CTA label — for prospects who want a guided walkthrough. */
+export const CTA_SECONDARY_LABEL = "Book a walkthrough";
+
+/** Secondary CTA destination — pre-filled mail to Erik. */
+export const CTA_SECONDARY_HREF =
+  "mailto:erik@referee-project.com?subject=Referee%20walkthrough%20request";

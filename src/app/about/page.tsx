@@ -469,8 +469,8 @@ export default function AboutPage() {
         <StatusCallout
           title="Current status"
           working={[
-            "Live demo with dashboard and paper-checking workflow",
-            "Structured scoring across CRWE flaw categories",
+            "Curated scored-paper experience with the full evidence trail",
+            "Structured scoring against the CRWE v2.1 flaw taxonomy",
             "Core platform built in Rust for reliability and performance",
             "Machine-readable output with evidence links",
           ]}
@@ -492,11 +492,11 @@ export default function AboutPage() {
       <section id="contact" className="mt-12 md:mt-16 mb-8">
         <CTABlock
           heading="See the score in action"
-          description="Walk through a live paper evaluation, read the technical overview, or get in touch to discuss how Referee could fit your workflow."
-          primaryHref="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores"
-          primaryLabel="Explore scored papers"
-          secondaryHref="/#method"
-          secondaryLabel="How scoring works"
+          description="Walk a curated paper end-to-end, then book a walkthrough if you want to talk through how Referee could fit your editorial intake or triage workflow."
+          primaryHref="https://demo.referee-project.com"
+          primaryLabel="See a scored paper"
+          secondaryHref="mailto:erik@referee-project.com?subject=Referee%20walkthrough%20request"
+          secondaryLabel="Book a walkthrough"
         />
       </section>
       </div>

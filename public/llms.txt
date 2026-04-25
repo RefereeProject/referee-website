@@ -1,6 +1,6 @@
 # Referee
 
-Referee is founder-led research-integrity infrastructure for scholarly publishing, producing transparent, machine-readable reliability signals for structured review triage.
+Referee is research-integrity infrastructure for scholarly publishing, producing transparent, machine-readable reliability signals scored against the public CRWE v2.1 flaw taxonomy (11 top-level categories, 300 structured checks).
 
 ## Key pages
 - / — Product overview, workflow, audience, and differentiation.
