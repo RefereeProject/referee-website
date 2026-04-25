@@ -10,10 +10,10 @@ import {
 // These rows use real CRWE v2.1 top-level category names from the taxonomy
 // (shown as a subset so the hero card stays legible).
 const categories = [
-  { name: "Data integrity", got: 1, max: 55, level: "low" },
-  { name: "Study design", got: 1, max: 76, level: "low" },
-  { name: "Statistical specification", got: 1, max: 45, level: "low" },
-  { name: "Reporting consistency", got: 1, max: 29, level: "low" },
+  { name: "Data integrity", got: 0, max: 55, level: "low" },
+  { name: "Study design", got: 38, max: 76, level: "med" },
+  { name: "Statistical specification", got: 23, max: 45, level: "med" },
+  { name: "Reporting consistency", got: 15, max: 29, level: "med" },
   { name: "Reproducibility & availability", got: 1, max: 24, level: "low" },
 ] as const;
 
