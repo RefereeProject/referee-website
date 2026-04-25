@@ -7,15 +7,14 @@ import {
 } from "@/lib/copy";
 
 // Illustrative category vector for the sample reliability report.
-// These five rows are not the full CRWE v2.1 taxonomy (which has 11
-// top-level categories and 300 structured checks); they are a hand-crafted
-// presentation slice so the card stays legible at hero size.
+// These rows use real CRWE v2.1 top-level category names from the taxonomy
+// (shown as a subset so the hero card stays legible).
 const categories = [
-  { name: "Methodology", got: 18, max: 25, level: "high" },
-  { name: "Statistical validity", got: 15, max: 20, level: "high" },
-  { name: "Reproducibility", got: 12, max: 15, level: "high" },
-  { name: "Transparency", got: 14, max: 20, level: "med" },
-  { name: "Citation integrity", got: 13, max: 20, level: "med" },
+  { name: "Data integrity", got: 1, max: 55, level: "low" },
+  { name: "Study design", got: 1, max: 76, level: "low" },
+  { name: "Statistical specification", got: 1, max: 45, level: "low" },
+  { name: "Reporting consistency", got: 1, max: 29, level: "low" },
+  { name: "Reproducibility & availability", got: 1, max: 24, level: "low" },
 ] as const;
 
 export function ScoreCard({ audit = false }: { audit?: boolean }) {
@@ -34,12 +33,12 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
             “The effect of <em>bisoprolol</em> on perioperative mortality and myocardial infarction in high-risk patients undergoing vascular surgery”
           </div>
           <div className="score-number-wrap">
-            <div className="score-number">72</div>
+            <div className="score-number">5</div>
             <div className="score-denom">/ 100</div>
-            <div className="score-confidence">Confidence · 0.84</div>
+            <div className="score-confidence">Known flawed paper</div>
           </div>
         </div>
-        <div className="score-divider">Category Vector · Illustrative</div>
+        <div className="score-divider">CRWE v2.1 Category Vector · Illustrative</div>
         <div className="score-cats">
           {categories.map((cat) => {
             const pct = Math.round((cat.got / cat.max) * 100);
@@ -70,7 +69,7 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
       </div>
       <div className="score-card-footer">
         <span>CRWE-taxonomy <span className="hash">{CRWE_VERSION_LABEL}</span></span>
-        <span>methodology: <span className="hash">18/25</span></span>
+        <span>score: <span className="hash">5/100</span></span>
       </div>
     </article>
   );
