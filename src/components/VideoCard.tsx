@@ -1,61 +1,35 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic"
-import { VideoEmbed } from "./VideoEmbed"
-import { Calendar, Clock } from "lucide-react"
+import dynamic from "next/dynamic";
+import { Calendar, Clock } from "lucide-react";
+import { VideoEmbed } from "./VideoEmbed";
 
-const ExpandableSummary = dynamic(
-  () => import("./ExpandableSummary").then((m) => m.ExpandableSummary),
-)
+const ExpandableSummary = dynamic(() => import("./ExpandableSummary").then((m) => m.ExpandableSummary));
 
 interface VideoCardProps {
-  videoId: string
-  title: string
-  date?: string
-  duration?: string
-  summary: string
-  description?: string
+  videoId: string;
+  title: string;
+  date?: string;
+  duration?: string;
+  summary: string;
+  description?: string;
 }
 
-/**
- * Card component displaying a YouTube video with expandable summary
- * Includes hover effects and metadata display
- */
 export function VideoCard({ videoId, title, date, duration, summary, description }: VideoCardProps) {
   return (
-    <div className="rounded-xl border border-border bg-card-bg p-5 sm:p-6">
+    <article className="card-flat">
       <VideoEmbed videoId={videoId} title={title} />
-
-      <div className="mt-6">
-        <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground">
-          {title}
-        </h2>
-
-        {description ? (
-          <p className="mt-2 text-sm text-foreground-muted leading-relaxed">
-            {description}
-          </p>
-        ) : null}
-
-        {(date || duration) ? (
-          <div className="mt-3 flex flex-wrap gap-4 text-sm text-foreground-muted">
-            {date ? (
-              <div className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4" aria-hidden="true" />
-                <span>{date}</span>
-              </div>
-            ) : null}
-            {duration ? (
-              <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" aria-hidden="true" />
-                <span>{duration}</span>
-              </div>
-            ) : null}
+      <div style={{ marginTop: 24 }}>
+        <h2>{title}</h2>
+        {description ? <p style={{ marginTop: 10, fontSize: 14, color: "var(--ink-muted)", lineHeight: 1.6 }}>{description}</p> : null}
+        {date || duration ? (
+          <div className="mono" style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 18, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+            {date ? <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><Calendar className="h-4 w-4" aria-hidden="true" />{date}</span> : null}
+            {duration ? <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><Clock className="h-4 w-4" aria-hidden="true" />{duration}</span> : null}
           </div>
         ) : null}
-
         <ExpandableSummary summary={summary} />
       </div>
-    </div>
-  )
+    </article>
+  );
 }

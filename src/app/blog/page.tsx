@@ -15,56 +15,44 @@ export default async function BlogIndexPage() {
   const posts = await getPosts();
 
   return (
-    <div className="py-6 md:py-10">
+    <>
       <PageIntro
         eyebrow="Blog"
         title="Insights and updates"
         description="Exploring the future of academic research evaluation, research integrity, and transparent peer review."
       />
 
-      {/* Posts list */}
-      <section className="mt-12 md:mt-16 space-y-6">
-        {posts.map((post, index) => (
-          <article key={post.id} className="group">
-            <Link href={`/blog/${post.slug || post.id}`} className="block">
-              <div className="rounded-xl border border-border bg-card-bg p-5 sm:p-6 hover:border-primary-200 transition-colors duration-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-sm text-foreground-muted">
+      <div className="container page-shell">
+        <section style={{ display: "grid", gap: 18 }}>
+          {posts.map((post, index) => (
+            <article key={post.id}>
+              <Link href={`/blog/${post.slug || post.id}`} className="card-flat block" style={{ textDecoration: "none" }}>
+                <div className="mono" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+                  <span>
                     {post.date && new Date(post.date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
                     })}
                   </span>
-                  {index === 0 ? (
-                    <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full border border-primary-200 bg-primary-50 text-primary-700">
-                      Latest
-                    </span>
-                  ) : null}
+                  {index === 0 ? <span className="tag tag-primary">Latest</span> : null}
                 </div>
-
-                <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground group-hover:text-primary-600 transition-colors duration-200">
-                  {post.title || post.slug || post.id}
-                </h2>
-
-                <p className="mt-2 text-sm text-foreground-muted leading-relaxed">
+                <h2>{post.title || post.slug || post.id}</h2>
+                <p style={{ marginTop: 10, fontSize: 14, color: "var(--ink-muted)", lineHeight: 1.6 }}>
                   {post.excerpt || "Read this article to learn more about our perspective on academic research evaluation."}
                 </p>
+                <p className="link-detail" style={{ display: "inline-block", marginTop: 16 }}>Read article →</p>
+              </Link>
+            </article>
+          ))}
+        </section>
 
-                <p className="mt-4 text-sm font-medium text-primary-600">
-                  Read article →
-                </p>
-              </div>
-            </Link>
-          </article>
-        ))}
-      </section>
-
-      {posts.length === 0 ? (
-        <div className="mt-12 rounded-xl border border-border bg-card-bg p-8 text-center">
-          <p className="text-foreground-muted">No blog posts available yet.</p>
-        </div>
-      ) : null}
-    </div>
+        {posts.length === 0 ? (
+          <div className="card-flat" style={{ textAlign: "center" }}>
+            <p style={{ color: "var(--ink-muted)" }}>No blog posts available yet.</p>
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 }

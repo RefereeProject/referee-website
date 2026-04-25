@@ -1,4 +1,3 @@
-/** Single category within a score breakdown */
 interface ScoreCategory {
   name: string;
   score: number;
@@ -6,97 +5,61 @@ interface ScoreCategory {
 }
 
 interface ScoreAnatomyProps {
-  /** Overall reliability score (integer, no fake precision) */
   score: number;
-  /** Per-category breakdown with individual scores and max possible */
   categories: ScoreCategory[];
-  /** Total number of evidence references examined */
   evidenceCount: number;
-  /** Optional scoring-model version identifier */
   version?: string;
 }
 
-/**
- * Displays a score breakdown module showing an overall score,
- * per-category progress bars and evidence count.
- * Designed to be embedded in landing or detail pages.
- */
-export function ScoreAnatomy({
-  score,
-  categories,
-  evidenceCount,
-  version,
-}: ScoreAnatomyProps) {
-  // Derive max possible score from categories for the overall display
+function levelForPercent(percent: number) {
+  if (percent >= 75) return "high";
+  if (percent >= 50) return "med";
+  return "low";
+}
+
+export function ScoreAnatomy({ score, categories, evidenceCount, version }: ScoreAnatomyProps) {
   const maxTotal = categories.reduce((sum, c) => sum + c.maxScore, 0);
 
   return (
-    <div className="rounded-2xl border-2 border-primary-200 bg-card-bg p-6 sm:p-8 space-y-6 shadow-sm">
-      {/* Overall score header — designed as a standalone, screenshot-worthy artifact */}
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary-600">
-            Referee Score
-          </p>
-          <p className="text-sm font-medium text-foreground-muted mt-1">
-            Overall reliability score
-          </p>
-          <p className="mt-2 text-6xl sm:text-7xl font-extrabold tracking-tighter text-primary-600">
-            {score}
-            <span className="text-2xl sm:text-3xl font-normal text-foreground-muted">
-              {" "}
-              / {maxTotal}
-            </span>
-          </p>
+    <article className="score-card" aria-label="Referee score anatomy">
+      <header className="score-card-header">
+        <div className="score-card-stamp">
+          <strong>Referee Score</strong><br />
+          Overall reliability score · evidence-backed
         </div>
-
-        {/* Evidence counter */}
-        <div className="text-right">
-          <p className="text-sm text-foreground-muted">
-            <span className="font-semibold text-foreground">
-              {evidenceCount}
-            </span>{" "}
-            evidence refs
-          </p>
+        <span className="score-card-status">Inspectable</span>
+      </header>
+      <div className="score-card-body">
+        <div className="score-headline">
+          <div className="score-title">Category vector with evidence provenance</div>
+          <div className="score-number-wrap">
+            <div className="score-number">{score}</div>
+            <div className="score-denom">/ {maxTotal}</div>
+            <div className="score-confidence">Evidence refs · {evidenceCount}</div>
+          </div>
+        </div>
+        <div className="score-divider">Breakdown</div>
+        <div className="score-cats">
+          {categories.map((cat) => {
+            const pct = cat.maxScore > 0 ? Math.round((cat.score / cat.maxScore) * 100) : 0;
+            return (
+              <div key={cat.name}>
+                <div className="score-cat">
+                  <div className="score-cat-name">{cat.name}</div>
+                  <div className="score-cat-val">{cat.score}/{cat.maxScore}</div>
+                </div>
+                <div className={`score-cat-bar ${levelForPercent(pct)}`}><span style={{ width: `${pct}%` }} /></div>
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      {/* Category breakdown bars */}
-      <div className="space-y-3">
-        {categories.map((cat) => {
-          const pct =
-            cat.maxScore > 0
-              ? Math.round((cat.score / cat.maxScore) * 100)
-              : 0;
-
-          return (
-            <div key={cat.name}>
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-medium text-foreground">{cat.name}</span>
-                <span className="text-foreground-muted">
-                  {cat.score} / {cat.maxScore}
-                </span>
-              </div>
-              {/* Progress track */}
-              <div className="mt-1 h-2 w-full rounded-full bg-primary-50/50">
-                <div
-                  className="h-2 rounded-full bg-primary-600 transition-all"
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Version provenance footer — helps establish the score as a traceable artifact */}
-      {version && (
-        <div className="pt-2 border-t border-border">
-          <p className="text-xs text-foreground-muted">
-            Scoring model: {version}
-          </p>
+      {version ? (
+        <div className="score-card-footer">
+          <span>Scoring model</span>
+          <span className="hash">{version}</span>
         </div>
-      )}
-    </div>
+      ) : null}
+    </article>
   );
 }

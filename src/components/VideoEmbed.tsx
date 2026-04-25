@@ -1,25 +1,21 @@
-"use client"
+"use client";
 
 interface VideoEmbedProps {
-  videoId: string
-  title: string
+  videoId: string;
+  title: string;
 }
 
-/**
- * YouTube video embed component with responsive aspect ratio
- * Uses native iframe for best performance and compatibility
- */
 export function VideoEmbed({ videoId, title }: VideoEmbedProps) {
   return (
-    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-card-bg">
+    <div className="relative aspect-video w-full overflow-hidden border bg-card-bg" style={{ borderColor: "var(--ink)" }}>
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
         title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         loading="lazy"
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 h-full w-full"
       />
     </div>
-  )
+  );
 }

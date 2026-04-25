@@ -4,78 +4,28 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface MethodologyItem {
-  title: string;
-  content: string;
-}
+interface MethodologyItem { title: string; content: string }
 
-interface MethodologyAccordionProps {
-  /** List of methodology sections to render */
-  items: MethodologyItem[];
-  /** Optional additional CSS classes on the wrapper */
-  className?: string;
-}
-
-/**
- * Accordion component for methodology details.
- * Only one item can be open at a time — clicking an open item closes it.
- * Uses CSS grid for smooth height transitions without JavaScript measurement.
- */
-export function MethodologyAccordion({
-  items,
-  className,
-}: MethodologyAccordionProps) {
+export function MethodologyAccordion({ items, className }: { items: MethodologyItem[]; className?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  /** Toggle the clicked item; close if already open */
-  const handleToggle = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
-
   return (
-    <div
-      className={cn(
-        "rounded-xl border border-border bg-card-bg divide-y divide-border overflow-hidden",
-        className
-      )}
-    >
+    <div className={cn("card-flat", className)} style={{ padding: 0 }}>
       {items.map((item, idx) => {
         const isOpen = openIndex === idx;
-
         return (
-          <div key={item.title}>
-            {/* Trigger button — full-width, accessible */}
+          <div key={item.title} style={{ borderTop: idx === 0 ? 0 : "1px solid var(--border)" }}>
             <button
               type="button"
-              onClick={() => handleToggle(idx)}
+              onClick={() => setOpenIndex((prev) => (prev === idx ? null : idx))}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-150 hover:bg-primary-50/50"
+              className="w-full text-left transition-colors"
+              style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "18px 20px" }}
             >
-              <span className="text-sm font-semibold text-foreground sm:text-base">
-                {item.title}
-              </span>
-              <ChevronDown
-                className={cn(
-                  "h-5 w-5 shrink-0 text-foreground-muted transition-transform duration-200",
-                  isOpen && "rotate-180"
-                )}
-              />
+              <span className="serif" style={{ fontSize: 18, fontWeight: 600 }}>{item.title}</span>
+              <ChevronDown className="h-5 w-5 shrink-0 transition-transform" style={{ color: "var(--ink-muted)", transform: isOpen ? "rotate(180deg)" : undefined }} />
             </button>
-
-            {/* Collapsible content — CSS grid transition for smooth height */}
-            <div
-              className={cn(
-                "grid transition-[grid-template-rows] duration-200 ease-in-out",
-                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-              )}
-              aria-hidden={!isOpen}
-            >
-              <div className="overflow-hidden">
-                <p className="px-5 pb-4 text-sm leading-relaxed text-foreground-muted">
-                  {item.content}
-                </p>
-              </div>
-            </div>
+            {isOpen ? <p style={{ padding: "0 20px 18px", fontSize: 14, lineHeight: 1.6, color: "var(--ink-muted)" }}>{item.content}</p> : null}
           </div>
         );
       })}

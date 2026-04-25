@@ -91,18 +91,20 @@ const talks = [
 
 export default function TalksPage() {
   return (
-    <div className="py-6 md:py-10">
+    <>
       <PageIntro
         eyebrow="Talks"
         title="Recorded Talks"
         description="Watch presentations and discussions about The Referee Project and our mission to transform research evaluation through transparency and adversarial review."
       />
 
-      <section className="mt-12 md:mt-16 space-y-6">
-        {talks.map((talk) => (
-          <VideoCard key={talk.id} {...talk} />
-        ))}
-      </section>
-    </div>
+      <div className="container page-shell">
+        <section style={{ display: "grid", gap: 24 }}>
+          {talks.map((talk) => (
+            <VideoCard key={talk.id} {...talk} />
+          ))}
+        </section>
+      </div>
+    </>
   )
 }

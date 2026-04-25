@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Linkedin,
   EyeOff,
@@ -267,44 +268,22 @@ const notItems = [
  */
 function PersonCard({ person }: { person: PersonProfile }) {
   return (
-    <div className="rounded-xl border border-border bg-card-bg p-5 sm:p-6">
-      <div className="flex flex-col md:flex-row gap-6 items-start">
-        {/* Profile image */}
-        <div className="shrink-0">
-          <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-xl overflow-hidden">
-            <Image
-              src={person.image}
-              alt={person.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 144px, 176px"
-            />
-          </div>
-        </div>
-
-        {/* Bio content */}
-        <div className="flex-1 space-y-3">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground">
-              {person.name}
-            </h3>
-            <p className="text-sm font-medium text-primary-600 mt-0.5">
-              {person.role}
-            </p>
-          </div>
-          <p className="text-sm text-foreground-muted leading-relaxed">
-            {person.bio}
-          </p>
-          <a
-            href={person.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary-600 text-primary-600 hover:bg-primary-50 transition-colors duration-200 text-sm font-semibold"
-          >
-            <Linkedin className="w-4 h-4" />
-            LinkedIn
-          </a>
-        </div>
+    <div className="founder card-flat">
+      <Image
+        src={person.image}
+        alt={person.name}
+        width={176}
+        height={220}
+        className="founder-portrait"
+        style={{ width: 176 }}
+      />
+      <div>
+        <h3>{person.name}</h3>
+        <div className="credential">{person.role}</div>
+        <p>{person.bio}</p>
+        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ marginTop: 16 }}>
+          <Linkedin className="h-4 w-4" /> LinkedIn
+        </a>
       </div>
     </div>
   );
@@ -324,10 +303,10 @@ function IconCard({
   description: string;
 }) {
   return (
-    <article className="rounded-xl border border-border bg-card-bg p-5">
-      <Icon className="h-6 w-6 text-primary-600" />
-      <h3 className="mt-3 text-base font-semibold text-foreground">{title}</h3>
-      <p className="mt-2 text-sm text-foreground-muted">{description}</p>
+    <article className="card-flat">
+      <div className="aud-icon"><Icon className="h-4 w-4" /></div>
+      <h4>{title}</h4>
+      <p style={{ marginTop: 8, fontSize: 14, color: "var(--ink-muted)", lineHeight: 1.55 }}>{description}</p>
     </article>
   );
 }
@@ -338,29 +317,21 @@ function IconCard({
 
 export default function AboutPage() {
   return (
-    <div className="py-6 md:py-10">
-      {/* AP-1: Hero (kept as-is) */}
+    <>
       <PageIntro
         eyebrow="About Referee"
         title="Why a transparent reliability score needs to exist"
         description="The scholarly record has no structured, inspectable way to communicate what was checked and what remains uncertain. Referee adds a transparent reliability layer — mapping every check to an explicit flaw category so the output can be audited, not just trusted."
       />
 
-      {/* Hero CTA buttons */}
-      <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores"
-          className="inline-flex items-center justify-center rounded-full px-8 py-3 sm:py-3.5 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-lg transition-all duration-200 font-semibold min-h-[48px]"
-          aria-label="Explore scored papers via email"
-        >
-          Explore scored papers
+      <div className="container page-shell">
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
+        <a href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores" className="btn btn-primary" aria-label="Explore scored papers via email">
+          Explore scored papers <span className="arrow">→</span>
         </a>
-        <a
-          href="/#how-it-works"
-          className="inline-flex items-center justify-center rounded-full px-8 py-3 sm:py-3.5 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 transition-all duration-200 font-semibold min-h-[48px]"
-        >
+        <Link href="/#method" className="btn btn-secondary">
           How scoring works
-        </a>
+        </Link>
       </div>
 
       {/* AP-2: Problem with current scholarly record */}
@@ -406,7 +377,7 @@ export default function AboutPage() {
       </section>
 
       {/* AP-5: How the score works */}
-      <section id="how-it-works" className="mt-12 md:mt-16 space-y-5">
+      <section id="method" className="mt-12 md:mt-16 space-y-5">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
           How the score works
         </h2>
@@ -440,7 +411,7 @@ export default function AboutPage() {
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
           Why this project has this shape
         </h2>
-        <div className="rounded-xl border border-border bg-card-bg p-6 sm:p-8 space-y-4 text-foreground-secondary leading-relaxed">
+        <div className="content-card" style={{ display: "grid", gap: 16 }}>
           <p>
             Referee&apos;s design draws on ideas from fields where structured
             weakness enumeration and audit trails are standard practice, not
@@ -524,10 +495,11 @@ export default function AboutPage() {
           description="Walk through a live paper evaluation, read the technical overview, or get in touch to discuss how Referee could fit your workflow."
           primaryHref="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores"
           primaryLabel="Explore scored papers"
-          secondaryHref="/#how-it-works"
+          secondaryHref="/#method"
           secondaryLabel="How scoring works"
         />
       </section>
-    </div>
+      </div>
+    </>
   );
 }

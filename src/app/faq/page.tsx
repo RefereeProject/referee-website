@@ -130,22 +130,21 @@ function QASection({
   items: Array<{ question: string; answer: string }>;
 }) {
   return (
-    <section className="mt-12 md:mt-16">
-      <h2 className="text-2xl font-bold text-foreground mb-6">{heading}</h2>
-      <div className="space-y-5">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="rounded-xl border border-border bg-card-bg p-5 sm:p-6"
-          >
-            <h3 className="text-lg font-semibold text-foreground mb-2">
-              {item.question}
-            </h3>
-            <p className="text-sm text-foreground-muted leading-relaxed whitespace-pre-line">
-              {item.answer}
-            </p>
+    <section className="section-tight">
+      <div className="section-head">
+        <div className="label"><span className="num">§</span>{heading}</div>
+        <div>
+          <div style={{ display: "grid", gap: 18 }}>
+            {items.map((item, index) => (
+              <article key={index} className="card-flat">
+                <h3>{item.question}</h3>
+                <p style={{ marginTop: 10, fontSize: 14, color: "var(--ink-muted)", lineHeight: 1.65, whiteSpace: "pre-line" }}>
+                  {item.answer}
+                </p>
+              </article>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
@@ -171,17 +170,16 @@ export default async function ObjectionsAndPrinciplesPage() {
           dangerouslySetInnerHTML={{ __html: faqJsonLd }}
         />
       ) : null}
-      <div className="py-6 md:py-10">
-        <PageIntro
+      <PageIntro
           eyebrow="Objections & Principles"
           title="Objections and Principles"
           description="Referee exists to add quality and nuance to the scholarly record. It makes a direct claim: a scholarly paper should not enter the record carrying only the authors' claims and a journal's verdict. It should also carry transparent, inspectable reliability metadata — a versioned score, linked evidence, and explicit unresolved items. That claim raises serious objections. Some are practical. Some are philosophical. Some are about incentives, power, and academic culture. We take those objections seriously. We answer them directly here."
         />
 
-        {/* Closing principle — displayed as a distinct callout */}
-        <div className="mt-10 rounded-xl border border-primary-200 bg-primary-50/40 p-5 sm:p-6 text-sm text-foreground leading-relaxed">
-          <p className="font-semibold text-foreground mb-1">Closing principle</p>
-          <p>
+      <div className="container page-shell">
+        <div className="card-flat card-tint">
+          <p className="eyebrow"><span className="eyebrow-tick" />Closing principle</p>
+          <p style={{ marginTop: 10 }}>
             Referee is not a claim to perfect objectivity, complete automation,
             or final truth. It is a claim that the scholarly record should carry
             more explicit, inspectable, and portable reliability information than

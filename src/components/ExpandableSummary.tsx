@@ -1,63 +1,44 @@
-"use client"
+"use client";
 
-import { useState, useId } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { useId, useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface ExpandableSummaryProps {
-  summary: string
-  initialOpen?: boolean
+  summary: string;
+  initialOpen?: boolean;
 }
 
-/**
- * Accordion component for displaying expandable video summaries
- * Features smooth animations and keyboard accessibility
- * Uses useId() for unique IDs when multiple instances render on the same page
- * Respects prefers-reduced-motion for accessibility
- */
 export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSummaryProps) {
-  const [isOpen, setIsOpen] = useState(initialOpen)
-  const contentId = useId()
-  const prefersReducedMotion = useReducedMotion()
+  const [isOpen, setIsOpen] = useState(initialOpen);
+  const contentId = useId();
 
   return (
-    <div className="mt-6">
+    <div style={{ marginTop: 24 }}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border bg-card-bg hover:border-primary-200 hover:bg-primary-50/50 transition-all duration-200 w-full text-left"
+        className="card-flat w-full text-left transition-colors"
+        style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 18px" }}
       >
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-        >
-          <ChevronDown className="w-5 h-5 text-foreground-muted" />
-        </motion.div>
-        <span className="font-medium text-foreground-secondary">
-          {isOpen ? "Hide" : "Show"} Talk Summary
+        <ChevronDown
+          aria-hidden="true"
+          className="h-5 w-5 shrink-0 transition-transform"
+          style={{ color: "var(--ink-muted)", transform: isOpen ? "rotate(180deg)" : undefined }}
+        />
+        <span className="mono" style={{ fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink)" }}>
+          {isOpen ? "Hide" : "Show"} talk summary
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen ? (
-          <motion.div
-            id={contentId}
-            initial={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
-            animate={prefersReducedMotion ? {} : { height: "auto", opacity: 1 }}
-            exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <div className="mt-3 p-5 sm:p-6 rounded-xl bg-card-bg border border-border">
-              <div
-                className="prose prose-lg prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-h3:text-xl prose-h3:mb-3 prose-p:leading-relaxed prose-p:text-foreground-secondary prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-ul:my-4 prose-li:my-2 prose-li:text-foreground-secondary max-w-none"
-                dangerouslySetInnerHTML={{ __html: summary }}
-              />
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      {isOpen ? (
+        <div id={contentId} className="card-flat" style={{ marginTop: 12 }}>
+          <div
+            className="prose prose-lg prose-referee max-w-none"
+            dangerouslySetInnerHTML={{ __html: summary }}
+          />
+        </div>
+      ) : null}
     </div>
-  )
+  );
 }
