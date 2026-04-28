@@ -22,21 +22,28 @@ bd list
 # View issue details
 bd show <issue-id>
 
-# Update issue status
-bd update <issue-id> --status in_progress
-bd update <issue-id> --status done
+# Update/close issues
+bd update <issue-id> --claim
+bd close <issue-id>
 
-# Sync with git remote
-bd sync
+# Refresh JSONL recovery mirror when needed
+bd export -o .beads/issues.jsonl
+
+# Publish reviewed Beads changes through Git
+git status --short .beads
+git add -u .beads
+# git add <intended-new-.beads-file>
+git diff --cached --quiet .beads || git commit -m "chore(beads): sync"
+git push
 ```
 
 ### Working with Issues
 
 Issues in Beads are:
-- **Git-native**: Stored in `.beads/issues.jsonl` and synced like code
+- **Git-native**: Stored in embedded Dolt under `.beads/` with `.beads/issues.jsonl` as a recovery/export mirror
 - **AI-friendly**: CLI-first design works perfectly with AI coding agents
 - **Branch-aware**: Issues can follow your branch workflow
-- **Always in sync**: Auto-syncs with your commits
+- **Git-published**: Commit and push tracked `.beads` changes with your code
 
 ## Why Beads?
 
@@ -53,7 +60,7 @@ Issues in Beads are:
 🔧 **Git Integration**
 - Automatic sync with git commits
 - Branch-aware issue tracking
-- Intelligent JSONL merge resolution
+- Dolt-native history, diff, branch, and merge support
 
 ## Get Started with Beads
 
@@ -61,7 +68,8 @@ Try Beads in your own projects:
 
 ```bash
 # Install Beads
-curl -sSL https://raw.githubusercontent.com/steveyegge/beads/main/scripts/install.sh | bash
+brew install beads
+brew install dolt
 
 # Initialize in your repo
 bd init

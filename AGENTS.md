@@ -11,7 +11,7 @@ bd ready              # Find available work
 bd show <id>          # View issue details
 bd update <id> --status in_progress  # Claim work
 bd close <id>         # Complete work
-bd sync               # Sync with git
+bd export -o .beads/issues.jsonl  # Refresh JSONL recovery mirror when needed
 ```
 
 ## Landing the Plane (Session Completion)
@@ -26,7 +26,9 @@ bd sync               # Sync with git
 4. **PUSH TO REMOTE** - This is MANDATORY:
    ```bash
    git pull --rebase
-   bd sync
+   bd export -o .beads/issues.jsonl
+   git add .beads
+   git diff --cached --quiet .beads || git commit -m "chore(beads): sync"
    git push
    git status  # MUST show "up to date with origin"
    ```
@@ -49,7 +51,7 @@ bd sync               # Sync with git
 ### Why bd?
 
 - Dependency-aware: Track blockers and relationships between issues
-- Git-friendly: SQLite-backed with JSONL sync via git
+- Git-friendly: Commit tracked `.beads/` changes with code; backend/storage details may vary by repository
 - Agent-optimized: JSON output, ready work detection, discovered-from links
 - Prevents duplicate tracking systems and confusion
 
@@ -108,11 +110,11 @@ bd close bd-42 --reason "Completed" --json
 
 ### Auto-Sync
 
-bd syncs via git:
+bd storage/sync is backend-neutral from these instructions:
 
-- Issues are stored in SQLite and exported to JSONL for git tracking
-- Use `bd sync` to commit and push issue changes
-- JSONL files are merged automatically on pull
+- Use `bd ready --json`, `bd update <id> --claim --json`, and `bd close <id> --reason "..." --json` for issue workflow
+- Do not open `.beads` storage directly; backend details may vary by repository
+- Commit any tracked `.beads/` changes together with the code changes they describe
 
 ### Important Rules
 
