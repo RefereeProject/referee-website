@@ -123,3 +123,9 @@ wrong. **Do not stop.** Recover automatically:
 Never ask the user to switch accounts manually — just switch. The same
 rule applies to SSH-origin pushes (`git@github.com:RefereeProject/...`); `gh auth
 switch` also rewrites the ssh key gh wraps around.
+
+## Beads → GitHub backup
+
+bd v1.0.3 auto-backs-up issue state to GitHub. Every `bd` write command exports `.beads/issues.jsonl` and stages it (throttled). When a git remote is configured, bd also auto-pushes the export every ~15min. Git hooks (`bd hooks list`) ensure consistency on commit/pull/push.
+
+**At session close:** just `git add .beads && git commit && git push` — there is no `bd sync` step; that command was removed in v1.0.x.
