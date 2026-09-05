@@ -62,3 +62,6 @@ firebase-debug.log
 .beads/dolt-monitor.*
 .beads/backup/
 .beads/.beads-credential-key
+
+# Beads embedded-Dolt runtime gate lock (matches sibling repos)
+.beads.gate.lock
