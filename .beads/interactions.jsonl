@@ -1,0 +1,1 @@
+{"id":"int-1e328cae3b617880d5189f4328b9cc16","kind":"field_change","created_at":"2026-06-08T07:20:24.554073Z","actor":"Erik Schneider","issue_id":"referee-website-b0g","extra":{"field":"status","new_value":"closed","old_value":"open","reason":"Superseded: sanitize-html 2.17.4 patch is now published. Upgrade is tracked by referee-website-d85."}}
