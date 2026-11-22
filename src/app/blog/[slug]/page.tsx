@@ -76,19 +76,30 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: articleJsonLd }}
       />
-      <div className="container" style={{ paddingTop: 28 }}>
-        <Link href="/blog" className="btn btn-secondary">
-          ← Back to Blog
-        </Link>
+      {/* Slim strip between the site header and the title band. It sits in
+          the same `.article` column as the title and body below, so all
+          three share one left edge. The negative margin cancels the ghost
+          button's side padding, so its label lines up with that edge while
+          keeping a full-size hover target. */}
+      <div className="container py-2">
+        <div className="article">
+          <Link href="/blog" className="btn btn-ghost btn-sm -ml-3.5">
+            ← Back to Blog
+          </Link>
+        </div>
       </div>
 
+      {/* PageIntro is a navy band, so the date uses `.meta`: it takes its
+          colour from the role tokens, which turn pale blue on navy. A fixed
+          dark text utility would be unreadable there. */}
       <PageIntro
         eyebrow="Blog"
         title={post.title || ""}
         description={post.excerpt || undefined}
+        width="article"
       >
         {post.date ? (
-          <time dateTime={post.date} className="text-sm text-foreground-muted">
+          <time dateTime={post.date} className="meta">
             {new Date(post.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -99,19 +110,25 @@ export default async function BlogPostPage({
       </PageIntro>
 
       <div className="container page-shell">
-        <article className="content-card mx-auto max-w-4xl">
+        {/* The text sits straight on the paper background, in the `.article`
+            reading column. `max-w-none` drops the typography plugin's own
+            65ch cap so that column sets the line length. `wrap-break-word`
+            lets a long unbroken string (a pasted URL, say) wrap on a phone
+            instead of widening the page; code blocks and tables are not
+            affected and scroll sideways inside the column. */}
+        <article className="article">
           <div
-            className="prose prose-lg prose-referee max-w-none"
+            className="prose prose-lg prose-referee max-w-none wrap-break-word"
             dangerouslySetInnerHTML={{ __html: safe }}
           />
         </article>
 
-        <section className="cta-block mx-auto max-w-4xl" style={{ marginTop: 48 }}>
-          <p className="eyebrow"><span className="eyebrow-tick" style={{ background: "rgba(255,255,255,.4)" }} />More from the record</p>
+        <section className="cta-block mx-auto mt-12 max-w-4xl sm:mt-16">
+          <p className="eyebrow"><span className="eyebrow-tick" />More from the record</p>
           <h2>More from the blog</h2>
           <p>Continue reading essays on reliability metadata, research integrity, and transparent peer review.</p>
-          <div style={{ marginTop: 28 }}>
-            <Link href="/blog" className="btn btn-primary">Back to all posts <span className="arrow">→</span></Link>
+          <div className="cta-actions">
+            <Link href="/blog" className="btn btn-primary">Back to all posts <span className="arrow" aria-hidden="true">→</span></Link>
           </div>
         </section>
       </div>
