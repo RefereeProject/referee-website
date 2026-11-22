@@ -4,6 +4,7 @@ import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
 import { findPostBySlug, getPosts, getSite } from "@/lib/content";
 import { PageIntro } from "@/components/PageIntro";
+import { SOCIAL_IMAGE } from "@/lib/brand";
 import {
   buildArticleSchema,
   CANONICAL_SITE_NAME,
@@ -23,7 +24,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await findPostBySlug(slug);
   if (!post) return { title: "Post" };
-  return { title: post.title || slug, description: post.excerpt };
+
+  const title = post.title || slug;
+  return {
+    title,
+    description: post.excerpt,
+    // Without this, a post inherits the root layout's Open Graph object and
+    // is announced to link previews as type "website". Setting openGraph
+    // here replaces the root object entirely (Next.js merges metadata
+    // shallowly), so the site name and the shared preview image are passed
+    // again. The Twitter card is a separate key and is still inherited.
+    openGraph: {
+      type: "article",
+      siteName: "Referee",
+      title,
+      description: post.excerpt,
+      images: [SOCIAL_IMAGE],
+    },
+  };
 }
 
 export default async function BlogPostPage({

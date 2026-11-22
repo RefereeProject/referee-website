@@ -71,6 +71,18 @@ function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) setIsOpen(false);
     };
 
+    // Focus moving into an embedded frame (the YouTube players on /talks).
+    // The frame's contents are another document, so this page sees no
+    // focus event for it and key presses inside it never reach onKeyDown
+    // above. What the browser does do is fire `blur` on the window and make
+    // the <iframe> element the page's activeElement, so that is the signal.
+    // An ordinary window blur (switching tabs or apps) leaves activeElement
+    // on the link that had focus, and the menu stays open.
+    const onWindowBlur = () => {
+      const active = document.activeElement;
+      if (active instanceof HTMLIFrameElement && !rootRef.current?.contains(active)) setIsOpen(false);
+    };
+
     // If the window grows past the breakpoint the button disappears, so the
     // panel must close too or it would be stranded open with no way to shut it.
     const desktop = window.matchMedia(DESKTOP_QUERY);
@@ -80,11 +92,13 @@ function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
 
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("blur", onWindowBlur);
     desktop.addEventListener("change", onBreakpoint);
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("blur", onWindowBlur);
       desktop.removeEventListener("change", onBreakpoint);
     };
   }, [isOpen]);
@@ -97,7 +111,8 @@ function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
   // goes nowhere in particular (the window loses focus, or Safari, which does
   // not focus a button on click). Those cases are ignored; otherwise clicking
   // the toggle in Safari would close the menu here and then reopen it in the
-  // click handler.
+  // click handler. It is also null when focus enters an embedded frame; that
+  // case is caught by the window blur listener in the effect above.
   const onBlur = (event: React.FocusEvent<HTMLDivElement>) => {
     const next = event.relatedTarget;
     if (next instanceof Node && !event.currentTarget.contains(next)) setIsOpen(false);
