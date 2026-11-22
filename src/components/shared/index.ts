@@ -3,6 +3,7 @@
  * Re-exports all reusable components used across landing and about pages.
  */
 
+export { SectionHead } from "./SectionHead";
 export { ScoreAnatomy } from "./ScoreAnatomy";
 export { ProofCard, ProofCardGrid } from "./ProofCard";
 export { ProcessSteps } from "./ProcessSteps";

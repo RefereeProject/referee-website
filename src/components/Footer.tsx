@@ -4,6 +4,11 @@ import {
   CRWE_LEAF_CHECKS,
   CRWE_TOP_LEVEL_CATEGORIES,
   CRWE_VERSION_LABEL,
+  CTA_PRIMARY_HREF,
+  CTA_PRIMARY_LABEL,
+  CTA_SECONDARY_HREF,
+  CTA_SECONDARY_LABEL,
+  FOOTER_DESCRIPTION,
 } from "@/lib/copy";
 
 export function Footer() {
@@ -12,22 +17,20 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
-          <div>
-            <Link href="/" className="brand" style={{ marginBottom: 14 }}>
-              {/* Brand lockup matches the navbar — logo image, not the CSS boxed R. */}
+          <div className="footer-brand">
+            {/* The footer has room for the kit's full horizontal lockup; the
+                white version is the one drawn for dark backgrounds. The
+                intrinsic size keeps the artwork's 352.37 : 108 ratio. */}
+            <Link href="/" aria-label="The Referee Project — home" style={{ display: "inline-block" }}>
               <Image
-                src="/Referee_new_logo.png"
+                src="/referee-brand-kit/referee-horizontal-white.svg"
                 alt=""
-                width={30}
-                height={30}
-                className="brand-logo"
-                style={{ display: "block", transform: "translateY(4px)" }}
+                width={183}
+                height={56}
+                className="footer-lockup"
               />
-              <span className="brand-name">The Referee Project</span>
             </Link>
-            <p style={{ maxWidth: 340, marginTop: 14, fontSize: 13, color: "var(--ink-muted)" }}>
-              Adding quality and nuance to the scholarly record.
-            </p>
+            <p className="footer-tagline">{FOOTER_DESCRIPTION}</p>
           </div>
           <div>
             <h5>Site</h5>
@@ -45,8 +48,8 @@ export function Footer() {
                 Primary CTA links to the curated scored-paper demo, matching
                 the homepage hero. The walkthrough mailto is the secondary path.
               */}
-              <li><a href="https://demo.referee-project.com">See a scored paper</a></li>
-              <li><a href="mailto:erik@referee-project.com?subject=Referee%20walkthrough%20request">Book a walkthrough</a></li>
+              <li><a href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL}</a></li>
+              <li><a href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a></li>
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/talks">Talks</Link></li>
               <li><Link href="/#status">Status & limits</Link></li>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -8,24 +8,30 @@ interface MethodologyItem { title: string; content: string }
 
 export function MethodologyAccordion({ items, className }: { items: MethodologyItem[]; className?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // One stable prefix per accordion, so each button can name the panel it
+  // controls even when several accordions are on the same page.
+  const baseId = useId();
 
   return (
-    <div className={cn("card-flat", className)} style={{ padding: 0 }}>
+    <div className={cn("accordion", className)}>
       {items.map((item, idx) => {
         const isOpen = openIndex === idx;
+        const panelId = `${baseId}-panel-${idx}`;
         return (
-          <div key={item.title} style={{ borderTop: idx === 0 ? 0 : "1px solid var(--border)" }}>
+          <div className="accordion-item" key={item.title}>
             <button
               type="button"
+              className="accordion-trigger"
               onClick={() => setOpenIndex((prev) => (prev === idx ? null : idx))}
               aria-expanded={isOpen}
-              className="w-full text-left transition-colors"
-              style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "18px 20px" }}
+              aria-controls={panelId}
             >
-              <span className="serif" style={{ fontSize: 18, fontWeight: 600 }}>{item.title}</span>
-              <ChevronDown className="h-5 w-5 shrink-0 transition-transform" style={{ color: "var(--ink-muted)", transform: isOpen ? "rotate(180deg)" : undefined }} />
+              <span>{item.title}</span>
+              {/* The chevron flips via the [aria-expanded] rule in globals.css. */}
+              <ChevronDown size={20} aria-hidden="true" />
             </button>
-            {isOpen ? <p style={{ padding: "0 20px 18px", fontSize: 14, lineHeight: 1.6, color: "var(--ink-muted)" }}>{item.content}</p> : null}
+            {/* `hidden` keeps the panel in the DOM so aria-controls stays valid. */}
+            <p id={panelId} className="accordion-panel" hidden={!isOpen}>{item.content}</p>
           </div>
         );
       })}

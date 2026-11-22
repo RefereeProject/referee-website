@@ -1,4 +1,24 @@
 import { cn } from "@/lib/utils";
+
 interface ProofCardProps { title: string; description: string; category: string; type?: string }
-export function ProofCard({ title, description, category, type }: ProofCardProps) { return <article className="card-flat"><div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}><span className="tag tag-evidence">{category}</span>{type ? <span className="tag">{type}</span> : null}</div><h4 style={{ marginTop: 14 }}>{title}</h4><p style={{ marginTop: 8, fontSize: 14, color: "var(--ink-muted)" }}>{description}</p></article>; }
-export function ProofCardGrid({ items, className }: { items: ProofCardProps[]; className?: string }) { return <div className={cn("grid gap-4 md:grid-cols-2 lg:grid-cols-3", className)}>{items.map((item) => <ProofCard key={item.title} {...item} />)}</div>; }
+
+export function ProofCard({ title, description, category, type }: ProofCardProps) {
+  return (
+    <article className="card-flat">
+      <div className="flex flex-wrap gap-2">
+        <span className="tag tag-evidence">{category}</span>
+        {type ? <span className="tag">{type}</span> : null}
+      </div>
+      <h4 className="mt-3.5">{title}</h4>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{description}</p>
+    </article>
+  );
+}
+
+export function ProofCardGrid({ items, className }: { items: ProofCardProps[]; className?: string }) {
+  return (
+    <div className={cn("grid gap-4 md:grid-cols-2 lg:grid-cols-3", className)}>
+      {items.map((item) => <ProofCard key={item.title} {...item} />)}
+    </div>
+  );
+}

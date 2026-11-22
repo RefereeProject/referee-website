@@ -1,51 +1,50 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CTA_PRIMARY_HREF, CTA_PRIMARY_LABEL } from "@/lib/copy";
+import { MobileNav } from "./MobileNav";
+import { NavLinks, type NavLink } from "./NavLinks";
 
-const navLinks = [
+const navLinks: readonly NavLink[] = [
   { href: "/about", label: "About" },
   // Anchor link — `How it works` is a homepage section (#method).
   { href: "/#method", label: "How it works" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "Objections & Principles" },
-] as const;
+];
 
+/**
+ * Sticky site header.
+ *
+ * Stays a Server Component: only the two small pieces that need the browser
+ * (active-link state and the mobile menu) are Client Components.
+ *
+ * The brand uses the square [R] symbol with live text rather than the kit's
+ * horizontal lockup image. At header height the lockup's "PROJECT" line would
+ * be about 4px tall and unreadable; the full lockup is used in the footer,
+ * where it has room.
+ */
 export function Navbar() {
   return (
-    <header className="site-header animate-navbar-slide-in">
+    <header className="site-header">
       <div className="container site-header-inner">
         <Link href="/" className="brand" aria-label="The Referee Project — home">
-          {/*
-            Brand lockup uses the project logo image instead of the
-            CSS `.brand-mark` boxed-R, per design refresh. The image is
-            kept square (30×30) to align with the existing baseline
-            (the `.brand-mark` rule in globals.css uses the same size).
-          */}
-          <Image
-            src="/Referee_new_logo.png"
-            alt=""
-            width={30}
-            height={30}
-            priority
-            className="brand-logo"
-            style={{ display: "block", transform: "translateY(4px)" }}
-          />
+          <Image src="/referee-brand-kit/referee-symbol.svg" alt="" width={34} height={34} className="brand-logo" />
           <span className="brand-name">The Referee Project</span>
         </Link>
-        <nav className="nav" aria-label="Primary">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hide-sm">
-              {link.label}
-            </Link>
-          ))}
-          {/*
-            Primary nav CTA — drives traffic to the curated scored-paper
-            demo, matching the homepage hero. Updated from the prior
-            "Demo →" mailto pattern.
-          */}
-          <a href="https://demo.referee-project.com" className="nav-cta">
-            See a scored paper →
-          </a>
+
+        {/* Hidden below 1024px, where MobileNav shows the same links. */}
+        <nav className="nav nav-desktop" aria-label="Primary">
+          <NavLinks links={navLinks} />
         </nav>
+
+        <div className="header-actions">
+          {/* Primary CTA: the curated scored-paper demo, matching the home hero.
+              Below 640px it moves inside the mobile menu (see .mobile-nav-cta). */}
+          <a href={CTA_PRIMARY_HREF} className="btn btn-primary btn-sm header-cta">
+            {CTA_PRIMARY_LABEL} <span className="arrow" aria-hidden="true">→</span>
+          </a>
+          <MobileNav links={navLinks} ctaHref={CTA_PRIMARY_HREF} ctaLabel={CTA_PRIMARY_LABEL} />
+        </div>
       </div>
     </header>
   );

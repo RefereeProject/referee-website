@@ -7,41 +7,28 @@ export function ComparisonToggle() {
 
   return (
     <div className="card-flat">
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+      <div className="flex flex-wrap items-center justify-center gap-3.5">
         <span className="tag">Opaque review</span>
+        {/* The track and thumb are styled from aria-checked in globals.css
+            (.switch), so the visual state can never drift from the state
+            announced to assistive technology. */}
         <button
           type="button"
           role="switch"
           aria-checked={showTransparent}
           aria-label="Toggle between opaque review and transparent score"
           onClick={() => setShowTransparent((prev) => !prev)}
-          className="transition-colors"
-          style={{
-            width: 52,
-            height: 28,
-            border: "1px solid var(--ink)",
-            background: showTransparent ? "var(--primary-700)" : "var(--surface-muted)",
-            padding: 3,
-          }}
+          className="switch"
         >
-          <span
-            aria-hidden="true"
-            style={{
-              display: "block",
-              width: 20,
-              height: 20,
-              background: "var(--surface)",
-              border: "1px solid var(--ink)",
-              transform: showTransparent ? "translateX(23px)" : "translateX(0)",
-              transition: "transform .18s ease",
-            }}
-          />
+          <span aria-hidden="true" className="switch-thumb" />
         </button>
         <span className="tag tag-primary">Transparent score</span>
       </div>
 
-      <div className="compare" style={{ marginTop: 22 }}>
-        <div className={`compare-col opaque ${showTransparent ? "opacity-45" : ""}`}>
+      {/* The unselected column is quietened with .is-dimmed rather than by
+          lowering its opacity, which would push its text below AA contrast. */}
+      <div className="compare mt-6">
+        <div className={`compare-col opaque ${showTransparent ? "is-dimmed" : ""}`}>
           <div className="compare-head">Traditional peer review</div>
           <h3>Hidden evaluation</h3>
           <ul>
@@ -50,7 +37,7 @@ export function ComparisonToggle() {
             <li>No evidence trail linking judgments to source material.</li>
           </ul>
         </div>
-        <div className={`compare-col transparent ${showTransparent ? "" : "opacity-60"}`}>
+        <div className={`compare-col transparent ${showTransparent ? "" : "is-dimmed"}`}>
           <div className="compare-head">Referee score output</div>
           <h3>Structured transparency</h3>
           <ul>
