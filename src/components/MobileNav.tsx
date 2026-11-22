@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NavLinks, type NavLink } from "./NavLinks";
@@ -10,6 +10,15 @@ import { NavLinks, type NavLink } from "./NavLinks";
  * Keep in sync with the 1024px breakpoint in globals.css (.nav-desktop).
  */
 const DESKTOP_QUERY = "(min-width: 1024px)";
+
+/**
+ * id of the disclosure panel, referenced by the button's aria-controls.
+ * A fixed string rather than useId(): the header renders exactly one menu,
+ * and useId() produced different values on the server and in the browser on
+ * the home page (an intermittent hydration mismatch), which a constant
+ * cannot do.
+ */
+const PANEL_ID = "mobile-nav-panel";
 
 interface MobileNavProps {
   links: readonly NavLink[];
@@ -26,7 +35,6 @@ interface MobileNavProps {
  */
 export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
   const pathname = usePathname();
-  const panelId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -79,7 +87,7 @@ export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
         type="button"
         className="nav-toggle"
         aria-expanded={isOpen}
-        aria-controls={panelId}
+        aria-controls={PANEL_ID}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         onClick={() => setOpenedOn(isOpen ? null : pathname)}
       >
@@ -88,7 +96,7 @@ export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
 
       {/* `hidden` keeps the panel in the DOM (so aria-controls always points
           at something) while removing its links from the tab order. */}
-      <div id={panelId} className="mobile-nav-panel" hidden={!isOpen}>
+      <div id={PANEL_ID} className="mobile-nav-panel" hidden={!isOpen}>
         <nav className="container" aria-label="Primary">
           <ul className="mobile-nav-list">
             {/* onNavigate also closes the menu for same-page anchors such as

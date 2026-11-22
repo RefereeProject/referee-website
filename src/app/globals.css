@@ -1046,8 +1046,10 @@
   }
 
   @media (max-width: 980px) {
+    /* minmax(0, 1fr), not 1fr: a bare 1fr track refuses to shrink below its
+       widest unbreakable content, so one long string could widen the page. */
     .hero-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .hero-visual {
@@ -1107,11 +1109,16 @@
     border-bottom: 1px solid var(--border);
   }
 
+  /* min-width + overflow-wrap let the long DOI break. Without them its
+     unbreakable width set a floor of about 330px for the whole card, which
+     pushed the hero wider than a 320px screen. */
   .score-card-stamp {
+    min-width: 0;
     font-family: var(--font-mono-stack);
     font-size: 0.6875rem;
     line-height: 1.55;
     color: var(--text-muted);
+    overflow-wrap: anywhere;
   }
 
   .score-card-stamp strong {
@@ -1471,7 +1478,7 @@
 
   @media (max-width: 980px) {
     .anatomy-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
