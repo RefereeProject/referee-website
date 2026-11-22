@@ -16,7 +16,7 @@ npm start       # serve the production build
 npx tsc --noEmit  # type-check only
 ```
 
-Node is managed by [mise](https://mise.jdx.dev/) (not nvm); CI uses Node 20. Path alias: `@/*` → `src/*`.
+The Node.js major in `package.json` controls both GitHub Actions and the Vercel runtime. To run the project locally with that major, use `mise use node@26`. Path alias: `@/*` → `src/*`.
 
 ## Architecture
 
