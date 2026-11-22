@@ -25,16 +25,23 @@ export function NavLinks({ links, variant = "inline", onNavigate }: NavLinksProp
 
   return links.map((link) => {
     // Anchor links such as "/#method" point at a section, not a page, so
-    // they are never the "current page".
-    const isSection = link.href.includes("#");
-    const isCurrent = !isSection && (pathname === link.href || pathname.startsWith(`${link.href}/`));
+    // they are never current.
+    const isAnchor = link.href.includes("#");
+    // "page" only for the page actually being viewed. On a page nested under
+    // a link (a blog post under /blog) the link is marked "true": it is the
+    // current section, but announcing it as the current page would be wrong.
+    // The trailing slash in the prefix test stops "/blog" matching "/blogger",
+    // and "/" is excluded because every path starts with it.
+    let current: "page" | "true" | undefined;
+    if (!isAnchor && pathname === link.href) current = "page";
+    else if (!isAnchor && link.href !== "/" && pathname.startsWith(`${link.href}/`)) current = "true";
 
     const anchor = (
       <Link
         key={link.href}
         href={link.href}
         className="nav-link"
-        aria-current={isCurrent ? "page" : undefined}
+        aria-current={current}
         onClick={onNavigate}
       >
         {link.label}

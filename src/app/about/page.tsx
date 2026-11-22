@@ -29,6 +29,7 @@ import { MethodologyAccordion } from "@/components/shared/MethodologyAccordion";
 import { StatusCallout } from "@/components/shared/StatusCallout";
 import { CTABlock } from "@/components/shared/CTABlock";
 import { SOCIAL_IMAGE } from "@/lib/brand";
+import { CRWE_VERSION_LABEL } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
 const aboutDescription =
@@ -284,7 +285,10 @@ function Profile({ person }: { person: PersonProfile }) {
         <h3>{person.name}</h3>
         <div className="credential">{person.role}</div>
         <p>{person.bio}</p>
-        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm mt-5">
+        {/* Both profiles have a button that just says "LinkedIn". A screen
+            reader listing the page's links would hear two identical names, so
+            the accessible name says whose profile it is. */}
+        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm mt-5" aria-label={`${person.name} on LinkedIn (opens in a new tab)`}>
           <ExternalLink className="h-4 w-4" aria-hidden="true" /> LinkedIn
         </a>
       </div>
@@ -302,9 +306,10 @@ function IconCard({ icon: Icon, title, description, className }: IconCardData & 
           and a utility here would override that rule. */}
       <div className="aud-icon"><Icon aria-hidden="true" /></div>
       <h4>{title}</h4>
-      {/* Same type size, leading and colour as the audience cards on the home
-          page. That rule is scoped to `.audience`, so it is repeated here. */}
-      <p className="mt-1.5 text-[0.90625rem] leading-[1.6] text-ink-muted">{description}</p>
+      {/* `.card-text` is the shared card body style (also on Home's audience
+          cards). The `mt-1.5` utility keeps this page's original rem-based
+          gap, which tracks the reader's font size; `.card-text` uses 6px. */}
+      <p className="card-text mt-1.5">{description}</p>
     </article>
   );
 }
@@ -368,21 +373,19 @@ export default function AboutPage() {
         eyebrow="About Referee"
         title="Why a transparent reliability score needs to exist"
         description="The scholarly record has no structured, inspectable way to communicate what was checked and what remains uncertain. Referee adds a transparent reliability layer — mapping every check to an explicit flaw category so the output can be audited, not just trusted."
-      >
-        {/* The actions sit inside the navy band, as they do in the home hero.
-            `.page-intro` is a navy surface, so the buttons take their on-navy
-            colours from the role tokens in globals.css. `.hero-actions` brings
-            the hero's top margin, which collapses with the wrapper's smaller
-            one, so the gap above the buttons matches the hero. */}
-        <div className="hero-actions">
-          <a href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores" className="btn btn-primary" aria-label="Explore scored papers via email">
-            Explore scored papers <span className="arrow" aria-hidden="true">→</span>
-          </a>
-          <Link href="/#method" className="btn btn-secondary">
-            How scoring works
-          </Link>
-        </div>
-      </PageIntro>
+        actions={
+          <>
+            <a href="mailto:erik@referee-project.com?subject=Explore%20Referee%20scores" className="btn btn-primary" aria-label="Explore scored papers via email">
+              Explore scored papers <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            {/* This page has its own "How the score works" section, so the
+                button scrolls to it rather than sending the reader to Home. */}
+            <Link href="#method" className="btn btn-secondary">
+              How scoring works
+            </Link>
+          </>
+        }
+      />
 
       {/* Layout: each block below is a full-width `.section` band holding one
           `.container`, the same rhythm as the home page. Backgrounds alternate
@@ -529,7 +532,7 @@ export default function AboutPage() {
               title="Current status"
               working={[
                 "Curated scored-paper experience with the full evidence trail",
-                "Structured scoring against the CRWE v2.1 flaw taxonomy",
+                `Structured scoring against the CRWE ${CRWE_VERSION_LABEL} flaw taxonomy`,
                 "Core platform built in Rust for reliability and performance",
                 "Machine-readable output with evidence links",
               ]}

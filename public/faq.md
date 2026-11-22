@@ -1,19 +1,153 @@
-# Frequently Asked Questions
+# Objections and Principles
 
-## How will academic journals react?
-Referee expects initial skepticism, with potential adoption as trust in results grows.
+Referee exists to add quality and nuance to the scholarly record. It makes a direct claim: a scholarly paper should not enter the record carrying only the authors' claims and a journal's verdict. It should also carry transparent, inspectable reliability metadata — a versioned score, linked evidence, and explicit unresolved items. That claim raises serious objections. Some are practical. Some are philosophical. Some are about incentives, power, and academic culture. We take those objections seriously. We answer them directly here.
 
-## What is the relationship with PubPeer and similar resources?
-Referee aims to unify fragmented post-publication commentary into a structured reliability workflow.
+## Principles
 
-## Can reliability be represented as a single score?
-A single score is imperfect, but still more transparent than scattered, opaque quality signals.
+### Why does Referee exist?
 
-## How do you address gaming and adversarial behavior?
-Referee expects gaming attempts and treats adversarial pressure as an input to system hardening.
+The current scholarly record asks outsiders to rely on too much opaque trust.
 
-## What role do AI and bots play?
-AI is used for scalable claim detection and evaluation support, with expert oversight where needed.
+Readers are asked to trust the paper, trust that peer review happened rigorously, and trust that the most important weaknesses were caught. Usually they cannot inspect what was actually checked, which standards were applied, or what remained unresolved.
 
-## How does Referee handle subjectivity in research design?
-Referee treats this as an active challenge and focuses on structured transparency over hidden judgment.
+Referee adds a third layer: transparent reliability metadata attached to the paper itself. The aim is not certainty. The aim is legibility.
+
+### Why use a reliability score at all?
+
+Because the alternative is worse.
+
+Today, most people infer reliability from prestige signals: venue, citations, reputation, or institutional status. Those are crude proxies. A score is also a simplification, but at least it can be tied to explicit categories, evidence, and versioned rules.
+
+The number is not the whole product. It is the summary layer. The real product is the inspectable record behind it.
+
+### Why make the score machine-readable?
+
+Because reliability information should travel with the paper.
+
+If evaluation only exists as prose, PDFs, or scattered commentary, it stays fragmented and hard to use. A machine-readable score can be indexed, compared, updated, and integrated into search, dashboards, funder workflows, publisher systems, and diligence pipelines.
+
+Human-readable explanation matters. Machine-readable structure matters too. Referee is built for both.
+
+### Why decompose review into targeted checks?
+
+Because traditional peer review bundles too many jobs into one person.
+
+A reviewer is often expected to be a domain expert, methodologist, statistician, auditor, skeptic, and editor all at once. That is bad system design. Many academics do not have the time, incentive, or breadth to do that work rigorously across every flaw type.
+
+Referee breaks evaluation into explicit categories and targeted checks. That makes review more systematic, more comparable, and more scalable.
+
+### What role do experts still play?
+
+An important one.
+
+Referee does not assume experts are useless. It assumes experts are scarce, overloaded, and unevenly equipped across different kinds of weaknesses. Some questions require deep domain judgment. Others do not.
+
+The goal is not to eliminate experts. It is to stop wasting expert attention on tasks that can be made narrower, clearer, and more inspectable.
+
+### Why should many targeted reviews be possible without a traditional academic referee?
+
+Because many review tasks are not the same as "judge this paper overall."
+
+Checking whether a paper omits key methodological details, contains impossible values, contradicts itself numerically, uses suspect data splits, or leaves core claims unverifiable often does not require a field-defining scholar. It requires a well-posed question, an explicit standard, and evidence.
+
+Credentials can matter. But they are not a substitute for transparent evaluation logic.
+
+## Objections
+
+### Isn't a single score too reductive?
+
+It would be, if the score were opaque.
+
+A reliability score only deserves trust if it can be unpacked: what was checked, what evidence was used, which categories were triggered, what remains unresolved, and which version of the scoring logic produced the output.
+
+Referee is not defending an unexplained number. It is defending a score with provenance.
+
+### Can one framework really work across many disciplines?
+
+Not as a rigid, one-size-fits-all doctrine.
+
+The point of a shared framework is not to deny disciplinary differences. It is to standardize recurring weakness types where standardization is possible, then extend the system with domain-specific modules where needed.
+
+The current system already applies inconsistent standards across fields. Referee does not create that problem. It makes standards more explicit and revisable.
+
+### Why borrow from bug-bounty logic?
+
+Because complex systems improve when weaknesses can be identified in narrow, testable ways.
+
+Software security improved when vulnerability discovery became more structured, more adversarial, and less dependent on closed trust networks. Scholarly evaluation has an analogous problem: too much is hidden, too much is informal, and too much depends on status.
+
+The analogy is not perfect. Papers are not software. But the underlying insight matters: targeted challenge scales better than vague confidence.
+
+### What prevents gaming?
+
+Nothing prevents gaming entirely.
+
+The serious question is whether a system becomes more fragile or more robust under adversarial pressure. Hidden systems get gamed too; they are just harder to inspect. Referee should be designed so that attempts to game the process leave traces, expose weak points, and improve the taxonomy and scoring logic over time.
+
+A transparent system can be attacked. It can also learn.
+
+### How can non-experts contribute without lowering quality?
+
+By narrowing the claim.
+
+Referee is based on the view that many useful review tasks can be specified more tightly than "provide a full expert judgment on this paper." When the question is explicit and the evidence is inspectable, a broader set of contributors can test specific weaknesses responsibly.
+
+What matters is not whether every contributor carries the right status marker. What matters is whether the claim is clear, the evidence is reviewable, and the standard is explicit.
+
+### What about AI errors, hallucinations, or shallow understanding?
+
+AI should not be treated as an oracle.
+
+Its value here is narrower: executing structured checks, surfacing candidate weaknesses, preserving an audit trail, and helping scale evaluation across many papers and flaw categories. Any system like this should remain challengeable, versioned, and open about uncertainty.
+
+The relevant comparison is not "AI versus perfect expert review." It is "transparent, inspectable evaluation versus the current mix of opacity, inconsistency, and limited reviewer effort."
+
+### How does Referee relate to PubPeer and other post-publication commentary?
+
+It is complementary.
+
+Today, useful criticism is scattered across PubPeer, Retraction Watch, journal correspondence, blogs, social platforms, and private conversations. That fragmentation makes it hard for outsiders to know where to look and hard for institutions to use reliability information systematically.
+
+Referee aims to make those signals more structured, more portable, and easier to attach to the paper itself.
+
+### How will journals react?
+
+Mixed at first.
+
+Some journals will resist because Referee makes evaluation more explicit and less dependent on closed processes. Others may eventually find value in structured reliability metadata, especially where submission volume exceeds careful review capacity.
+
+Referee is not built to preserve the comfort of the current publishing system. It is built to improve the legibility of the scholarly record.
+
+### What about anonymity and accountability?
+
+The core issue is evidence quality, not only source identity.
+
+In some cases anonymity protects honest criticism. In other cases signed review may strengthen trust. Referee does not need one universal rule across all contexts. It does need a process where claims are specific, evidence-backed, and open to challenge.
+
+Accountability should attach to the quality of the claim and the transparency of the process, not only to institutional status.
+
+### Doesn't this risk harming researchers' careers?
+
+Transparency changes incentives. Some people will dislike that.
+
+But discomfort is not a sufficient argument for preserving opacity. The better safeguard is not silence. It is precision: explicit scope, visible evidence, versioned outputs, and clear distinction between detected issues, audit gaps, and unresolved questions.
+
+Referee should not function as a hidden blacklist. It should function as a more legible and contestable layer in the scholarly record.
+
+### How is this funded?
+
+The near-term answer is practical: pilots, partnerships, and paid use by organizations that need structured reliability evaluation.
+
+The longer-term answer is structural: society spends enormous resources generating research and comparatively little validating it. That imbalance should not be permanent. Funders, publishers, research organizations, and diligence teams all have a real interest in better reliability signals.
+
+### How does Referee handle subjectivity and disagreement?
+
+By refusing to pretend that all disagreement is noise.
+
+Some parts of research evaluation can be standardized. Some remain contestable. Referee should separate those two domains as clearly as possible. Where judgment calls remain, the system should make that visible rather than hiding it inside a single opaque verdict.
+
+The goal is not to eliminate disagreement. The goal is to make disagreement more explicit, structured, and useful.
+
+## Closing principle
+
+Referee is not a claim to perfect objectivity, complete automation, or final truth. It is a claim that the scholarly record should carry more explicit, inspectable, and portable reliability information than it does today. That is the standard.

@@ -114,9 +114,11 @@ export default function TalksPage() {
             at the container's left edge, like the title band above, so the
             page keeps one left margin. `grid-cols-1` (not a bare grid) lets
             the column shrink below its content's minimum width on phones. */}
-        <div className="grid max-w-4xl grid-cols-1 gap-8">
-          {talks.map((talk) => (
-            <VideoCard key={talk.id} {...talk} />
+        <div className="content-column grid grid-cols-1 gap-8">
+          {/* `id` is only the React key. VideoCard has no use for it, so it
+              is kept out of the props spread into the card. */}
+          {talks.map(({ id, ...talk }) => (
+            <VideoCard key={id} {...talk} />
           ))}
         </div>
 
@@ -127,10 +129,8 @@ export default function TalksPage() {
           as the list above. `.cta-block` is a navy surface, so the buttons
           switch to their on-navy colours by themselves.
         */}
-        <section className="cta-block mt-12 max-w-4xl sm:mt-16">
-          {/* `.cta-block h2` leaves room for an eyebrow above the heading.
-              There is none here, so that top margin is removed. */}
-          <h2 className="mt-0">Want the working version, not the talk?</h2>
+        <section className="cta-block content-column mt-12 sm:mt-16">
+          <h2>Want the working version, not the talk?</h2>
           <div className="cta-actions">
             <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>
               {CTA_PRIMARY_LABEL} <span className="arrow" aria-hidden="true">→</span>

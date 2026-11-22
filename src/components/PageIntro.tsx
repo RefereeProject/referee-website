@@ -10,6 +10,12 @@ type PageIntroProps = {
    * instead of sitting far to its left.
    */
   width?: "default" | "article";
+  /**
+   * Buttons under the description. They get the same spacing as the home
+   * hero's buttons. The band is a navy surface, so `.btn` picks up its
+   * on-navy colours without extra classes.
+   */
+  actions?: React.ReactNode;
   children?: React.ReactNode;
 };
 
@@ -18,9 +24,9 @@ type PageIntroProps = {
  * the blog start with the same weight as the home hero.
  *
  * `children` render below the description (the blog article uses this for
- * its publication date).
+ * its publication date); `actions` render last.
  */
-export function PageIntro({ eyebrow, title, description, width = "default", children }: PageIntroProps) {
+export function PageIntro({ eyebrow, title, description, width = "default", actions, children }: PageIntroProps) {
   return (
     <section className="page-intro">
       <div className="container">
@@ -29,6 +35,7 @@ export function PageIntro({ eyebrow, title, description, width = "default", chil
           <h1>{title}</h1>
           {description ? <p className="page-intro-lead">{description}</p> : null}
           {children ? <div className="page-intro-extra">{children}</div> : null}
+          {actions ? <div className="page-intro-actions">{actions}</div> : null}
         </div>
       </div>
     </section>
