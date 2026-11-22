@@ -16,9 +16,15 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 - **Framework**: Next.js 16 with App Router
 - **React**: v19.2
-- **Styling**: Tailwind CSS v4 with typography plugin
-- **Animation**: Framer Motion v12
-- **Fonts**: Inter (sans), Source Serif 4 (display) and IBM Plex Mono (monospace)
+- **Styling**: Tailwind CSS v4 with typography plugin, on top of a design-token layer in `src/app/globals.css`
+- **Animation**: CSS only (one hero entrance, disabled under "reduce motion")
+- **Fonts**: Inter (interface and body), Source Serif 4 (display) and IBM Plex Mono (data only)
+
+## Design System
+
+The look follows the v1 brand kit in `public/referee-brand-kit/` (see its `README.txt`): ink navy, sky, slate and pale blue on a paper background, with the square bracket from the [R] logo as a recurring motif.
+
+All tokens and component styles live in `src/app/globals.css`; its header comment explains how the file is organised. In short: use the role tokens (`--fg`, `--fg-heading`, `--btn-*`) rather than raw palette steps, because navy sections flip those roles for everything inside them. `CLAUDE.md` lists the details that are easy to get wrong.
 
 ## Content Management
 

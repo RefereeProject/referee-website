@@ -43,9 +43,20 @@ The site deliberately serves content to agents as well as browsers. These are st
 
 ### Components and styling
 
-- `src/components/shared/` holds the reusable page-section components, re-exported through `shared/index.ts`.
-- Styling is Tailwind v4 plus a large hand-written design-token layer in `src/app/globals.css` (CSS variables such as `--primary-*`, `--ink`, `--surface-*`, `--score-*`). Prefer these tokens over new hard-coded colours. `cn()` in `src/lib/utils.ts` merges class names.
-- Fonts (`src/app/layout.tsx`): Inter (`--font-sans`), Source Serif 4 (`--font-serif`, used for display), IBM Plex Mono (`--font-mono`).
+- `src/components/shared/` holds the reusable page-section components, re-exported through `shared/index.ts`. `SectionHead` is the standard opener for a page section. `cn()` in `src/lib/utils.ts` merges class names.
+- Shell: `Navbar` is a Server Component; only `NavLinks` (active-link state) and `MobileNav` (menu below 1024px) are Client Components. The 1024px breakpoint is written twice, in `MobileNav.tsx` and in `globals.css`; change both together. `PageIntro` is the navy title band that opens every interior page.
+
+### Design system (`src/app/globals.css`)
+
+Built on the v1 brand kit (`public/referee-brand-kit/README.txt`): ink navy, sky, slate and pale blue on paper. The file's header comment explains its structure; the points that are easy to get wrong:
+
+- **Palette vs role tokens.** `--brand-*` are the kit colours. `--primary-*` is the navy-to-sky scale (the names predate the kit, when they were greens). Do not use palette steps for component colours: use the role tokens (`--fg`, `--fg-heading`, `--fg-muted`, `--fg-link`, `--ring`, `--btn-*`, `--chip-*`). Navy surfaces (`.hero`, `.page-intro`, `.cta-block`, `.site-footer`, `.on-navy`) flip the roles once, so buttons and text inside adapt on their own; cards (`.card-flat`, `.score-card`, `.content-card`, `.on-light`) reset them to light.
+- **Layers.** Base and component rules are in `@layer base` / `@layer components`, so Tailwind utilities override them. Two rules are deliberately unlayered, with the reason in a comment: `.container` (must beat Tailwind's own `container` utility) and `.prose-referee` (must beat the typography plugin).
+- **Score colours** (`--score-high/medium/low`, `--success/--warning/--error`) are the only non-blue colours. Keep them for data and status.
+- **Brand motif: the square bracket** from the [R] logo, used in three places only: `.cite` (the `[1]` markers, via `SectionHead`'s `index` prop), `.bracket-frame` (around the hero score card), and one faint bracket behind navy bands. Use sparingly.
+- **Do not hand-write vendor prefixes** next to the standard property (`-webkit-backdrop-filter` beside `backdrop-filter`). The CSS pipeline adds prefixes itself and drops the standard declaration if both are present.
+- Fonts (`src/app/layout.tsx`): next/font sets `--font-inter`, `--font-source-serif` and `--font-plex-mono` on `<html>` (not `<body>`: the stylesheet reads them on `:root`). The stacks built from them are `--font-body`, `--font-display` and `--font-mono-stack`. Source Serif 4 is for display, Inter for interface and body, Plex Mono for real data only (IDs, hashes, scores).
+- Icons use the App Router file conventions: `src/app/favicon.ico`, `icon.svg` and `apple-icon.png` are copies of the brand-kit files. The shared link-preview image is `SOCIAL_IMAGE` in `src/lib/brand.ts`; a route that sets its own `openGraph` or `twitter` metadata must pass it again, because Next.js merges metadata shallowly.
 
 ### API
 
