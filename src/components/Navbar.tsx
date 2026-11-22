@@ -21,7 +21,7 @@ export function Navbar() {
             (the `.brand-mark` rule in globals.css uses the same size).
           */}
           <Image
-            src="/Referee_new_logo.png"
+            src="/referee-brand-kit/referee-symbol.svg"
             alt=""
             width={30}
             height={30}

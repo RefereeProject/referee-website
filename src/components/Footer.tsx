@@ -16,7 +16,7 @@ export function Footer() {
             <Link href="/" className="brand" style={{ marginBottom: 14 }}>
               {/* Brand lockup matches the navbar — logo image, not the CSS boxed R. */}
               <Image
-                src="/Referee_new_logo.png"
+                src="/referee-brand-kit/referee-symbol.svg"
                 alt=""
                 width={30}
                 height={30}

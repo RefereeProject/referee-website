@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     name: CANONICAL_SITE_NAME,
     description: typeof metadata.description === "string" ? metadata.description : undefined,
     siteUrl: site.link,
-    logoPath: "/Referee_new_logo.png",
+    logoPath: "/referee-brand-kit/icon-512.png",
   }));
 
   return (

@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     description: aboutDescription,
     type: "website",
     siteName: "Referee",
-    images: [{ url: "/Referee_new_logo.png", width: 512, height: 512, alt: "Referee logo" }],
+    images: [{ url: "/referee-brand-kit/og-image.png", width: 1200, height: 630, alt: "Referee — The Referee Project" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "About — Referee",
     description: aboutDescription,
-    images: ["/Referee_new_logo.png"],
+    images: ["/referee-brand-kit/og-image.png"],
   },
 };
 

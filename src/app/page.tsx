@@ -15,8 +15,8 @@ import {
 export const metadata: Metadata = {
   title: "Referee | A transparent reliability score for every scholarly paper",
   description: HOME_META_DESCRIPTION,
-  openGraph: { title: "Referee | A transparent reliability score for every scholarly paper", description: HOME_META_DESCRIPTION, type: "website", siteName: "Referee", images: [{ url: "/Referee_new_logo.png", width: 512, height: 512, alt: "Referee logo" }] },
-  twitter: { card: "summary", title: "Referee | A transparent reliability score for every scholarly paper", description: HOME_META_DESCRIPTION, images: ["/Referee_new_logo.png"] },
+  openGraph: { title: "Referee | A transparent reliability score for every scholarly paper", description: HOME_META_DESCRIPTION, type: "website", siteName: "Referee", images: [{ url: "/referee-brand-kit/og-image.png", width: 1200, height: 630, alt: "Referee — The Referee Project" }] },
+  twitter: { card: "summary_large_image", title: "Referee | A transparent reliability score for every scholarly paper", description: HOME_META_DESCRIPTION, images: ["/referee-brand-kit/og-image.png"] },
 };
 
 const steps = [
