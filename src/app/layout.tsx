@@ -58,7 +58,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     // The font variables must sit on <html>: globals.css reads them on :root,
     // and a variable defined on <body> is not visible there. (They used to be
     // on <body>, which is why the brand fonts never actually loaded.)
-    <html lang="en" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
+    //
+    // data-scroll-behavior="smooth" tells Next.js that globals.css turns on
+    // smooth scrolling. With it, Next switches smooth scrolling off while it
+    // moves to the top on a route change, so a new page appears at the top
+    // instead of visibly scrolling there. In-page anchor links stay smooth.
+    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: organizationJsonLd }} />
         {/* First tab stop on every page. Hidden until it receives keyboard

@@ -27,7 +27,7 @@ export default async function BlogIndexPage() {
         {posts.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             {posts.map((post, index) => {
-              // content.json lists posts newest first, so the first entry is
+              // getPosts returns posts newest first, so the first entry is
               // the latest one. On wide screens it becomes a full-width lead
               // card with the title beside the excerpt; the others fill a
               // two-column grid. Below `lg` every card is one stacked column.

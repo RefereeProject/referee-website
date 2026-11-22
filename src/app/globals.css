@@ -98,6 +98,10 @@
   /* Layout */
   --container: 1180px;
   --measure: 680px;
+  /* A single column of cards (the Talks list and its closing CTA). Wider
+     than --measure because it holds video embeds, not just text. Same
+     width as Tailwind's max-w-4xl, which Talks used before. */
+  --content-column: 56rem;
   --gutter: 32px;
   /* Height of the sticky header. Also drives scroll-padding so anchor links
      such as /#method do not land underneath it. Both values grow at the
@@ -151,10 +155,7 @@
    (the score card inside the home hero is the main case).
    -------------------------------------------------------------------------- */
 :root,
-.on-light,
-.card,
 .card-flat,
-.content-card,
 .score-card {
   --fg-heading: var(--brand-navy);
   --fg: var(--ink-soft);
@@ -182,8 +183,8 @@
   --chip-fg: var(--brand-navy);
 }
 
-/* Navy surfaces. Listed after the light set so an explicit .on-navy wins. */
-.on-navy,
+/* Navy surfaces. Listed after the light set so that, at equal specificity,
+   a navy section's own roles win over the :root defaults. */
 .hero,
 .page-intro,
 .cta-block,
@@ -278,8 +279,6 @@
   --font-sans: var(--font-body);
   --font-serif: var(--font-display);
   --font-mono: var(--font-mono-stack);
-
-  --animate-rise: rise 0.7s var(--ease-out) both;
 }
 
 /* --------------------------------------------------------------------------
@@ -379,16 +378,9 @@
    -------------------------------------------------------------------------- */
 @layer components {
   /* ---- Type helpers ---------------------------------------------------- */
-  .font-display,
   .serif {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
-  }
-
-  /* Mono is for real data only: identifiers, hashes, scores. */
-  .mono {
-    font-family: var(--font-mono-stack);
-    font-variant-numeric: tabular-nums;
   }
 
   .lead {
@@ -400,6 +392,10 @@
 
   .measure {
     max-width: var(--measure);
+  }
+
+  .content-column {
+    max-width: var(--content-column);
   }
 
   .meta {
@@ -628,9 +624,7 @@
   }
 
   /* ---- Cards ----------------------------------------------------------- */
-  .card,
-  .card-flat,
-  .evidence-card {
+  .card-flat {
     padding: clamp(20px, 2.4vw, 28px);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -665,13 +659,13 @@
     text-decoration-color: currentColor;
   }
 
-  .content-card {
-    padding: clamp(24px, 4vw, 48px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--surface);
-    color: var(--fg);
-    box-shadow: var(--shadow-sm);
+  /* Body text of a small card under its title: the audience cards on Home
+     and the icon cards on About. One class so the two stay identical. */
+  .card-text {
+    margin-top: 6px;
+    font-size: 0.90625rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
   }
 
   /* ---- Form fields ----------------------------------------------------- */
@@ -799,7 +793,10 @@
     color: var(--brand-navy);
   }
 
-  .nav-link[aria-current="page"] {
+  /* "page" is the page being viewed; "true" marks the section it belongs to
+     (Blog while reading a post). Both are highlighted the same way. */
+  .nav-link[aria-current="page"],
+  .nav-link[aria-current="true"] {
     color: var(--brand-navy);
     font-weight: 600;
   }
@@ -857,6 +854,14 @@
     font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 600;
+  }
+
+  /* Every menu link is already navy and semibold, so the desktop cue (navy,
+     600) would not show here. The current link is set one weight heavier
+     instead. */
+  .mobile-nav-list .nav-link[aria-current="page"],
+  .mobile-nav-list .nav-link[aria-current="true"] {
+    font-weight: 700;
   }
 
   /* The demo button lives in the header on wide screens and inside the menu
@@ -1750,13 +1755,6 @@
     transform: translateY(-2px);
   }
 
-  .audience .card-flat p {
-    margin-top: 6px;
-    font-size: 0.90625rem;
-    line-height: 1.6;
-    color: var(--ink-muted);
-  }
-
   .aud-icon {
     display: grid;
     place-items: center;
@@ -1932,6 +1930,11 @@
 
   .cta-block h2 {
     max-width: 720px;
+  }
+
+  /* The gap belongs to the eyebrow, so a CTA without one (Talks) starts
+     with its heading flush to the padding. */
+  .cta-block > .eyebrow + h2 {
     margin-top: 14px;
   }
 
@@ -1998,6 +2001,16 @@
     margin-top: 22px;
   }
 
+  /* <PageIntro actions>: the buttons under an interior page's intro. Same
+     34px gap and button spacing as .hero-actions, so About's buttons sit
+     where the home hero's do. */
+  .page-intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
   /* ---- Accordion ------------------------------------------------------- */
   .accordion {
     overflow: hidden;
@@ -2052,45 +2065,6 @@
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--ink-muted);
-  }
-
-  /* ---- Switch (ComparisonToggle) --------------------------------------- */
-  .switch {
-    position: relative;
-    width: 52px;
-    height: 30px;
-    padding: 3px;
-    border: 1px solid var(--border-control);
-    border-radius: var(--radius-pill);
-    background: var(--surface-muted);
-    cursor: pointer;
-    transition: background-color 0.18s ease, border-color 0.18s ease;
-  }
-
-  .switch[aria-checked="true"] {
-    border-color: var(--brand-navy);
-    background: var(--brand-navy);
-  }
-
-  .switch-thumb {
-    display: block;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--surface);
-    box-shadow: 0 1px 3px rgba(11, 21, 51, 0.35);
-    transition: transform 0.18s ease;
-  }
-
-  .switch[aria-checked="true"] .switch-thumb {
-    transform: translateX(22px);
-  }
-
-  /* The side that is not selected stays readable; it is quietened with a
-     flat surface instead of lowering the opacity of its text. */
-  .compare-col.is-dimmed {
-    box-shadow: none;
-    filter: saturate(0.6);
   }
 
   /* ---- Disclosure button (talk summaries) ------------------------------ */
@@ -2247,18 +2221,6 @@
     .footer-grid {
       grid-template-columns: 1fr;
     }
-  }
-
-  /* ---- Utilities kept from the old stylesheet -------------------------- */
-  .line-clamp-3 {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  .touch-manipulation {
-    touch-action: manipulation;
   }
 }
 

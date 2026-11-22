@@ -59,19 +59,27 @@ Referee does not claim to replace expert peer review with a black box. It organi
   - Focus: argues that scalable research validation requires specialized AI agents paired with validation controls and expert oversight.
 
 ## FAQ topic coverage
-- Journal adoption skepticism and incentives to participate.
-- Relationship to existing post-publication commentary systems (for example, PubPeer and related ecosystems).
-- Handling non-binary or subjective weakness assessments.
-- Cross-disciplinary taxonomy standardization challenges.
-- Limits and usefulness of a single reliability score.
-- Adversarial/gaming behavior and why it is expected.
-- Participation by non-academics and credential boundary concerns.
-- Resistance to public criticism of research flaws.
-- AI and bot roles in both detection and evaluation workflows.
-- Anonymity, accountability, and abuse mitigation.
-- Funding sustainability for incentives and operations.
-- Career and morale implications of transparent flaw exposure.
-- Variability in research interpretation and unresolved subjectivity.
+The /faq page (Objections and Principles; full text at /faq.md) has two groups.
+- Principles:
+  - Why Referee exists: replacing opaque trust with legible reliability metadata.
+  - Why use a reliability score at all, versus prestige proxies.
+  - Why the score is machine-readable.
+  - Why review is decomposed into targeted checks.
+  - The role experts still play.
+  - Why many targeted reviews do not need a traditional academic referee.
+- Objections:
+  - Whether a single score is too reductive.
+  - Whether one framework can work across disciplines.
+  - Why Referee borrows from bug-bounty logic.
+  - What prevents gaming.
+  - How non-experts contribute without lowering quality.
+  - AI errors, hallucinations and shallow understanding.
+  - Relationship to PubPeer and other post-publication commentary.
+  - How journals will react.
+  - Anonymity and accountability.
+  - Risk to researchers' careers.
+  - How Referee is funded.
+  - Subjectivity and disagreement.
 
 ## Talks coverage
 - The Referee Project: An Update with Sebastián Buriticá Arias (2024)

@@ -10,13 +10,32 @@ import {
 // Illustrative category vector for the sample reliability report.
 // These rows use real CRWE v2.1 top-level category names from the taxonomy
 // (shown as a subset so the hero card stays legible).
+//
+// The sample is deliberately a mid-range paper, not an obvious failure: most
+// papers sit in the grey area between clearly reliable and clearly not, and
+// the mixed bars show that a middling total can hide one weak category.
+// It is an unnamed manuscript on purpose. Attaching an invented score to a
+// real, citable paper would be a claim about that paper.
 const categories = [
-  { name: "Data integrity", got: 0, max: 55, level: "low" },
-  { name: "Study design", got: 38, max: 76, level: "med" },
-  { name: "Statistical specification", got: 23, max: 45, level: "med" },
-  { name: "Reporting consistency", got: 15, max: 29, level: "med" },
-  { name: "Reproducibility & availability", got: 1, max: 24, level: "low" },
+  { name: "Data integrity", got: 44, max: 55, level: "high" },
+  { name: "Study design", got: 56, max: 76, level: "med" },
+  { name: "Statistical specification", got: 32, max: 45, level: "med" },
+  { name: "Reporting consistency", got: 24, max: 29, level: "high" },
+  { name: "Reproducibility & availability", got: 9, max: 24, level: "low" },
 ] as const;
+
+/**
+ * Headline score of the sample card: points earned over points available
+ * across the rows above (165/229, which rounds to 72). Computed rather than
+ * typed in, so a reader who adds up the bars gets the number on the card,
+ * and changing a row cannot leave the headline out of step. The home page's
+ * Method section imports it for the same reason.
+ */
+export const SAMPLE_SCORE = Math.round(
+  (categories.reduce((sum, cat) => sum + cat.got, 0) /
+    categories.reduce((sum, cat) => sum + cat.max, 0)) *
+    100,
+);
 
 /**
  * Sample reliability report. Rendered twice on the home page: in the hero,
@@ -29,23 +48,23 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
       <header className="score-card-header">
         <div className="score-card-stamp">
           <strong>Reliability Report · Illustrative</strong><br />
-          DOI 10.1056/NEJM199912093412402 · NEJM · Dec 9, 1999
+          Illustrative manuscript · CRWE {CRWE_VERSION_LABEL}
         </div>
         <span className="score-card-status">Reviewed</span>
       </header>
       <div className="score-card-body">
         <div className="score-headline">
           <div className="score-title">
-            “The effect of <em>bisoprolol</em> on perioperative mortality and myocardial infarction in high-risk patients undergoing vascular surgery”
+            “Sample manuscript (illustrative)”
           </div>
           <div className="score-number-wrap">
-            {/* `low` colours the number like the low bars below it. */}
-            <div className="score-number low">5</div>
+            {/* `med` colours the number like the mid-range bars below it. */}
+            <div className="score-number med">{SAMPLE_SCORE}</div>
             <div className="score-denom">/ 100</div>
-            <div className="score-confidence">Known flawed paper</div>
+            <div className="score-confidence">Mixed evidence</div>
           </div>
         </div>
-        <div className="score-divider">CRWE v2.1 Category Vector · Illustrative</div>
+        <div className="score-divider">CRWE {CRWE_VERSION_LABEL} Category Vector · Illustrative</div>
         <div className="score-cats">
           {categories.map((cat) => {
             const pct = Math.round((cat.got / cat.max) * 100);
@@ -77,7 +96,7 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
       </div>
       <div className="score-card-footer">
         <span>CRWE-taxonomy <span className="hash">{CRWE_VERSION_LABEL}</span></span>
-        <span>score: <span className="hash">5/100</span></span>
+        <span>score: <span className="hash">{SAMPLE_SCORE}/100</span></span>
       </div>
     </article>
   );

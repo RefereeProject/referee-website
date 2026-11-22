@@ -40,9 +40,21 @@ export async function getPages(): Promise<WPEntry[]> {
   return content.pages.filter((p) => p.status === 'publish' || p.status === '');
 }
 
+/**
+ * Published posts, newest first.
+ *
+ * Sorted here instead of trusting the order in content.json: the blog index
+ * marks the first post as "Latest", so a post added out of order would
+ * otherwise take that slot. WordPress exports dates as fixed-width
+ * "YYYY-MM-DD HH:MM:SS" strings, which sort correctly as plain text.
+ * content.json is not validated when it is read, so a post without a date
+ * is treated as "" (sorted last) instead of crashing the comparison.
+ */
 export async function getPosts(): Promise<WPEntry[]> {
   const content = await getContent();
-  return content.posts.filter((p) => p.status === 'publish' || p.status === '');
+  return content.posts
+    .filter((p) => p.status === 'publish' || p.status === '')
+    .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 }
 
 /** Finds a post by slug or id to handle both URL patterns consistently */

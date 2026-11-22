@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpenText, FlaskConical, Landmark, LibraryBig, Presentation, SearchCheck, type LucideIcon } from "lucide-react";
-import { Hero, ScoreCard } from "@/components/Hero";
+import { Hero, SAMPLE_SCORE, ScoreCard } from "@/components/Hero";
 import { SectionHead } from "@/components/shared/SectionHead";
 import { SOCIAL_IMAGE } from "@/lib/brand";
 import {
@@ -55,7 +55,7 @@ const steps = [
   { n: "01", title: "Ingest", body: "Manuscript and supplementary materials are parsed into structured screening context — text, tables, figures, references, methods.", output: "Input: manuscript.pdf · hash: sha256/…" },
   { n: "02", title: "Map", body: "Claims are mapped to categories in the CRWE flaw taxonomy. Each claim becomes a checkable assertion with provenance.", output: "Output: claim graph · 248 nodes" },
   { n: "03", title: "Check", body: "Structured checks run against each claim — statistical sanity, reproducibility, citation integrity, transparency, and methodology.", output: "Output: 47 evidence refs · 3 unresolved" },
-  { n: "04", title: "Preserve", body: "A versioned, machine-readable reliability score is written to the record, with the full evidence trail attached and re-derivable.", output: `Output: score.json · ${CRWE_VERSION_LABEL} · 72/100` },
+  { n: "04", title: "Preserve", body: "A versioned, machine-readable reliability score is written to the record, with the full evidence trail attached and re-derivable.", output: `Output: score.json · ${CRWE_VERSION_LABEL} · ${SAMPLE_SCORE}/100` },
 ] as const;
 
 // CRWE v2.1 surface — six core categories (1–6) plus five method modules (M1–M5),
@@ -98,7 +98,7 @@ const statusLive = [
 
 const statusImproving = [
   "Coverage breadth across research domains.",
-  "False-positive reduction in edge cases.",
+  "False-positive calibration.",
   "Additional flaw categories under development.",
   "API access for integration partners.",
 ] as const;
@@ -233,7 +233,7 @@ export default function Home() {
               <article className="card-flat" key={title}>
                 <div className="aud-icon"><Icon aria-hidden="true" /></div>
                 <h4>{title}</h4>
-                <p>{body}</p>
+                <p className="card-text">{body}</p>
                 <div className="aud-tag">{tag}</div>
               </article>
             ))}

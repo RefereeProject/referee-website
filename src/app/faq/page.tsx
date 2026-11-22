@@ -147,10 +147,10 @@ function QASection({
   return (
     <section className={cn("section", className)}>
       <div className="container">
-        {/* A group has one name and no separate kicker line. The name is the
-            heading, and the label is left empty so the citation marker stands
-            on its own above it. */}
-        <SectionHead index={index} label="" title={heading} />
+        {/* A group has one name and no separate kicker line: the name is the
+            heading, and with no label the citation marker stands on its own
+            above it. */}
+        <SectionHead index={index} title={heading} />
         {/* Two columns from tablet width up. Cards in a row share a height,
             and each column stays narrow enough to read comfortably. */}
         <div className="section-body grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -205,9 +205,15 @@ export default async function ObjectionsAndPrinciplesPage() {
         description="Referee exists to add quality and nuance to the scholarly record. It makes a direct claim: a scholarly paper should not enter the record carrying only the authors' claims and a journal's verdict. It should also carry transparent, inspectable reliability metadata — a versioned score, linked evidence, and explicit unresolved items. That claim raises serious objections. Some are practical. Some are philosophical. Some are about incentives, power, and academic culture. We take those objections seriously. We answer them directly here."
       />
 
-      {/* The statement gets a band of its own, on white, so the tinted card
-          reads as a thesis and not as one more answer. The width cap keeps
-          the serif text to a comfortable line length. */}
+      {/* The two groups alternate paper and muted bands, like the sections on
+          the home page, so the white cards stand out on both. */}
+      <QASection index={1} heading="Principles" items={principles} />
+      <QASection index={2} heading="Objections" items={objections} className="section-muted" />
+
+      {/* The closing statement comes after the last answer, as its label
+          says. It gets a band of its own, on white, so the tinted card reads
+          as a thesis and not as one more answer. The width cap keeps the
+          serif text to a comfortable line length. */}
       <section className="section-tight section-surface">
         <div className="container">
           <div className="card-flat card-tint max-w-3xl">
@@ -221,11 +227,6 @@ export default async function ObjectionsAndPrinciplesPage() {
           </div>
         </div>
       </section>
-
-      {/* The two groups alternate paper and muted bands, like the sections on
-          the home page, so the white cards stand out on both. */}
-      <QASection index={1} heading="Principles" items={principles} />
-      <QASection index={2} heading="Objections" items={objections} className="section-muted" />
     </>
   );
 }

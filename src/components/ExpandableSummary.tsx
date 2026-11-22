@@ -26,14 +26,16 @@ export function ExpandableSummary({ summary, initialOpen = false }: ExpandableSu
         <span>{isOpen ? "Hide" : "Show"} talk summary</span>
       </button>
 
-      {isOpen ? (
-        <div id={contentId} className="disclosure-panel">
-          <div
-            className="prose prose-lg prose-referee max-w-none"
-            dangerouslySetInnerHTML={{ __html: summary }}
-          />
-        </div>
-      ) : null}
+      {/* The panel stays in the DOM while closed so the button's
+          aria-controls always points at an element that exists. `hidden`
+          removes it from layout and from the accessibility tree, the same
+          approach MethodologyAccordion uses. */}
+      <div id={contentId} className="disclosure-panel" hidden={!isOpen}>
+        <div
+          className="prose prose-lg prose-referee max-w-none"
+          dangerouslySetInnerHTML={{ __html: summary }}
+        />
+      </div>
     </div>
   );
 }
