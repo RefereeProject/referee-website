@@ -1,4 +1,5 @@
 import {
+  CRWE_LEAF_CHECKS,
   CRWE_VERSION_LABEL,
   CTA_PRIMARY_HREF,
   CTA_PRIMARY_LABEL,
@@ -17,6 +18,11 @@ const categories = [
   { name: "Reproducibility & availability", got: 1, max: 24, level: "low" },
 ] as const;
 
+/**
+ * Sample reliability report. Rendered twice on the home page: in the hero,
+ * and (with `audit`) in the "Anatomy of a Score" section, where it also
+ * shows the provenance block.
+ */
 export function ScoreCard({ audit = false }: { audit?: boolean }) {
   return (
     <article className="score-card" aria-label="Sample reliability score (illustrative)">
@@ -33,7 +39,8 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
             “The effect of <em>bisoprolol</em> on perioperative mortality and myocardial infarction in high-risk patients undergoing vascular surgery”
           </div>
           <div className="score-number-wrap">
-            <div className="score-number">5</div>
+            {/* `low` colours the number like the low bars below it. */}
+            <div className="score-number low">5</div>
             <div className="score-denom">/ 100</div>
             <div className="score-confidence">Known flawed paper</div>
           </div>
@@ -48,18 +55,19 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
                   <div className="score-cat-name">{cat.name}</div>
                   <div className="score-cat-val">{cat.got}/{cat.max}</div>
                 </div>
+                {/* The width comes from the data, so it stays an inline style. */}
                 <div className={`score-cat-bar ${cat.level}`}><span style={{ width: `${pct}%` }} /></div>
               </div>
             );
           })}
         </div>
         <div className="score-evidence">
-          <span><strong style={{ color: "var(--ink)" }}>47</strong> evidence refs</span>
-          <span><strong style={{ color: "var(--warning)" }}>3</strong> unresolved</span>
+          <span><strong>47</strong> evidence refs</span>
+          <span><strong className="is-warning">3</strong> unresolved</span>
           <a href="#anatomy">Inspect ↗</a>
         </div>
         {audit ? (
-          <div className="mono" style={{ marginTop: 14, paddingTop: 12, borderTop: "1px dashed var(--border-strong)", fontSize: 10, lineHeight: 1.7, color: "var(--text-muted)", letterSpacing: ".02em" }}>
+          <div className="score-audit">
             <div>checked: 2026-04-23T14:22:08Z</div>
             <div>scope: methodology, statistics, reproducibility, transparency, citations</div>
             <div>out-of-scope: novelty assessment, peer-review of theoretical contribution</div>
@@ -77,42 +85,38 @@ export function ScoreCard({ audit = false }: { audit?: boolean }) {
 
 export function Hero() {
   return (
-    <section className="hero" id="top" style={{ padding: "64px 0 48px", borderBottom: "1px solid var(--border)", background: "linear-gradient(180deg, rgba(243,247,244,.55) 0%, rgba(250,249,244,1) 60%)" }}>
-      <div className="container">
-        <div className="hero-doi" style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "center", marginBottom: 24 }}>
-          <span className="tag tag-primary">CRWE {CRWE_VERSION_LABEL}</span>
-          <span className="eyebrow" style={{ marginLeft: "auto" }}>Illustrative report</span>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1.1fr) minmax(320px,1fr)", gap: 64, alignItems: "start" }} className="hero-grid">
-          <div>
-            <h1 style={{ marginTop: 8 }}>A transparent reliability score for <em style={{ color: "var(--primary-800)" }}>every</em> scholarly paper.</h1>
-            <p
-              className="lede-serif"
-              style={{
-                marginTop: 18,
-                maxWidth: 620,
-                color: "var(--primary-800)",
-                fontSize: "clamp(24px, 3.1vw, 38px)",
-                lineHeight: 1.12,
-                letterSpacing: "-.025em",
-              }}
-            >
-              Adding quality and nuance to the scholarly record.
-            </p>
-            <p className="lede-serif" style={{ marginTop: 24, maxWidth: 560 }}>
-              Referee evaluates manuscripts against the CRWE flaw taxonomy and produces versioned, machine-readable reliability scores with inspectable evidence — built for editorial intake, conference triage, and integration into existing scholarly workflows.
-            </p>
-            <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL} <span className="arrow">→</span></a>
-              <a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
-            </div>
-            <div className="mono" style={{ marginTop: 32, paddingTop: 18, borderTop: "1px solid var(--border)", display: "flex", gap: 32, flexWrap: "wrap", fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-              <span>Taxonomy · <strong style={{ color: "var(--ink)", fontWeight: 500 }}>CRWE {CRWE_VERSION_LABEL}</strong></span>
-              <span>Checks · <strong style={{ color: "var(--ink)", fontWeight: 500 }}>300 structured</strong></span>
-              <span>Output · <strong style={{ color: "var(--ink)", fontWeight: 500 }}>Versioned & re-derivable</strong></span>
-            </div>
+    <section className="hero" id="top">
+      <div className="container hero-grid">
+        {/* The direct children of .hero-copy rise in one after another
+            (see the staggered animation-delay rules in globals.css). */}
+        <div className="hero-copy">
+          <p className="hero-kicker">
+            <span className="tag tag-primary">CRWE {CRWE_VERSION_LABEL}</span>
+          </p>
+          <h1>A transparent reliability score for <em>every</em> scholarly paper.</h1>
+          <p className="hero-tagline">Adding quality and nuance to the scholarly record.</p>
+          <p className="hero-lede">
+            Referee evaluates manuscripts against the CRWE flaw taxonomy and produces versioned, machine-readable reliability scores with inspectable evidence — built for editorial intake, conference triage, and integration into existing scholarly workflows.
+          </p>
+          <div className="hero-actions">
+            <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>{CTA_PRIMARY_LABEL} <span className="arrow" aria-hidden="true">→</span></a>
+            <a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>{CTA_SECONDARY_LABEL}</a>
           </div>
-          <div><ScoreCard /></div>
+          <dl className="hero-facts">
+            <div><dt>Taxonomy</dt><dd>CRWE {CRWE_VERSION_LABEL}</dd></div>
+            <div><dt>Checks</dt><dd>{CRWE_LEAF_CHECKS} structured</dd></div>
+            <div><dt>Output</dt><dd>Versioned & re-derivable</dd></div>
+          </dl>
+        </div>
+
+        <div className="hero-visual">
+          <p className="eyebrow hero-visual-label">Illustrative report</p>
+          {/* .bracket-frame draws the logo's sky brackets around the card. The
+              card resets itself to light-surface colours (see the role tokens
+              in globals.css), so it reads correctly on the navy hero. */}
+          <div className="bracket-frame">
+            <ScoreCard />
+          </div>
         </div>
       </div>
     </section>

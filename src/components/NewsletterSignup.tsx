@@ -40,42 +40,49 @@ export function NewsletterSignup() {
     <section className="card-flat card-tint">
       <div className="mx-auto max-w-md">
         <p className="eyebrow"><span className="eyebrow-tick" />Newsletter</p>
-        <h3 style={{ marginTop: 10 }}>Stay updated</h3>
-        <p style={{ marginTop: 8, color: "var(--ink-muted)", fontSize: 14 }}>
+        <h3 className="mt-2.5">Stay updated</h3>
+        <p className="mt-2 text-sm text-ink-muted">
           Get monthly updates on the Referee Project. No spam, just insights.
         </p>
 
         {status === "success" ? (
-          <div className="card-flat" style={{ marginTop: 20, borderColor: "var(--primary-200)", background: "var(--surface)" }}>
-            <p style={{ color: "var(--primary-800)", fontWeight: 600 }}>
+          // role="status" makes screen readers announce the confirmation,
+          // which otherwise appears silently in place of the form.
+          <div className="card-flat mt-5" role="status">
+            <p className="font-semibold text-navy">
               ✓ Thanks for subscribing. Check your email to confirm.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ marginTop: 22, display: "grid", gap: 12 }}>
+          <form onSubmit={handleSubmit} className="mt-5 grid gap-3">
+            {/* A placeholder is not an accessible name, so each field also
+                carries the same wording as its aria-label. Focus styling
+                comes from .field (the inputs used to remove their outline). */}
             <input
               type="text"
               placeholder="First name (optional)"
+              aria-label="First name (optional)"
+              autoComplete="given-name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               disabled={status === "loading"}
-              className="w-full border bg-card-bg px-4 py-3 outline-none transition disabled:cursor-not-allowed disabled:opacity-50"
-              style={{ borderColor: "var(--border-strong)", color: "var(--ink)" }}
+              className="field"
             />
             <input
               type="email"
               placeholder="Email address *"
+              aria-label="Email address"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={status === "loading"}
-              className="w-full border bg-card-bg px-4 py-3 outline-none transition disabled:cursor-not-allowed disabled:opacity-50"
-              style={{ borderColor: "var(--border-strong)", color: "var(--ink)" }}
+              className="field"
             />
             {status === "error" && errorMessage ? (
-              <p style={{ color: "var(--error)", fontSize: 13 }}>{errorMessage}</p>
+              <p role="alert" className="text-[13px]" style={{ color: "var(--error)" }}>{errorMessage}</p>
             ) : null}
-            <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
+            <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full">
               {status === "loading" ? "Subscribing…" : "Subscribe"}
             </button>
           </form>
