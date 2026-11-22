@@ -33,6 +33,21 @@ Referee does not claim to replace expert peer review with a black box. It organi
 - Collaboration posture: active outreach for additional qualified advisors and collaborators.
 
 ## Blog coverage (published posts)
+- /blog/false-positives-false-negatives-and-the-real-calibration-problem
+  - Title: False Positives, False Negatives, and the Real Calibration Problem
+  - Focus: Any system that looks for research weaknesses will make mistakes. The real question is not whether errors occur, but whether they are visible, measurable, correctable, and tied to a versioned record rather than hidden inside prestige or private review.
+- /blog/why-reliability-should-be-machine-readable
+  - Title: Why Reliability Should Be Machine-Readable
+  - Focus: Scholarship is searched, ranked, funded, cited, regulated, and reused by systems. Reliability information locked in prose cannot travel through those channels. Referee turns reliability into structured metadata that can move with the paper.
+- /blog/defect-or-audit-gap-why-referee-forces-a-call-anyway
+  - Title: Defect or Audit Gap? Why Referee Forces a Call Anyway
+  - Focus: Research criticism usually collapses actual flaws and missing information into one vague complaint. Referee separates defects from audit gaps and then forces explicit yes/no calls on both. Ambiguity is preserved in the evidence record, not promoted into a third scoring state.
+- /blog/from-pdf-to-provenance-how-a-referee-score-gets-made
+  - Title: From PDF to Provenance: How a Referee Score Gets Made
+  - Focus: Referee does not upload a paper to an AI model and ask for a vague review. It turns the paper into a structured record, runs narrow checks tied to the CRWE, records evidence, makes explicit yes/no calls, and preserves the provenance behind the score.
+- /blog/what-a-referee-score-actually-measures
+  - Title: What a Referee Score Actually Measures
+  - Focus: The scholarly record already scores papers through prestige, reputation, and citation habits. Referee replaces those hidden scores with an explicit, versioned measure based on named research weaknesses, public evidence, and decomposable scoring.
 - /blog/academic-collegiality-is-a-bug-not-a-feature
   - Title: Academic collegiality is a bug, not a feature (and it's largely not true)
   - Focus: critiques assumptions about collegial peer review and argues for more direct, democratized, adversarial criticism in research evaluation.
