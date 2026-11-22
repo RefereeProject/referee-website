@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Linkedin,
+  ExternalLink,
   EyeOff,
   Shuffle,
   Lock,
@@ -285,7 +285,7 @@ function Profile({ person }: { person: PersonProfile }) {
         <div className="credential">{person.role}</div>
         <p>{person.bio}</p>
         <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm mt-5">
-          <Linkedin className="h-4 w-4" aria-hidden="true" /> LinkedIn
+          <ExternalLink className="h-4 w-4" aria-hidden="true" /> LinkedIn
         </a>
       </div>
     </div>
