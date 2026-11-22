@@ -37,11 +37,8 @@ interface MobileNavProps {
 export function MobileNav(props: MobileNavProps) {
   const pathname = usePathname();
 
-  // The disclosure is keyed by pathname, so every navigation (a link, the
-  // browser's Back or Forward button) mounts a fresh one, which starts
-  // closed. Remembering "the page the menu was opened on" is not enough:
-  // going Back and then Forward returns to that same page and would reopen
-  // a menu the visitor never asked for.
+  // A different pathname mounts a fresh, closed disclosure. Keeping the open
+  // pathname in state could reopen the menu when the visitor returns there.
   return <MobileNavDisclosure key={pathname} {...props} />;
 }
 
@@ -90,12 +87,23 @@ function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
       if (event.matches) setIsOpen(false);
     };
 
+    // Hash-only history traversal keeps the pathname, and the back/forward
+    // cache can restore the existing disclosure without remounting it.
+    const onHistoryTraversal = () => setIsOpen(false);
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) setIsOpen(false);
+    };
+
+    window.addEventListener("popstate", onHistoryTraversal);
+    window.addEventListener("pageshow", onPageShow);
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("blur", onWindowBlur);
     desktop.addEventListener("change", onBreakpoint);
 
     return () => {
+      window.removeEventListener("popstate", onHistoryTraversal);
+      window.removeEventListener("pageshow", onPageShow);
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("blur", onWindowBlur);
@@ -142,7 +150,7 @@ function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
                 not change. */}
             <NavLinks links={links} variant="list" onNavigate={close} />
           </ul>
-          <a href={ctaHref} className="btn btn-primary mobile-nav-cta">
+          <a href={ctaHref} className="btn btn-primary mobile-nav-cta" onClick={close}>
             {ctaLabel} <span className="arrow" aria-hidden="true">→</span>
           </a>
         </nav>
