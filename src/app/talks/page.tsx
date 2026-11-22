@@ -109,25 +109,36 @@ export default function TalksPage() {
       />
 
       <div className="container page-shell">
-        <section style={{ display: "grid", gap: 24 }}>
+        {/* One column, capped so the video stays a sensible size and the text
+            under it does not run the full width of a desktop screen. It starts
+            at the container's left edge, like the title band above, so the
+            page keeps one left margin. `grid-cols-1` (not a bare grid) lets
+            the column shrink below its content's minimum width on phones. */}
+        <div className="grid max-w-4xl grid-cols-1 gap-8">
           {talks.map((talk) => (
             <VideoCard key={talk.id} {...talk} />
           ))}
-        </section>
+        </div>
+
         {/*
           Page-level CTA — mirrors the homepage hero so visitors who arrive via
           a talk recording have the same primary/secondary action surface.
+          It uses the navy `.cta-block` from the home page, at the same width
+          as the list above. `.cta-block` is a navy surface, so the buttons
+          switch to their on-navy colours by themselves.
         */}
-        <section style={{ marginTop: 48, paddingTop: 32, borderTop: "1px solid var(--border)", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
-          <p className="eyebrow" style={{ marginRight: "auto" }}>
-            <span className="eyebrow-tick" />Want the working version, not the talk?
-          </p>
-          <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>
-            {CTA_PRIMARY_LABEL} <span className="arrow">→</span>
-          </a>
-          <a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>
-            {CTA_SECONDARY_LABEL}
-          </a>
+        <section className="cta-block mt-12 max-w-4xl sm:mt-16">
+          {/* `.cta-block h2` leaves room for an eyebrow above the heading.
+              There is none here, so that top margin is removed. */}
+          <h2 className="mt-0">Want the working version, not the talk?</h2>
+          <div className="cta-actions">
+            <a className="btn btn-primary" href={CTA_PRIMARY_HREF}>
+              {CTA_PRIMARY_LABEL} <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            <a className="btn btn-secondary" href={CTA_SECONDARY_HREF}>
+              {CTA_SECONDARY_LABEL}
+            </a>
+          </div>
         </section>
       </div>
     </>

@@ -1,6 +1,8 @@
 import { PageIntro } from "@/components/PageIntro";
+import { SectionHead } from "@/components/shared/SectionHead";
 import { getSite } from "@/lib/content";
 import { buildFaqPageSchema, serializeJsonLd } from "@/lib/structuredData";
+import { cn } from "@/lib/utils";
 
 export const metadata = {
   title: "Objections & Principles – The Referee Project",
@@ -121,29 +123,56 @@ const allFaqs = [...principles, ...objections];
 /*  Page component                                                     */
 /* ------------------------------------------------------------------ */
 
-/** Renders a titled group of Q&A cards */
+/**
+ * One full-width band of the page: a numbered section head, then every
+ * question in the group as a card.
+ *
+ * The answers are shown in full on purpose (no accordion). Crawlers read this
+ * page, and the FAQ JSON-LD is built from the same arrays, so what is visible
+ * has to match what the structured data says.
+ */
 function QASection({
+  index,
   heading,
   items,
+  className,
 }: {
+  /** Shown as the [1] / [2] citation marker above the heading. */
+  index: number;
   heading: string;
   items: Array<{ question: string; answer: string }>;
+  /** Extra classes for the band, e.g. `section-muted` to alternate surfaces. */
+  className?: string;
 }) {
   return (
-    <section className="section-tight">
-      <div className="section-head">
-        <div className="label"><span className="num">§</span>{heading}</div>
-        <div>
-          <div style={{ display: "grid", gap: 18 }}>
-            {items.map((item, index) => (
-              <article key={index} className="card-flat">
+    <section className={cn("section", className)}>
+      <div className="container">
+        {/* A group has one name and no separate kicker line. The name is the
+            heading, and the label is left empty so the citation marker stands
+            on its own above it. */}
+        <SectionHead index={index} label="" title={heading} />
+        {/* Two columns from tablet width up. Cards in a row share a height,
+            and each column stays narrow enough to read comfortably. */}
+        <div className="section-body grid grid-cols-1 gap-5 md:grid-cols-2">
+          {items.map((item) => {
+            // A blank line in the answer text starts a new paragraph. In this
+            // content the first paragraph is the short, direct answer, so it
+            // is set darker and heavier than the reasoning that follows: a
+            // reader can scan question and answer and skip the rest.
+            const [shortAnswer, ...reasoning] = item.answer.split("\n\n");
+
+            return (
+              <article key={item.question} className="card-flat">
                 <h3>{item.question}</h3>
-                <p style={{ marginTop: 10, fontSize: 14, color: "var(--ink-muted)", lineHeight: 1.65, whiteSpace: "pre-line" }}>
-                  {item.answer}
-                </p>
+                <p className="mt-3 font-medium text-ink">{shortAnswer}</p>
+                {reasoning.map((paragraph) => (
+                  <p key={paragraph} className="mt-3 text-[0.9375rem] leading-relaxed text-ink-muted">
+                    {paragraph}
+                  </p>
+                ))}
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -171,25 +200,32 @@ export default async function ObjectionsAndPrinciplesPage() {
         />
       ) : null}
       <PageIntro
-          eyebrow="Objections & Principles"
-          title="Objections and Principles"
-          description="Referee exists to add quality and nuance to the scholarly record. It makes a direct claim: a scholarly paper should not enter the record carrying only the authors' claims and a journal's verdict. It should also carry transparent, inspectable reliability metadata — a versioned score, linked evidence, and explicit unresolved items. That claim raises serious objections. Some are practical. Some are philosophical. Some are about incentives, power, and academic culture. We take those objections seriously. We answer them directly here."
-        />
+        eyebrow="Objections & Principles"
+        title="Objections and Principles"
+        description="Referee exists to add quality and nuance to the scholarly record. It makes a direct claim: a scholarly paper should not enter the record carrying only the authors' claims and a journal's verdict. It should also carry transparent, inspectable reliability metadata — a versioned score, linked evidence, and explicit unresolved items. That claim raises serious objections. Some are practical. Some are philosophical. Some are about incentives, power, and academic culture. We take those objections seriously. We answer them directly here."
+      />
 
-      <div className="container page-shell">
-        <div className="card-flat card-tint">
-          <p className="eyebrow"><span className="eyebrow-tick" />Closing principle</p>
-          <p style={{ marginTop: 10 }}>
-            Referee is not a claim to perfect objectivity, complete automation,
-            or final truth. It is a claim that the scholarly record should carry
-            more explicit, inspectable, and portable reliability information than
-            it does today. That is the standard.
-          </p>
+      {/* The statement gets a band of its own, on white, so the tinted card
+          reads as a thesis and not as one more answer. The width cap keeps
+          the serif text to a comfortable line length. */}
+      <section className="section-tight section-surface">
+        <div className="container">
+          <div className="card-flat card-tint max-w-3xl">
+            <p className="eyebrow"><span className="eyebrow-tick" />Closing principle</p>
+            <p className="serif mt-3 text-xl text-navy md:text-[1.375rem]">
+              Referee is not a claim to perfect objectivity, complete automation,
+              or final truth. It is a claim that the scholarly record should carry
+              more explicit, inspectable, and portable reliability information than
+              it does today. That is the standard.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <QASection heading="Principles" items={principles} />
-        <QASection heading="Objections" items={objections} />
-      </div>
+      {/* The two groups alternate paper and muted bands, like the sections on
+          the home page, so the white cards stand out on both. */}
+      <QASection index={1} heading="Principles" items={principles} />
+      <QASection index={2} heading="Objections" items={objections} className="section-muted" />
     </>
   );
 }
