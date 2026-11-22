@@ -616,8 +616,7 @@
     white-space: nowrap;
   }
 
-  .tag-primary,
-  .tag-evidence {
+  .tag-primary {
     background: var(--chip-bg);
     border-color: var(--chip-border);
     color: var(--chip-fg);
