@@ -2,110 +2,59 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Structure
+## Project
 
-This is a Next.js 15 project called "The Referee Project".
+"The Referee Project" marketing/content site (Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript strict). Deployed to Vercel. There is no test suite; `npm run lint` and `npm run build` (which type-checks) are the checks.
 
-Key architecture components:
-- **Content Management**: JSON-based content store (`content/content.json`) with pages and posts
-- **Styling**: Tailwind CSS v4 with custom typography plugin
-- **Fonts**: Inter (display) and JetBrains Mono (monospace)
-
-## Runtime Management
-
-- **Node version management:** Uses [mise](https://mise.jdx.dev/) (not nvm). Version auto-activates from `mise.toml` or `.nvmrc` on `cd`. Run `mise install` if needed.
-
-## Development Commands
-
-All commands should be run from the repository root:
+## Commands
 
 ```bash
-# Development server
-npm run dev
-
-# Build production
-npm run build
-
-# Lint code
-npm run lint
-
-# Production server
-npm start
+npm run dev     # dev server on :3000
+npm run build   # production build (also runs the TypeScript check)
+npm run lint    # eslint (flat config: next core-web-vitals + typescript)
+npm start       # serve the production build
+npx tsc --noEmit  # type-check only
 ```
 
-## Content Architecture
+Node is managed by [mise](https://mise.jdx.dev/) (not nvm); CI uses Node 20. Path alias: `@/*` → `src/*`.
 
-The project uses a simple JSON-based content system:
+## Architecture
 
-- **Content Store**: Pre-generated `content/content.json` contains all site content (migrated from WordPress)
-- **Content Library**: `src/lib/content.ts` provides typed access to pages and posts
+### Where page content actually lives
 
-### Content Types
-- `WPEntry`: WordPress pages/posts with id, title, slug, status, date, link, content, excerpt
-- `SiteInfo`: Site metadata (title, link, description)  
-- `ContentStore`: Complete content structure with site info, pages, and posts
+Content is split, which is easy to get wrong:
 
-### Content Functions
-- `getContent()`: Returns full content store with caching (checks both `./content/content.json` and `./referee-next/content/content.json` paths)
-- `getSite()`: Returns site metadata
-- `getPages()`: Returns published pages only
-- `getPosts()`: Returns published posts only
-- `findPostBySlug(slug)`: Finds specific post by slug
+- **Blog posts and site metadata** come from `content/content.json` (a one-time WordPress export) through `src/lib/content.ts` (`getSite`, `getPosts`, `findPostBySlug`; filters to `status === 'publish'`). `getContent` is wrapped in `React.cache` for per-request dedup and reads `content/content.json` from `process.cwd()` (it also checks `referee-next/content/` as a legacy path). Only `blog/`, `blog/[slug]/`, `faq/` and the root layout read from it.
+- **Home, About, FAQ, Talks pages are hand-written TSX** in `src/app/*/page.tsx`. The `pages` array in `content.json` is leftover WordPress data and is not rendered; editing it changes nothing on the site.
+- Blog post HTML is rendered with `dangerouslySetInnerHTML` only after passing through `sanitize-html` with an explicit tag/attribute allowlist (`src/app/blog/[slug]/page.tsx`). Extend that allowlist rather than bypassing it.
 
-## Build Process
+### Copy and brand voice
 
-Standard Next.js build process:
-- `npm run build` - Builds the Next.js application
-- Content is pre-generated and committed in `content/content.json`
+`src/lib/copy.ts` centralises preferred terminology, banned hero terms (e.g. "founder-led", "pre-seed", "startup") and tone rules (clinical, restrained, no hype). It is imported by the home, talks, Hero and Footer code. Check it before writing user-facing copy.
 
-## File Structure
+### SEO / machine-readable surface (duplicated by hand)
 
-```
-/
-├── src/
-│   ├── app/                 # Next.js App Router pages
-│   │   ├── about/          # About page
-│   │   ├── blog/           # Blog listing and individual posts
-│   │   ├── faq/            # FAQ page
-│   │   ├── layout.tsx      # Root layout with Navbar/Footer
-│   │   └── page.tsx        # Homepage
-│   ├── components/         # React components
-│   │   ├── Navbar.tsx      # Site navigation
-│   │   ├── Footer.tsx      # Site footer  
-│   │   ├── Hero.tsx        # Homepage hero section
-│   │   ├── ColourfulText.tsx # Animated text component
-│   │   └── aurora-background.tsx # Aurora effect background
-│   └── lib/
-│       ├── content.ts      # Content access layer
-│       └── utils.ts        # Utility functions (cn helper)
-├── content/
-│   └── content.json        # Pre-generated content (migrated from WordPress)
-└── public/                 # Static assets
-```
+The site deliberately serves content to agents as well as browsers. These are static files in `public/` and are **not generated** from `content.json` or the TSX pages, so they must be updated manually when content changes:
 
-## Content Management
+- `public/{index,about,blog,faq,talks}.md` and `public/blog/<slug>.md`: markdown mirrors of pages. **Publishing a new post requires adding a matching `public/blog/<slug>.md`.**
+- `public/llms.txt`, `public/llms-full.txt`, `public/robots.txt`, `public/.well-known/agent-card.json`.
+- `next.config.ts` adds a `Content-Signal: machine-consumable` header to an explicit list of routes. A new public route or markdown endpoint needs adding to `contentSignalSources` there.
+- JSON-LD is built in `src/lib/structuredData.ts` (Organization, Article, FAQ) and injected via `serializeJsonLd` in the layout, blog post page and FAQ page.
 
-Content is stored in `content/content.json` (pre-migrated from WordPress). To update content, manually edit this JSON file.
+### Components and styling
 
-## Technology Stack
+- `src/components/shared/` holds the reusable page-section components, re-exported through `shared/index.ts`.
+- Styling is Tailwind v4 plus a large hand-written design-token layer in `src/app/globals.css` (CSS variables such as `--primary-*`, `--ink`, `--surface-*`, `--score-*`). Prefer these tokens over new hard-coded colours. `cn()` in `src/lib/utils.ts` merges class names.
+- Fonts (`src/app/layout.tsx`): Inter (`--font-sans`), Source Serif 4 (`--font-serif`, used for display), IBM Plex Mono (`--font-mono`).
 
-- **Framework**: Next.js 15 with App Router
-- **React**: v19.1.0
-- **Styling**: Tailwind CSS v4 with typography plugin
-- **Animation**: Framer Motion v12
-- **Content**: HTML sanitization (sanitize-html)
-- **TypeScript**: Full type coverage
-- **Package Manager**: npm
-- **Linting**: ESLint with Next.js presets
-- **Utilities**: class-variance-authority, clsx, tailwind-merge, lucide-react
+### API
 
-## Font Configuration
+`POST /api/newsletter` (`src/app/api/newsletter/route.ts`) validates input and subscribes to Mailchimp with `status: "pending"` (double opt-in). Requires `MAILCHIMP_API_KEY`, `MAILCHIMP_SERVER_PREFIX`, `MAILCHIMP_AUDIENCE_ID`; see `.env.example`. `NEXT_PUBLIC_GA_MEASUREMENT_ID` enables Google Analytics and `NEXT_PUBLIC_SITE_URL` sets `metadataBase` (defaults to `https://referee-project.com`).
 
-The project uses two Google Fonts configured in `src/app/layout.tsx`:
-- **Inter**: Display font (weights 300-900) via `--font-display` CSS variable
-- **JetBrains Mono**: Monospace font via `--font-mono` CSS variable
+### Deployment
 
-<!-- gh-auth-recovery:v1 -->
+`.github/workflows/vercel-deploy.yml` builds with the Vercel CLI (`vercel pull`, `vercel build`, `vercel deploy --prebuilt`) on push to `main` (production) and on PRs (preview).
+
 ## Git push auth recovery
 
 This repo pushes to **RefereeProject/** on github.com. If `git push`, `gh pr create`,
