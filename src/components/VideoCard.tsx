@@ -1,10 +1,11 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import { Calendar, Clock } from "lucide-react";
+// Imported directly, not through next/dynamic. The lazy wrapper rendered a
+// different component tree on the server than in the browser, which changed
+// the id that ExpandableSummary generates with useId() and caused a
+// hydration mismatch on its aria-controls attribute. The component is tiny,
+// so lazy-loading it saved nothing.
+import { ExpandableSummary } from "./ExpandableSummary";
 import { VideoEmbed } from "./VideoEmbed";
-
-const ExpandableSummary = dynamic(() => import("./ExpandableSummary").then((m) => m.ExpandableSummary));
 
 interface VideoCardProps {
   videoId: string;
@@ -15,6 +16,11 @@ interface VideoCardProps {
   description?: string;
 }
 
+/**
+ * One recorded talk: the embed, its title and facts, and a collapsible
+ * summary. This is a Server Component; only ExpandableSummary, which holds
+ * the open/closed state, runs in the browser.
+ */
 export function VideoCard({ videoId, title, date, duration, summary, description }: VideoCardProps) {
   return (
     <article className="card-flat">
