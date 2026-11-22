@@ -61,9 +61,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="en" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: organizationJsonLd }} />
+        {/* First tab stop on every page. Hidden until it receives keyboard
+            focus; lets keyboard users jump past the header navigation. */}
+        <a href="#main" className="skip-link">Skip to content</a>
         <GoogleAnalytics />
         <Navbar />
-        <main className="site-main">{children}</main>
+        <main id="main" className="site-main">{children}</main>
         <Footer />
       </body>
     </html>
