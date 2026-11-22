@@ -7,7 +7,8 @@ import { NavLinks, type NavLink } from "./NavLinks";
 
 /**
  * Viewport width at which the desktop nav bar takes over.
- * Keep in sync with the 1024px breakpoint in globals.css (.nav-desktop).
+ * Keep in sync with the `min-width: 1024px` rule in globals.css that shows
+ * .nav-desktop and hides .nav-toggle and .mobile-nav-panel.
  */
 const DESKTOP_QUERY = "(min-width: 1024px)";
 
@@ -33,40 +34,48 @@ interface MobileNavProps {
  * ARIA "menu": the links stay ordinary links, Tab moves through them in
  * order, and the rest of the page remains usable while it is open.
  */
-export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
+export function MobileNav(props: MobileNavProps) {
   const pathname = usePathname();
+
+  // The disclosure is keyed by pathname, so every navigation (a link, the
+  // browser's Back or Forward button) mounts a fresh one, which starts
+  // closed. Remembering "the page the menu was opened on" is not enough:
+  // going Back and then Forward returns to that same page and would reopen
+  // a menu the visitor never asked for.
+  return <MobileNavDisclosure key={pathname} {...props} />;
+}
+
+function MobileNavDisclosure({ links, ctaHref, ctaLabel }: MobileNavProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // We store the pathname the menu was opened on rather than a boolean.
-  // The menu counts as open only while we are still on that page, so any
-  // navigation (a link, the browser's Back button) closes it without needing
-  // an effect that watches the route.
-  const [openedOn, setOpenedOn] = useState<string | null>(null);
-  const isOpen = openedOn === pathname;
-
-  const close = () => setOpenedOn(null);
+  const close = () => setIsOpen(false);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
-      setOpenedOn(null);
-      // Return focus to the button so keyboard users are not left on a link
-      // that has just been hidden.
-      buttonRef.current?.focus();
+      // Read where focus is before closing: hiding the panel moves focus off
+      // any link inside it.
+      const focusWasInside = rootRef.current?.contains(document.activeElement) ?? false;
+      setIsOpen(false);
+      // Hand focus back to the button only when it was in the menu, so a
+      // keyboard user is not left on a link that has just been hidden. If
+      // focus is elsewhere on the page, leave it where it is.
+      if (focusWasInside) buttonRef.current?.focus();
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpenedOn(null);
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) setIsOpen(false);
     };
 
     // If the window grows past the breakpoint the button disappears, so the
     // panel must close too or it would be stranded open with no way to shut it.
     const desktop = window.matchMedia(DESKTOP_QUERY);
     const onBreakpoint = (event: MediaQueryListEvent) => {
-      if (event.matches) setOpenedOn(null);
+      if (event.matches) setIsOpen(false);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -80,8 +89,22 @@ export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
     };
   }, [isOpen]);
 
+  // Close when keyboard focus moves to something outside the menu. The panel
+  // covers the top of the page, so without this, tabbing past the last link
+  // would put focus on a control hidden underneath it.
+  //
+  // `relatedTarget` is the element receiving focus. It is null when focus
+  // goes nowhere in particular (the window loses focus, or Safari, which does
+  // not focus a button on click). Those cases are ignored; otherwise clicking
+  // the toggle in Safari would close the menu here and then reopen it in the
+  // click handler.
+  const onBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    const next = event.relatedTarget;
+    if (next instanceof Node && !event.currentTarget.contains(next)) setIsOpen(false);
+  };
+
   return (
-    <div ref={rootRef}>
+    <div ref={rootRef} onBlur={onBlur}>
       <button
         ref={buttonRef}
         type="button"
@@ -89,7 +112,7 @@ export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
         aria-expanded={isOpen}
         aria-controls={PANEL_ID}
         aria-label={isOpen ? "Close menu" : "Open menu"}
-        onClick={() => setOpenedOn(isOpen ? null : pathname)}
+        onClick={() => setIsOpen((open) => !open)}
       >
         {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
       </button>
@@ -99,8 +122,9 @@ export function MobileNav({ links, ctaHref, ctaLabel }: MobileNavProps) {
       <div id={PANEL_ID} className="mobile-nav-panel" hidden={!isOpen}>
         <nav className="container" aria-label="Primary">
           <ul className="mobile-nav-list">
-            {/* onNavigate also closes the menu for same-page anchors such as
-                "/#method", where the pathname does not change. */}
+            {/* onNavigate closes the menu for same-page anchors such as
+                "/#method", where the pathname (and so the key above) does
+                not change. */}
             <NavLinks links={links} variant="list" onNavigate={close} />
           </ul>
           <a href={ctaHref} className="btn btn-primary mobile-nav-cta">

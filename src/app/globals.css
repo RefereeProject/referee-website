@@ -98,10 +98,11 @@
   /* Layout */
   --container: 1180px;
   --measure: 680px;
-  --gutter: 40px;
+  --gutter: 32px;
   /* Height of the sticky header. Also drives scroll-padding so anchor links
-     such as /#method do not land underneath it. */
-  --header-h: 72px;
+     such as /#method do not land underneath it. Both values grow at the
+     desktop breakpoint below. */
+  --header-h: 64px;
 
   /* Shape. The logo tile has generous corners, so the UI does too. */
   --radius-sm: 6px;
@@ -133,10 +134,13 @@
   --nav-border: var(--border);
 }
 
-@media (max-width: 1023px) {
+/* Written mobile-first with a single min-width query, the same one
+   MobileNav.tsx watches. A max-width: 1023px / min-width: 1024px pair would
+   leave a gap at fractional widths (browser zoom), where neither matches. */
+@media (min-width: 1024px) {
   :root {
-    --header-h: 64px;
-    --gutter: 32px;
+    --header-h: 72px;
+    --gutter: 40px;
   }
 }
 
@@ -771,8 +775,11 @@
     gap: 2px;
   }
 
-  /* Pushes the links to the right, next to the demo button. */
+  /* The desktop link bar. Hidden by default and shown from 1024px (see the
+     header breakpoint below); margin-left pushes it to the right, next to
+     the demo button. */
   .nav-desktop {
+    display: none;
     margin-left: auto;
   }
 
@@ -804,7 +811,7 @@
   }
 
   .nav-toggle {
-    display: none;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
@@ -860,17 +867,18 @@
     margin-top: 20px;
   }
 
-  @media (max-width: 1023px) {
-    .nav-desktop {
-      display: none;
-    }
-
-    .nav-toggle {
-      display: inline-flex;
-    }
-  }
-
+  /* Header breakpoint. One min-width query, identical to DESKTOP_QUERY in
+     MobileNav.tsx, switches all three pieces together: the link bar
+     appears, and the menu button and its panel go away. Using a single
+     query (rather than a max-width/min-width pair) means there is no
+     in-between width at which the panel could be open with no button to
+     close it. */
   @media (min-width: 1024px) {
+    .nav-desktop {
+      display: flex;
+    }
+
+    .nav-toggle,
     .mobile-nav-panel {
       display: none;
     }
